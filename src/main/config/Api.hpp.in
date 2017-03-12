@@ -1,0 +1,76 @@
+#ifndef @UPPER_PROJECT_NAME@_CORE_API_HPP
+#define @UPPER_PROJECT_NAME@_CORE_API_HPP
+
+//#include <@PROJECT_INCLUDE_NAME@/defines.hpp>
+#include <didactics/core/Defines.hpp>
+
+#if defined(_MSC_VER) || defined(__declspec)
+#   define @NAMESPACE@_DLLEXPORT __declspec(dllexport)
+#   define @NAMESPACE@_DLLIMPORT __declspec(dllimport)
+#else
+    #if __GNUC__ >= 4
+        #define @NAMESPACE@_EXPORT      __attribute__ ((visibility ("default")))
+        #define @NAMESPACE@_IMPORT      __attribute__ ((visibility ("default")))
+        #define @NAMESPACE@_DLL_PUBLIC  __attribute__ ((visibility("default")))
+        #define @NAMESPACE@_DLL_LOCAL   __attribute__ ((visibility("hidden")))
+    #else
+        #define @NAMESPACE@_EXPORT
+        #define @NAMESPACE@_IMPORT
+        #define @NAMESPACE@_DLL_PUBLIC
+        #define @NAMESPACE@_DLL_LOCAL
+    #endif
+#endif
+
+#if defined(@NAMESPACE@_STATIC)
+#  define @NAMESPACE@_API
+#elif defined(@NAMESPACE@_SHARED)
+#  define @NAMESPACE@_API @NAMESPACE@_EXPORT
+#else
+#  define @NAMESPACE@_API @NAMESPACE@_IMPORT
+#endif
+
+#define NS @NAMESPACE@
+
+#ifndef NS
+    # define PREPEND_NAMESPACE(name) ::name
+    # define USE_NAMESPACE
+    # define BEGIN_NAMESPACE
+    # define END_NAMESPACE
+    # define FORWARD_DECLARE_CLASS(name) class name;
+    # define FORWARD_DECLARE_STRUCT(name) struct name;
+    # define NULLPTR NULL
+    # define DECL_EQ_DEFAULT
+    # define DECL_EQ_DELETE
+    # define  DECL_OVERRIDE
+    # define  DECL_FINAL
+#else
+    # define PREPEND_NAMESPACE(name) ::NS::name
+    # define USE_NAMESPACE using namespace ::NS;
+    # define BEGIN_NAMESPACE namespace NS {
+    # define END_NAMESPACE }
+    # define NULLPTR nullptr
+    # define DECL_EQ_DEFAULT = default
+    # define DECL_EQ_DELETE = delete
+    # define DECL_OVERRIDE override
+    # define DECL_FINAL final
+
+    # define FORWARD_DECLARE_CLASS(name) \
+	BEGIN_NAMESPACE class name; END_NAMESPACE
+
+    # define FORWARD_DECLARE_STRUCT(name) \
+	BEGIN_NAMESPACE struct name; END_NAMESPACE
+
+    namespace @NAMESPACE@_NAMESPACE {}
+#endif
+
+
+#define DISABLE_COPY(Class) \
+	Class(const Class &) DECL_EQ_DELETE; \
+	Class &operator=(const Class &) DECL_EQ_DELETE;
+
+
+#define NS_UNUSED(x) (void)(x)
+#define NOOP(x) do {} while(0) //((void)0)
+
+#endif
+

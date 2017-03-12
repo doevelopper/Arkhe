@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!--
+   | For more configuration infromation and examples see the Jakarta Log4j
+   | owebsite: http://jakarta.apache.org/log4j
+   | http://beuss.developpez.com/tutoriels/java/jakarta/log4j/
+-->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="all" debug="false">
+<!-- 
+		Output the log message to system console.
+-->
+	<appender name="MyConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out"/>
+                <!--param name="threshold" value="OFF"/-->
+                <param name="Encoding" value="UTF-8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-8p] %d{yyyy-MM-dd HH:mm:ss.SSS} (%-20.20c{1.}) %t (%-10.30l) | %m%n"/>
+			<!--param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} (%-5c{1.}) [%-8p] [%-15.15t] (%-10.30l) | %m%n"/-->
+			<!--param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} (%-10c) [%-8p] [%-15.15t] (%-10.30l) | %m%n"/-->
+			<!--param name="ConversionPattern" value="%d{ISO8601} %-5p [%c{1}] - %m%n" /-->
+		</layout>
+	</appender>
+<!-- 
+        Buffer events and log them asynchronously 
+-->
+        <!--appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+            <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+            <appender-ref ref="FILE"/>
+            <appender-ref ref="SMTP"/>
+            <appender-ref ref="CONSOLE"/>
+        </appender-->
+<!-- 
+        A time/date based rolling appender
+-->
+	<appender name="FILE" class="org.jboss.logging.appender.DailyRollingFileAppender">
+            <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+            <param name="File" value="log/server.log"/>
+            <param name="Append" value="false"/>
+            <param name="Threshold" value="WARN"/>
+
+            <!-- Rollover at midnight each day -->
+            <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+
+            <!-- Rollover at the top of each hour    
+                <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+            -->
+
+            <layout class="org.apache.log4j.PatternLayout">
+                <!-- The default pattern: Date Priority [Category] Message\n -->
+                <!--<param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>-->
+                <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n -->
+                    <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+
+		</layout>
+	</appender>
+        
+        <!-- Premier Appender, ne journalise que les messages DEBUG -->
+         <appender name="filedebug" class="org.apache.log4j.FileAppender">
+             <param name="file" value="log/debug.log"/>
+             <layout class="org.apache.log4j.SimpleLayout"/>
+             <filter class="org.apache.log4j.varia.LevelMatchFilter">
+                 <param name="levelToMatch" value="DEBUG"/>
+             </filter>
+             <filter class="org.apache.log4j.varia.DenyAllFilter"/>
+            <layout class="org.apache.log4j.PatternLayout">
+                <param name="ConversionPattern" value="%d{HH:mm:ss.SSS} [%-8p] [%c] %m%n"/>
+            </layout>
+         </appender>
+         <!-- Second Appender, ne journalise que les messages INFO à ERROR (exclu donc FATAL) -->
+         <appender name="fileinfoup" class="org.apache.log4j.FileAppender">
+             <param name="file" value="log/rangeLevel.log"/>
+             <layout class="org.apache.log4j.SimpleLayout"/>
+             <filter class="org.apache.log4j.varia.LevelRangeFilter">
+                 <param name="levelMin" value="INFO"/>
+                 <param name="levelMax" value="ERROR"/>
+             </filter>
+            <layout class="org.apache.log4j.PatternLayout">
+                <param name="ConversionPattern" value="%d{HH:mm:ss.SSS} [%-8p] [%c] %m%n"/>
+            </layout>
+         </appender>
+        <!--logger name="d.u.L"> 
+            <level value="error" />
+        </logger-->
+	<root>
+            <priority value="all" />
+            <appender-ref ref="MyConsoleAppender"/>
+            <appender-ref ref="filedebug" />
+            <appender-ref ref="fileinfoup"/>                
+            <!--appender-ref ref="CONSOLE"/>
+            <appender-ref ref="MyRollingAppenderDaily"/>
+            <appender-ref ref="MyRollingAppenderSize"/>
+            <appender-ref ref="MyLogFileAppenderXml"/>
+            <appender-ref ref="MyXmlAppenderFormated"/>
+            <appender-ref ref="MyXmlAppender"/>
+            <appender-ref ref="MyOdbcMysqlAppender"/>
+            <appender-ref ref="ui.file"/>                
+            <appender-ref ref="MyOdbcPostgresAppender"/>
+            <appender-ref ref="network.file" /-->
+	</root>
+</log4j:configuration>

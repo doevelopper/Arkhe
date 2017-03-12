@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0           
+		 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                               INFORMATIONS                              -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<groupId>io.github.levitics</groupId>
+	<artifactId>levitics.arkhe</artifactId>
+	<version>1.0-SNAPSHOOT</version>
+	<packaging>pom</packaging>
+	<description>
+     UAV Mission planning and operations.
+	</description>
+	<url>http://www.levitics.com/arkhe</url>
+	<inceptionYear>2017</inceptionYear>
+	<organization>
+		<name>The Levitics Software Engineering Lab</name>
+		<url>http://www.levitics.com/</url>
+	</organization>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                                 LICENSE                                 -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<licenses>
+		<license>
+			<name>THE APACHE SOFTWARE LICENSE, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+			<url>${licenses-header-path}/licenses/GPL-3.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE Version 3</name>
+			<url>${licenses-header-path}/licenses/LGPL-3.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>        
+		<license>
+			<name>WTFPL - Do What The Fuck You Want To Public License</name>
+			<url>http://www.wtfpl.net/</url>
+			<distribution>repo</distribution>
+			<comments>Open Source Licenses.</comments>
+		</license>
+	</licenses>        
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                                DEVELOPERS                               -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+	<developers>
+		<developer>
+			<id>101</id>
+			<name>Adrien H</name>
+			<email>happyman@${mailUrl}</email>
+			<url/>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<roles>
+				<role>PMC</role>
+				<role>architect</role>
+				<role>developer</role>
+				<role>tester</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y</picUrl>
+			</properties>
+		</developer>
+	</developers>
+	<!--
+                                    *** PROJECT Contributors ***
+    -->
+
+	<contributors>
+		<contributor>
+			<name>Jane  Doe</name>
+			<email>jane.doe@acme.com</email>
+			<url/>
+			<organization>${project.organization.name}</organization>
+			<organizationUrl>${project.organization.url}</organizationUrl>
+			<roles>
+				<role>developer</role>
+				<role>tester</role>
+			</roles>
+			<timezone>+1</timezone>
+			<properties>
+				<picUrl>http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y</picUrl>
+			</properties>
+		</contributor>
+	</contributors>
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<!--                                PROPERTIES                               -->
+	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+	<properties>
+		<global.encoding>UTF-8</global.encoding>
+		<project.build.sourceEncoding>${global.encoding}</project.build.sourceEncoding>
+		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
+		<project.reporting.outputEncoding>${global.encoding}</project.reporting.outputEncoding> 
+        <sourceReleaseAssemblyDescriptor>source-release</sourceReleaseAssemblyDescriptor>
+        <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
+		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+		<maven-site-plugin.version>3.6</maven-site-plugin.version>
+        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
+        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <puppycrawl.tools.version>5.4</puppycrawl.tools.version>
+        <cmake.command>cmake</cmake.command>
+        <make.command>make</make.command>
+        <sonar.language>c++</sonar.language>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.cxx.cppcheck.reportPath>.sonar/reports-cppcheck/cppcheck-result-*.xml</sonar.cxx.cppcheck.reportPath>		
+		<sonar.cxx.customrules.reportPath>.sonar/reports-cpplint/cpplint-result-*.xml</sonar.cxx.customrules.reportPath>
+		<sonar.cxx.rats.reportPath>.sonar/reports-rats/rats-result-*.xml</sonar.cxx.rats.reportPath>
+		<sonar.cxx.vera.reportPath>.sonar/reports-vera++/vera++-result-*.xml</sonar.cxx.vera.reportPath>
+		<sonar.cxx.xunit.reportPath>.sonar/reports-xunit/xunit-result-*.xml</sonar.cxx.xunit.reportPath>		
+		<sonar.cxx.bulleyescoverage.reportPath>.sonar/reports-bullseye/bullseyecoverage-result-*.xml</sonar.cxx.bulleyescoverage.reportPath>
+		<sonar.cxx.bulleyescoverage.itReportPath>.sonar/reports-it-bullseye/bullseyecoverage-result-*.xml</sonar.cxx.bulleyescoverage.itReportPath> 
+		<sonar.cxx.bulleyescoverage.calcomplexity>true</sonar.cxx.bulleyescoverage.calcomplexity>			
+		<sonar.host.url>http://latest-fiasco:9000</sonar.host.url>                
+        <cmake.generator.win32>Visual Studio 14 2015</cmake.generator.win32>
+        <cmake.generator.win64>Visual Studio 14 2015 Win64</cmake.generator.win64>
+        <cmake.generator.mingw>MinGW Makefiles</cmake.generator.mingw>
+        <cmake.generator.unix>Unix Makefiles</cmake.generator.unix>  
+		<cmake.build.type>Debug</cmake.build.type>
+		<cmake.generator/>
+		<hostname/>
+        <aol/>
+		<cpp.compiler.version/>
+		<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
+		<os>${env.OS}</os>
+        <computer>${env.COMPUTERNAME}</computer>
+        <arch>${env.PROCESSOR_ARCHITECTURE}</arch>
+        <sys.os.arch>${os.arch}</sys.os.arch>
+        <sys.os.name>${os.name}</sys.os.name>
+        <sys.os.version>${os.version}</sys.os.version>
+        <sys.user.name>${user.name}</sys.user.name>
+        <sys.java.vendor>${java.vendor}</sys.java.vendor>
+        <sys.java.version>${java.version}</sys.java.version>
+        <sys.user.timezone>${user.timezone}</sys.user.timezone>
+	</properties>
+
+	<build>
+		<extensions>
+			<extension>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>1.4.0.Final</version>
+			</extension>
+		</extensions>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!-- WORKAROUND: https://issues.sonatype.org/browse/CENTRALSRV-35 -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+					<configuration>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<useReleaseProfile>false</useReleaseProfile>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<!-- <arguments>${arguments} -Psonatype-oss-release</arguments> -->
+						<tagNameFormat>release-@{project.version}</tagNameFormat>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!--plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>parse-version</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+                    <execution>
+                        <id>add-source-main</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>some directory</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>some directory</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+				</executions>
+			</plugin-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>${buildnumber-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>none</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <format>{0,date,yyyy-MM-dd HH:mm:ss}</format>
+                    <items>
+                        <item>timestamp</item>
+                    </items>
+				</configuration>
+		    </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+					<!-- <compilerArgs> -->
+						<!-- <arg>-Xlint:unchecked</arg> -->
+					<!-- </compilerArgs> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven-clean-plugin.version}</version>
+				<configuration>
+					<verbose>true</verbose>
+					<!-- <filesets> -->
+						<!-- <fileset> -->
+							<!-- <directory>bin</directory> -->
+							<!-- <followSymlinks>false</followSymlinks> -->
+							<!-- <includes> -->
+								<!-- <include>*</include> -->
+							<!-- </includes> -->
+						<!-- </fileset> -->
+						<!-- <fileset> -->
+							<!-- <directory>packages</directory> -->
+							<!-- <followSymlinks>false</followSymlinks> -->
+							<!-- <includes> -->
+								<!-- <include>*</include> -->
+							<!-- </includes> -->
+						<!-- </fileset> -->
+						<!-- <fileset> -->
+							<!-- <directory>CMakeFiles</directory> -->
+							<!-- <followSymlinks>false</followSymlinks> -->
+							<!-- <includes> -->
+								<!-- <include>*</include> -->
+							<!-- </includes> -->
+						<!-- </fileset> -->
+						<!-- <fileset> -->
+							<!-- <directory>./</directory> -->
+							<!-- <followSymlinks>false</followSymlinks> -->
+							<!-- <includes> -->
+								<!-- <include>CMakeCache.txt</include> -->
+							<!-- </includes> -->
+						<!-- </fileset> -->
+					<!-- </filesets> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${maven-deploy-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${maven-install-plugin.version}</version>
+			</plugin>
+		</plugins>
+    </build>    
+    <profiles> 
+        <profile>
+            <id>check-coding-style</id>
+			 <build>
+                <directory>${aol}</directory>
+                <plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>${maven-checkstyle-plugin.version}</version>
+						<dependencies>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>${puppycrawl.tools.version}</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<configLocation>checkstyle.xml</configLocation>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>true</consoleOutput>
+							<excludes>${checkstyle.exclusions}</excludes>
+						</configuration>
+						<executions>
+							<execution>
+								<id>checkstyle</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+                </plugins>
+			</build>
+        </profile>
+        <profile>
+            <id>windows-x64-build</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                    <!-- <arch>x64</arch> -->
+                </os>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <cmake.command>cmake.exe</cmake.command>
+                <make.command>mingw32-make</make.command>
+                <hostname>${env.COMPUTERNAME}</hostname>
+				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
+				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
+				<!-- <aol>${os.detected.classifier}-${cmake.build.type}</aol> -->
+            </properties>
+            <build>
+                <directory>${aol}</directory>
+                <plugins>
+					<!--plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>properties-maven-plugin</artifactId>
+						<version>1.0.0</version>
+						<executions>
+							<execution>
+								<id>set-compiler-properties</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>set-system-properties</goal>
+								</goals>
+								<configuration>
+									<properties>
+										<property>
+											<name>compiler.version</name>
+											<value>compiler.version.value</value>
+										</property>
+									</properties>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin-->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+						<version>${exec-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>cmake-generate-and-configure</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>generate-sources</phase>
+                                <configuration>
+                                    <executable>${cmake.command}</executable>
+                                    <!-- <workingDirectory>${project.build.directory}/${aol}</workingDirectory> -->
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-DPROJECT_NAME=${project.artifactId}</argument>
+                                        <argument>-G</argument>
+                                        <argument>${cmake.generator}</argument>
+                                        <argument>-DCMAKE_BUILD_TYPE=${cmake.build.type}</argument>
+                                        <argument>-DCMAKE_EXPORT_COMPILE_COMMANDS=ON</argument>
+                                        <argument>${project.basedir}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>cmake-compiling-code</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <executable>${make.command}</executable>
+                                    <!-- <workingDirectory>${project.build.directory}/${aol}</workingDirectory> -->
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-j</argument>
+                                        <argument>${nproc}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+		<profile>
+			<id>linux-x64</id>
+			<activation>
+				<os>
+					<name>Linux</name>
+					<arch>!i386</arch>
+				</os>
+			</activation>
+            <properties> 
+                <hostname>${env.HOSTNAME}</hostname> 
+				<cmake.generator>${cmake.generator.unix}</cmake.generator>
+				<aol>${sys.os.arch}.${os.name}-${cmake.build.type}</aol>
+            </properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${maven-compiler-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>default-compile</id>
+								<phase>none</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${exec-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>generate</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<executable>${cmake.command}</executable>
+									<workingDirectory>${project.build.directory}</workingDirectory>
+									<arguments>
+										<argument>-G</argument>
+										<argument>${cmake.generator}</argument>
+										<argument>${project.basedir</argument>
+                                        <argument>-DCMAKE_BUILD_TYPE=${cmake.build.type}</argument>
+                                        <argument>-DCMAKE_EXPORT_COMPILE_COMMANDS=ON</argument>
+										<argument>${project.basedir}</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build> 
+		</profile>
+		<profile>
+			<id>mac64</id>
+			<activation>
+				<os>
+					<name>Mac OS X</name>
+					<arch>x86_64</arch>
+				</os>
+			</activation>
+            <properties> 
+                <hostname>${env.HOSTNAME}</hostname> 
+            </properties>
+		</profile>
+		<profile>
+			<id>sonatype-oss-release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<passphrase>${gpg.passphrase}</passphrase>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+		  <id>maven-distro</id>
+		  <build>
+			<plugins>
+			  <plugin>
+				<groupId>io.takari.maven.plugins</groupId>
+				<artifactId>provisio-maven-plugin</artifactId>
+				<version>0.1.16</version>
+				<executions>
+				  <execution>
+					<id>maven-distro</id>
+					<phase>package</phase>
+					<goals>
+					  <goal>provision</goal>
+					</goals>
+				  </execution>
+				</executions>
+			  </plugin>
+			</plugins>
+		  </build>
+		</profile>
+		<profile>
+			<id>cmake-configure-generate</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${exec-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>generate</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<executable>${cmake.command}</executable>
+									<workingDirectory>${project.build.directory}</workingDirectory>
+									<arguments>
+										<argument>-G</argument>
+										<argument>${cmake.generator}</argument>
+										<argument>${project.basedir</argument>
+                                        <argument>-DCMAKE_BUILD_TYPE=${cmake.build.type}</argument>
+                                        <argument>-DCMAKE_EXPORT_COMPILE_COMMANDS=ON</argument>
+										<argument>${project.basedir}</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>cmake-underlying-build-system</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${exec-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>compile</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>generate-resources</phase>
+								<configuration>
+									<executable>${cmake.command}</executable>
+									<workingDirectory>${project.build.directory}</workingDirectory>
+									<arguments>
+										<argument>--build</argument>
+										<argument>.</argument>
+										<argument>--target</argument>
+										<argument>all</argument>
+                                        <argument>--config</argument>
+                                        <argument>${cmake.build.type}</argument>
+										<argument>--</argument>
+										<argument>-j</argument>
+										<argument>${nproc}</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>cmake-compile</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${exec-maven-plugin.version}</version>
+						<executions>
+                            <execution>
+                                <id>cmake-compiling-code</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <executable>${make.command}</executable>
+                                    <!-- <workingDirectory>${project.build.directory}/${aol}</workingDirectory> -->
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-j</argument>
+                                        <argument>${nproc}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+        <profile>
+			<id>license-enable</id>
+            <build>
+				<plugins>
+					<plugin>
+						<groupId>com.mycila.maven-license-plugin</groupId>
+                        <artifactId>maven-license-plugin</artifactId>
+                        <version>1.8.0</version>
+                        <configuration>
+							<header>copyright.txt</header>
+                            <strictCheck>true</strictCheck>
+                            <mapping>
+								<tmpl>PHP</tmpl>
+                                <cmake>SCRIPT_STYLE</cmake>
+                                <txt>SCRIPT_STYLE</txt>
+                                <properties>SCRIPT_STYLE</properties>
+                                <in>SCRIPT_STYLE</in>
+                                <mk>SCRIPT_STYLE</mk>
+                                <m>PHP</m>
+                                <h>PHP</h>
+                                <c>PHP</c>
+                                <cpp>PHP</cpp>
+                                <hpp>PHP</hpp>
+                                <dox>PHP</dox>
+                                <cvm>PHP</cvm>
+                                <hvm>PHP</hvm>
+                                <java>PHP</java>
+                                <bat_template>BATCH</bat_template>
+                                <sh_template>SCRIPT_STYLE</sh_template>
+                                <template>PHP</template>
+                           </mapping>
+                                <includes>
+									<include>**/*.sh</include>
+                                    <include>**/*.bat</include>
+                                    <include>**/*.tmpl</include>
+                                    <include>**/*.xml</include>
+                                    <include>**/*.html</include>
+                                    <include>**/*.txt</include>
+                                    <include>**/*.cmake</include>
+                                    <include>**/*.in</include>
+                                    <include>**/*.mk</include>
+                                    <include>**/*.java</include>
+                                    <include>**/*.cpp</include>
+                                    <include>**/*.hpp</include>
+                                    <include>**/*.c</include>
+                                    <include>**/*.h</include>
+                                    <include>**/*.m</include>
+                                    <include>**/*.dox</include>
+                                    <include>**/*.vm</include>
+                                    <include>**/*.cvm</include>
+                                    <include>**/*.hvm</include>
+                                    <include>**/*.template</include>
+                                    <include>**/*.sh_template</include>
+                                    <include>**/*.bat_template</include>
+                                    <include>**/sonar-project.properties</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>checkstyle.xml</exclude>
+                                    <exclude>findbugs-exclude-filter.xml</exclude>
+                                    <exclude>suppressions.xml</exclude>
+                                </excludes>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <phase>validate</phase>
+                                    <goals>
+                                        <goal>format</goal>
+                                    </goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>        

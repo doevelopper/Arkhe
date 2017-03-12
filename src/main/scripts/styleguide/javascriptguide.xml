@@ -1,0 +1,7 @@
+<?xml version = '1.0'?>
+<?xml-stylesheet type="text/xsl" href="styleguide.xsl"?>
+<GUIDE title="Google JavaScript Style Guide">
+  <p class="revision">
+    Please note: this guide has been <a href="jsguide.html">updated and moved</a>.
+  </p>
+</GUIDE>

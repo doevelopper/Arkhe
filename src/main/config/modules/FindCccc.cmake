@@ -1,0 +1,4 @@
+FIND_PROGRAM(CCCC_PROGRAM NAMES cccc)
+
+INCLUDE(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Cccc DEFAULT_MSG CCCC_PROGRAM)

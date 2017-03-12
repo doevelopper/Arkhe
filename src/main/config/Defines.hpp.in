@@ -1,0 +1,88 @@
+#ifndef @UPPER_PROJECT_NAME@_CORE_DEFINES_HPP
+#define @UPPER_PROJECT_NAME@_CORE_DEFINES_HPP
+#cmakedefine HAVE_FEATURES_H
+#cmakedefine HAVE_SYS_SYSCALL_H
+#cmakedefine HAVE_SYS_WAIT_H 1
+#cmakedefine HAVE_STDINT_H
+#cmakedefine HAVE_STRING_H
+#ifdef HAVE_STDINT_H
+    #include <stdint.h>
+#endif
+#cmakedefine SIZEOF_INT ${SIZEOF_INT}
+#cmakedefine SIZEOF_VOIDP ${SIZEOF_VOIDP}
+#cmakedefine SIZEOF_UINT ${SIZEOF_UINT}
+#cmakedefine SIZEOF_LONG ${SIZEOF_LONG}
+9 #cmakedefine SIZEOF_LONG_LONG ${SIZEOF_LONG_LONG}
+#cmakedefine TM_IN_SYS_TIME ${TM_IN_SYS_TIME}
+#cmakedefine HAVE_DLFCN_H
+#cmakedefine HAVE_FCNTL
+#cmakedefine HAVE_SYS_SOCKET_H
+#ifdef HAVE_SYS_SOCKET_H
+#  include <sys/socket.h>
+#endif
+
+#cmakedefine HAVE_INTTYPES_H 
+#ifdef HAVE_INTTYPES_H 
+#  include  <inttypes.h>
+#endif
+
+#cmakedefine HAVE_SYS_SOCKET_H
+#ifdef HAVE_SYS_SOCKET_H 
+#  include  <sys/socket.h>
+#endif
+#cmakedefine HAVE_GETHOSTNAME
+#cmakedefine HAVE_GETTIMEOFDAY
+#cmakedefine HAVE_CLOCK_NANOSLEEP
+#cmakedefine HAVE_CLOCK_GETTIME
+#cmakedefine HAVE_MEMORY_H
+#cmakedefine HAVE_MMAP
+#cmakedefine HAVE_MLOCKALL
+#cmakedefine HAVE_NETDB_H
+#cmakedefine HAVE_SCHED_H
+#cmakedefine HAVE_SETENV
+#cmakedefine HAVE_SETGROUPS
+#cmakedefine HAVE_SETPRIORITY
+#cmakedefine HAVE_STRFTIME
+#cmakedefine HAVE_SYS_IOCTL_H
+#cmakedefine HAVE_SYS_RESOURCE_H
+#cmakedefine HAVE_USLEEP
+#cmakedefine SIZEOF_SIZE_T
+#cmakedefine size_t
+#cmakedefine SIZEOF_VOID_P ${SIZEOF_VOID_P}
+#cmakedefine HAVE_LIB_GMOCK
+#cmakedefine HAVE_LIBPTHREAD
+#cmakedefine HAVE_SYS_TYPES_H
+#cmakedefine HAVE_LIB_GFLAGS
+#cmakedefine HAVE_SYSLOG_H
+#cmakedefine HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_SYSCALL_H
+#cmakedefine HAVE_SYS_TIME_H
+#cmakedefine HAVE_UNWIND_H
+#cmakedefine HAVE_UNISTD_H
+#ifdef HAVE_UNISTD_H
+#  include  <unistd.h> 
+#endif
+#cmakedefine HAVE_MALLOC_H 1
+#cmakedefine HAVE_SYS_MOUNT_H
+#cmakedefine HAVE_BCOPY
+#cmakedefine HAVE_PTHREAD_H
+#cmakedefine HAVE_SIGALTSTACK
+#cmakedefine HAVE_SIGACTION
+#cmakedefine HAVE_RWLOCK
+#cmakedefine HAVE_LINUX_WIRELESS_H
+#cmakedefine HAVE_NET_IF_H
+#cmakedefine HAVE_NET_IF_MEDIA_H
+#cmakedefine HAVE_GETIFADDRS
+#cmakedefine HAVE_FREEIFADDRS
+#ifdef __APPLE__
+#  include <@ROOT_INCLUDE_NAME@/core/platform/DefinesDarwin.hpp>
+#elif defined (__linux__)
+#  include <@ROOT_INCLUDE_NAME@/core/platform/DefinesLinux.hpp>
+#elif defined (_WIN32)
+#  include <@ROOT_INCLUDE_NAME@/core/platform/DefinesWin32.hpp>
+#else
+#  error Unknown OS
+#  define @NAMESPACE@_PLATFORM_POSIX
+#endif
+#endif
+
