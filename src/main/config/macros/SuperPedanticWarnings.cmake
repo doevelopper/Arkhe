@@ -40,7 +40,8 @@ endif()
 # set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -stdlib=libstdc++") ;# Fails on Windows
 
 set(COMMON_CMAKE_CXX_FLAGS 
-    "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic"
+    # "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -Wfatal-errors"
+    "${CMAKE_CXX_FLAGS} -Wfatal-errors"
 )
 
 set(PARANO_CMAKE_CXX_FLAGS 
@@ -49,14 +50,18 @@ set(PARANO_CMAKE_CXX_FLAGS
 
 set(GCC_COMMON_WARNING_FLAGS 
     "${COMMON_CMAKE_CXX_FLAGS} "
-    "-Wcast-align -Wchar-subscripts"
-    # "-Wformat-security -Wno-long-long" 
-    # "-Wpointer-arith -Wundef -Wdelete-non-virtual-dtor -Wzero-as-null-pointer-constant" 
+    # "-Wcast-align -Wchar-subscripts"
+    # "-Wformat-security -Wno-long-long"
+    # "-Wdelete-non-virtual-dtor"
+    # "-Winit-self"
+	###
+    # "-Wpointer-arith -Wundef"
+    # "-Wzero-as-null-pointer-constant" 
     # "-W -Wshadow -Wunused-variable  -Wunused-parameter" 
     # "-Wunused-function -Wunused -Wno-system-headers" 
     # "-Wno-deprecated -Woverloaded-virtual -Wwrite-strings"
     # "-Wredundant-decls -Wconversion -Wswitch-enum -Wold-style-cast"
-    # "-Wunreachable-code"
+    "-Wunreachable-code"
 )
 string(REPLACE ";" " " GCC_COMMON_WARNING_FLAGS "${GCC_COMMON_WARNING_FLAGS}")
 

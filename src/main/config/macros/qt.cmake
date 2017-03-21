@@ -11,7 +11,7 @@ if(WIN32)
     if(MSVS OR MSYS OR MINGW)
         set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{QT5_DIR} )
         set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "D:/Qt/Qt5.8.0/5.8/mingw53_32" ) # remember to add D:\Qt\Qt5.8.0\5.8\mingw53_32\bin to %PATH%
-        SET(CMAKE_FIND_ROOT_PATH "D:/Qt/Qt5.8.0/5.8/mingw53_32" "D:/Qt/Qt5.8.0/Tools/mingw530_32")
+        SET(CMAKE_FIND_ROOT_PATH "D:/Qt/Qt5.8.0/5.8/mingw53_32" "D:/Qt/Qt5.8.0/Tools/mingw530_32" "D:/Qt/Qt5.8.0/Tools/mingw530_32/include")
 
         set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
         set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
