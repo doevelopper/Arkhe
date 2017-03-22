@@ -7,6 +7,7 @@
 #include <arkhe/osgi/core/workflow/WorkflowInterstepTransition.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowIntrastepTransition.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowStepPrivate.hpp>
+
 class Workflow;
 
 /*!
@@ -61,7 +62,7 @@ namespace osgi
 			void onExitComplete()const;
 			
 		protected:
-			QScopedPointer<WorkflowStepPrivate> d_ptr;
+			QScopedPointer<osgi::core::WorkflowStepPrivate> d_ptr;
 
 		private:
 			Q_DECLARE_PRIVATE(WorkflowStep);

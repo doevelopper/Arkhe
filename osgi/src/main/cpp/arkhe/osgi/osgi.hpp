@@ -6,34 +6,38 @@
 #include <QStringList>
 #include <QDateTime>
 #include <vector>
+#include <QHash>
+#include <QVariant>
 
 #define ARKHE_CORE_EXPORT
+#define ARKHE_CORE_PLUGIN_FW_EXPORT
 
 
 #define CONSTRUCTOR_NO_ARG_CPP(PUB)      \
-  PUB::PUB(): d_ptr(new PUB##Private)    \
+    PUB::PUB(): d_ptr(new PUB##Private)    \
     {                                    \
     }
 
 #define CONSTRUCTOR_1_ARG_CPP(PUB, _ARG1)   \
-  PUB::PUB(_ARG1 _parent)                       \
-    : Superclass( _parent )                     \
-    , d_ptr(new PUB##Private)                   \
+    PUB::PUB(_ARG1 _parent)                       \
+        : Superclass( _parent )                     \
+        , d_ptr(new PUB##Private)                   \
     {                                           \
     }
 
 #define SET_CPP(PUB, _TYPE, _NAME, _VARNAME)    \
-  void PUB::_NAME(_TYPE var)                        \
-  {                                                 \
-    Q_D(PUB);                                       \
-    d->_VARNAME =  var;                             \
-  }
+    void PUB::_NAME(_TYPE var)                        \
+    {                                                 \
+        Q_D(PUB);                                       \
+        d->_VARNAME =  var;                             \
+    }
+
 #define GET_CPP(PUB, _TYPE, _NAME, _VARNAME)   \
-  _TYPE PUB::_NAME()const                          \
-  {                                                \
-    Q_D(const PUB);                                \
-    return d->_VARNAME;                            \
-  }
+    _TYPE PUB::_NAME() const                          \
+    {                                                \
+        Q_D(const PUB);                                \
+        return d->_VARNAME;                            \
+    }
 
 namespace osgi 
 {
@@ -72,6 +76,58 @@ namespace osgi
             return new ClassType;
         }
     }
+	
+	namespace
+	{
+		using Properties = QHash<QString, QVariant> ;
+		using Dictionary = QHash<QString, QVariant> ;
+
+		#if QT_VERSION < 0x040700
+			#include <QSharedPointer>
+			template<class T>
+			inline uint qHash(const QSharedPointer<T>& ptr)
+			{
+				return qHash<T>(ptr.data());
+			}
+		#endif
+		
+		template<class A>
+		QStringList getIIDs()
+		{
+			  return QStringList(qobject_interface_iid<A*>());
+		}
+		
+		template<class A, class B>
+		QStringList getIIDs()
+		{
+			QStringList ids;
+			ids << qobject_interface_iid<A*>();
+			ids << qobject_interface_iid<B*>();
+			return ids;
+		}
+
+
+		template<class A, class B, class C>
+		QStringList getIIDs()
+		{
+			QStringList ids;
+			ids << qobject_interface_iid<A*>();
+			ids << qobject_interface_iid<B*>();
+			ids << qobject_interface_iid<C*>();
+			return ids;
+		}
+
+		template<class A, class B, class C, class D>
+		QStringList getIIDs()
+		{
+			QStringList ids;
+			ids << qobject_interface_iid<A*>();
+			ids << qobject_interface_iid<B*>();
+			ids << qobject_interface_iid<C*>();
+			ids << qobject_interface_iid<D*>();
+			return ids;
+		}
+	}
 }
 #endif
 

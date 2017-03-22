@@ -22,7 +22,7 @@ namespace osgi
         virtual ~FactoryLibraryItem();
           //explicit ctkFactoryLibraryItem(const QString& path);
         virtual bool load();
-        using SymbolAddressType=QFunctionPointer;
+        using SymbolAddressType = QFunctionPointer;
         void setSymbols(const QStringList& symbols);
         void setLoadHints(QLibrary::LoadHints hints);
         bool resolve();

@@ -1,8 +1,9 @@
 #include <QMetaEnum>
 #include <arkhe/osgi/core/workflow/WorkflowStepPrivate.hpp>
+#include <arkhe/osgi/core/workflow/WorkflowStep.hpp>
 #include <arkhe/osgi/core/workflow/Workflow.hpp>
 
-osgi::core::WorkflowStepPrivate::WorkflowStepPrivate(Workflow& object)
+osgi::core::WorkflowStepPrivate::WorkflowStepPrivate(WorkflowStep& object)
   :q_ptr(&object)
 {
 	qRegisterMetaType<WorkflowStep*>("WorkflowStep*");
@@ -73,5 +74,3 @@ void osgi::core::WorkflowStepPrivate::invokeOnExitCommandInternal(const Workflow
 {
 	emit invokeOnExitCommand(goingTo, transitionType);
 }
-
-

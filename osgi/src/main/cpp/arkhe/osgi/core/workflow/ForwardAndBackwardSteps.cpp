@@ -13,7 +13,7 @@ QList<osgi::core::WorkflowStep*> osgi::core::ForwardAndBackwardSteps::forwardSte
 	return this->ForwardSteps;
 }
 
-QList<osgi::core::WorkflowStep*> osgi::cor::ForwardAndBackwardStepse::backwardSteps()
+QList<osgi::core::WorkflowStep*> osgi::core::ForwardAndBackwardSteps::backwardSteps()
 {
     return this->BackwardSteps;
 }

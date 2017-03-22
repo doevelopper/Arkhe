@@ -1,7 +1,7 @@
 #include <arkhe/osgi/core/workflow/WorkflowStep.hpp>
 
 osgi::core::WorkflowStep::WorkflowStep()
-: d_ptr(new WorkflowStepPrivate(*this))
+: d_ptr(new osgi::core::WorkflowStepPrivate(*this))
 {
 }
 
@@ -23,8 +23,8 @@ osgi::core::WorkflowStep::~WorkflowStep()
 {
 }
 
-GET_CPP(WorkflowStep, Workflow*, workflow, _Workflow);
-SET_CPP(WorkflowStep, Workflow*, setWorkflow, _Workflow);
+GET_CPP(osgi::core::WorkflowStep, osgi::core::Workflow*, workflow, _Workflow);
+SET_CPP(osgi::core::WorkflowStep, osgi::core::Workflow*, setWorkflow, _Workflow);
 
 void osgi::core::WorkflowStep::setId(const QString& newId)
 {
@@ -39,31 +39,31 @@ void osgi::core::WorkflowStep::setId(const QString& newId)
 	d->Id = newId;
 }
 
-GET_CPP(WorkflowStep, QString, name, Name);
-SET_CPP(WorkflowStep, const QString&, setName, Name);
+GET_CPP(osgi::core::WorkflowStep, QString, name, Name);
+SET_CPP(osgi::core::WorkflowStep, const QString&, setName, Name);
 
-GET_CPP(WorkflowStep, QString, description, Description);
-SET_CPP(WorkflowStep, const QString&, setDescription, Description);
+GET_CPP(osgi::core::WorkflowStep, QString, description, Description);
+SET_CPP(osgi::core::WorkflowStep, const QString&, setDescription, Description);
 
-GET_CPP(WorkflowStep, QString, statusText, StatusText);
-SET_CPP(WorkflowStep, const QString&, setStatusText, StatusText);
+GET_CPP(osgi::core::WorkflowStep, QString, statusText, StatusText);
+SET_CPP(osgi::core::WorkflowStep, const QString&, setStatusText, StatusText);
 
-GET_CPP(WorkflowStep, bool, hasValidateCommand, HasValidateCommand);
-SET_CPP(WorkflowStep, bool, setHasValidateCommand, HasValidateCommand);
+GET_CPP(osgi::core::WorkflowStep, bool, hasValidateCommand, HasValidateCommand);
+SET_CPP(osgi::core::WorkflowStep, bool, setHasValidateCommand, HasValidateCommand);
 
-GET_CPP(WorkflowStep, bool, hasOnEntryCommand, HasOnEntryCommand);
-SET_CPP(WorkflowStep, bool, setHasOnEntryCommand, HasOnEntryCommand);
+GET_CPP(osgi::core::WorkflowStep, bool, hasOnEntryCommand, HasOnEntryCommand);
+SET_CPP(osgi::core::WorkflowStep, bool, setHasOnEntryCommand, HasOnEntryCommand);
 
-GET_CPP(WorkflowStep, bool, hasOnExitCommand, HasOnExitCommand);
-SET_CPP(WorkflowStep, bool, setHasOnExitCommand, HasOnExitCommand);
+GET_CPP(osgi::core::WorkflowStep, bool, hasOnExitCommand, HasOnExitCommand);
+SET_CPP(osgi::core::WorkflowStep, bool, setHasOnExitCommand, HasOnExitCommand);
 
-GET_CPP(WorkflowStep, QState*, processingState, ProcessingState);
-GET_CPP(WorkflowStep, QState*, validationState, ValidationState);
+GET_CPP(osgi::core::WorkflowStep, QState*, processingState, ProcessingState);
+GET_CPP(osgi::core::WorkflowStep, QState*, validationState, ValidationState);
 
-GET_CPP(WorkflowStep, WorkflowIntrastepTransition*, validationTransition, ValidationTransition);
-GET_CPP(WorkflowStep, WorkflowIntrastepTransition*, validationFailedTransition, ValidationFailedTransition);
+GET_CPP(osgi::core::WorkflowStep, osgi::core::WorkflowIntrastepTransition*, validationTransition, ValidationTransition);
+GET_CPP(osgi::core::WorkflowStep, osgi::core::WorkflowIntrastepTransition*, validationFailedTransition, ValidationFailedTransition);
 
-GET_CPP(WorkflowStep, bool, isWidgetType, WidgetType);
+GET_CPP(osgi::core::WorkflowStep, bool, isWidgetType, WidgetType);
 
 
 QObject* osgi::core::WorkflowStep::WorkflowStepQObject()

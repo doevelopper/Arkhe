@@ -11,6 +11,7 @@
 #include <arkhe/osgi/core/workflow/ForwardAndBackwardSteps.hpp>
 
 class QStateMachine;
+// class Workflow;
 /*!
  * @brief .
  */
@@ -23,9 +24,9 @@ namespace osgi
 			Q_OBJECT
 			Q_DECLARE_PUBLIC(Workflow);
 			
+		public:
 			WorkflowPrivate(Workflow& object);
 			virtual ~WorkflowPrivate();
-		public:
 		  /*! 
 		   *  @brief Add a step to the workflow
 		   *  @note The step's components will be automatically be added to the state machine

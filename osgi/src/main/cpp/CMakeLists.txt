@@ -32,12 +32,13 @@ add_library(${PROJECT_NAME}-osgi
 	arkhe/osgi/core/workflow/WorkflowInterstepTransitionEvent.cpp
 	arkhe/osgi/core/workflow/WorkflowInterstepTransition.cpp
 	arkhe/osgi/core/workflow/WorkflowIntrastepTransitionEvent.cpp
-	arkhe/osgi/core/workflow/Workflow.cpp
-	arkhe/osgi/core/workflow/WorkflowPrivate.cpp
-	arkhe/osgi/core/workflow/WorkflowStep.cpp
-	arkhe/osgi/core/workflow/ForwardAndBackwardSteps.cpp
-	arkhe/osgi/core/workflow/WorkflowStepPrivate.cpp
-	
+	# arkhe/osgi/core/workflow/Workflow.cpp
+	# arkhe/osgi/core/workflow/WorkflowPrivate.cpp
+	# arkhe/osgi/core/workflow/WorkflowStep.cpp
+	# arkhe/osgi/core/workflow/ForwardAndBackwardSteps.cpp
+	# arkhe/osgi/core/workflow/WorkflowStepPrivate.cpp
+
+	arkhe/osgi/core/framework/Runnable.cpp
 )
 
 target_link_libraries( ${PROJECT_NAME}-osgi Qt5::Widgets )

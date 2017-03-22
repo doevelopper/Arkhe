@@ -1,6 +1,6 @@
 #include <arkhe/osgi/core/workflow/WorkflowInterstepTransition.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowPrivate.hpp>
-
+#include <arkhe/osgi/core/workflow/Workflow.hpp>
 
 osgi::core::WorkflowPrivate::WorkflowPrivate(Workflow& object)
   :q_ptr(&object)

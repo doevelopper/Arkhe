@@ -3,10 +3,13 @@
 #include <arkhe/osgi/core/workflow/Workflow.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowPrivate.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowStep.hpp>
+#include <arkhe/osgi/core/workflow/WorkflowIntrastepTransitionEvent.hpp>
+#include <arkhe/osgi/core/workflow/WorkflowInterstepTransitionEvent.hpp>
+#include <arkhe/osgi/core/workflow/WorkflowInterstepTransition.hpp>
 
 osgi::core::Workflow::Workflow(QObject* _parent) 
-: Superclass(_parent)
-  , d_ptr(new WorkflowPrivate(*this))
+	: Superclass(_parent)
+	, d_ptr(new osgi::core::WorkflowPrivate(*this))
 {
   Q_D(Workflow);
   d->StateMachine = new QStateMachine(this);
@@ -236,11 +239,9 @@ osgi::core::WorkflowStep* osgi::core::Workflow::step(const QString& id)const
 
 // Convenience method to set the QStateMachine's initialState to a
 // specific step's processing state.
-GET_CPP(Workflow, WorkflowStep*, initialStep, InitialStep);
-SET_CPP(Workflow, WorkflowStep*, setInitialStep, InitialStep);
-
-
-GET_CPP(Workflow, WorkflowStep*, currentStep, CurrentStep);
+GET_CPP(osgi::core::Workflow, osgi::core::WorkflowStep*, initialStep, InitialStep);
+SET_CPP(osgi::core::Workflow, osgi::core::WorkflowStep*, setInitialStep, InitialStep);
+GET_CPP(osgi::core::Workflow, osgi::core::WorkflowStep*, currentStep, CurrentStep);
 
 
 void osgi::core::Workflow::start()
@@ -280,7 +281,7 @@ void osgi::core::Workflow::stop()
     {
 		d->OriginStep = d->CurrentStep;
 		d->DestinationStep = 0;
-		d->TransitionType = ctkWorkflowInterstepTransition::StoppingWorkflow;
+		d->TransitionType = WorkflowInterstepTransition::StoppingWorkflow;
 		d->onExitInternal(d->OriginStep, d->DestinationStep, d->TransitionType);
     }
 
@@ -308,14 +309,14 @@ void osgi::core::Workflow::goForward(const QString& desiredBranchId)
 		}
     }
 
-	d->DesiredBranchId = desiredBranchId;
+		d->DesiredBranchId = desiredBranchId;
 
-	if (d->Verbose)
+		if (d->Verbose)
     {
-		qDebug() << "goForward - posting ValidationTransition";
+			qDebug() << "goForward - posting ValidationTransition";
     }
-	d->StateMachine->postEvent(
-		new WorkflowIntrastepTransitionEvent(WorkflowIntrastepTransition::ValidationTransition));
+		
+		d->StateMachine->postEvent(new WorkflowIntrastepTransitionEvent(WorkflowIntrastepTransition::ValidationTransition));
 }
 
 void osgi::core::Workflow::goBackward(const QString& desiredBranchId)
@@ -350,11 +351,10 @@ void osgi::core::Workflow::goBackward(const QString& desiredBranchId)
 }
 
 
-GET_CPP(Workflow, bool, goBackToOriginStepUponSuccess, GoBackToOriginStepUponSuccess);
-SET_CPP(Workflow, bool, setGoBackToOriginStepUponSuccess, GoBackToOriginStepUponSuccess);
-
-GET_CPP(Workflow, bool, verbose, Verbose);
-SET_CPP(Workflow, bool, setVerbose, Verbose);
+GET_CPP(osgi::core::Workflow, bool, goBackToOriginStepUponSuccess, GoBackToOriginStepUponSuccess);
+SET_CPP(osgi::core::Workflow, bool, setGoBackToOriginStepUponSuccess, GoBackToOriginStepUponSuccess);
+GET_CPP(osgi::core::Workflow, bool, verbose, Verbose);
+SET_CPP(osgi::core::Workflow, bool, setVerbose, Verbose);
 
 
 void osgi::core::Workflow::goToStep(const QString& targetId)
@@ -518,11 +518,11 @@ void osgi::core::Workflow::goToProcessingStateAfterValidationFailed()
 
 void osgi::core::Workflow::performTransitionBetweenSteps()
 {
-	Q_D(Workflow);
+		Q_D(Workflow);
 
-	if (d->Verbose)
+		if (d->Verbose)
     {
-		qDebug() << "performTransitionBetweenSteps - Performing transition between steps";
+			qDebug() << "performTransitionBetweenSteps - Performing transition between steps";
     }
 
   // Alternative: could find the origin and destination step based on
@@ -530,25 +530,27 @@ void osgi::core::Workflow::performTransitionBetweenSteps()
   // keeping track of an origin step's destination step (and would be
   // tricky in an extension to branching workflows, unless we change
   // this method signature)
+/*
+		WorkflowInterstepTransition	* transition = qobject_cast<WorkflowInterstepTransition*>(QObject::sender());
+		Q_ASSERT(transition);
+	
+		d->OriginStep = d->stepFromState(transition->sourceState());
+		d->DestinationStep = d->stepFromState(transition->targetState());
+		d->TransitionType = transition->transitionType();
 
-	WorkflowInterstepTransition* transition = qobject_cast<WorkflowInterstepTransition*>(QObject::sender());
-	Q_ASSERT(transition);
-
-	d->OriginStep = d->stepFromState(transition->sourceState());
-	d->DestinationStep = d->stepFromState(transition->targetState());
-	d->TransitionType = transition->transitionType();
-	Q_ASSERT(d->TransitionType == WorkflowInterstepTransition::TransitionToNextStep
-           || d->TransitionType == WorkflowInterstepTransition::TransitionToPreviousStep
-           || d->TransitionType == WorkflowInterstepTransition::TransitionToPreviousStartingStepAfterSuccessfulGoToFinishStep);
+		Q_ASSERT(d->TransitionType == WorkflowInterstepTransition::TransitionToNextStep
+						 || d->TransitionType == WorkflowInterstepTransition::TransitionToPreviousStep
+						 || d->TransitionType == WorkflowInterstepTransition::TransitionToPreviousStartingStepAfterSuccessfulGoToFinishStep);
 
 	// update the map from the step to the previous step if we are going forward
-	if (d->TransitionType == WorkflowInterstepTransition::TransitionToNextStep)
+		if (d->TransitionType == WorkflowInterstepTransition::TransitionToNextStep)
     {
-		d->StepToPreviousStepMap.insert(d->DestinationStep, d->OriginStep);
+			d->StepToPreviousStepMap.insert(d->DestinationStep, d->OriginStep);
     }
 
 	// exit the destination step
-	d->onExitInternal(d->OriginStep, d->DestinationStep, d->TransitionType);
+		d->onExitInternal(d->OriginStep, d->DestinationStep, d->TransitionType);
+		*/
 }
 
 void osgi::core::Workflow::goToStepSucceeded()

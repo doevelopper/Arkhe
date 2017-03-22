@@ -3,6 +3,7 @@
 
 #include <arkhe/osgi/osgi.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowInterstepTransition.hpp>
+#include <arkhe/osgi/core/workflow/WorkflowIntrastepTransition.hpp>
 
 #include <QObject>
 #include <QPointer>
