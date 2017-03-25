@@ -31,6 +31,6 @@ namespace osgi
 		};		
 	}
 }
-Q_DECLARE_INTERFACE(ApplicationLauncher, "000.levitics.arkhe.service.application.ApplicationLauncher")
+Q_DECLARE_INTERFACE(osgi::svc::ApplicationLauncher, "000.levitics.arkhe.service.ApplicationLauncher")
 
 #endif

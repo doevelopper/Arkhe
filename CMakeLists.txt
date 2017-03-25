@@ -121,7 +121,9 @@ set(QRCS ${CMAKE_CURRENT_LIST_DIR}/src/main/resources/Qtrcs/resources.qrc
 )
 
 add_subdirectory(external)
-add_subdirectory(osgi)
+include(FindGoogleMock)
+message (STATUS "${GOOGLEMOCK_INCLUDE_DIR}")
+# add_subdirectory(osgi)
 
-add_subdirectory(src/main/cpp)
+# add_subdirectory(src/main/cpp)
 #add_subdirectory(src/test/cpp)

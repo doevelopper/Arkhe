@@ -46,5 +46,5 @@ namespace osgi
 		};		
 	}
 }
-Q_DECLARE_INTERFACE(Location, "000.levitics.arkhe.service.datalocation.Location")
+Q_DECLARE_INTERFACE(osgi::svc::Location, "000.levitics.arkhe.service.Location")
 #endif

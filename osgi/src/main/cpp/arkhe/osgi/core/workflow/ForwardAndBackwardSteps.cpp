@@ -7,7 +7,7 @@ osgi::core::ForwardAndBackwardSteps::ForwardAndBackwardSteps()
 osgi::core::ForwardAndBackwardSteps::~ForwardAndBackwardSteps()
 {
 }
-
+/*
 QList<osgi::core::WorkflowStep*> osgi::core::ForwardAndBackwardSteps::forwardSteps()
 {
 	return this->ForwardSteps;
@@ -92,3 +92,4 @@ QString osgi::core::ForwardAndBackwardSteps::forwardBranchId(WorkflowStep* step)
 		return QString();
     }
 }
+*/
