@@ -13,19 +13,21 @@
 namespace osgi
 {
 
-	template<typename BaseClassType>
-	class AbstractFactoryFileBasedItem : public AbstractFactoryItem<BaseClassType>
+	namespace core
 	{
-	public:
-        AbstractFactoryFileBasedItem();
-        virtual ~AbstractFactoryFileBasedItem();
-        void path(const QString& path);
-        QString path()const;
-	protected:
-	  
-	private:
-        QString  m_path;
-	};
-		
+		template<typename BaseClassType>
+		class AbstractFactoryFileBasedItem : public AbstractFactoryItem<BaseClassType>
+		{
+		public:
+			AbstractFactoryFileBasedItem();
+			virtual ~AbstractFactoryFileBasedItem();
+			void path(const QString& path);
+			QString path()const;
+		protected:
+		  
+		private:
+			QString  m_path;
+		};
+	}
 }
 #endif

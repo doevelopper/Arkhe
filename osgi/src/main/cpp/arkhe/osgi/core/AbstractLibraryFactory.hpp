@@ -13,22 +13,23 @@
  */
 namespace osgi
 {
-
-	template<typename BaseClassType>
-	class AbstractLibraryFactory : public AbstractFileBasedFactory<BaseClassType>
+	namespace core
 	{
-	public:
-        AbstractLibraryFactory();
-        virtual ~AbstractLibraryFactory();
-        void setSymbols(const QStringList& symbols);
-	protected:
+		template<typename BaseClassType>
+		class AbstractLibraryFactory : public AbstractFileBasedFactory<BaseClassType>
+		{
+		public:
+			AbstractLibraryFactory();
+			virtual ~AbstractLibraryFactory();
+			void setSymbols(const QStringList& symbols);
+		protected:
 
-        virtual bool isValidFile(const QFileInfo& file)const;
-        virtual void initItem(osgi::AbstractFactoryItem<BaseClassType>* item);
+			virtual bool isValidFile(const QFileInfo& file)const;
+			virtual void initItem(osgi::core::AbstractFactoryItem<BaseClassType>* item);
 
-	private:
-        QStringList Symbols;
-	};
-		
+		private:
+			QStringList Symbols;
+		};
+	}
 }
 #endif

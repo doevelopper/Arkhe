@@ -1,10 +1,10 @@
 #include <arkhe/osgi/core/workflow/WorkflowIntrastepTransition.hpp>
 #include <arkhe/osgi/core/workflow/WorkflowIntrastepTransitionEvent.hpp>
 
-// osgi::core::WorkflowIntrastepTransition::WorkflowIntrastepTransition()
-// {
+osgi::core::WorkflowIntrastepTransition::WorkflowIntrastepTransition()
+{
 	
-// }
+}
 
 osgi::core::WorkflowIntrastepTransition::~WorkflowIntrastepTransition()
 {

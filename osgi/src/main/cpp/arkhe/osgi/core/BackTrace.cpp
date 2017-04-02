@@ -11,7 +11,7 @@ osgi::core::BackTrace::BackTrace(const BackTrace& other)
   : d(new BackTracePrivate(*other.d.data()))
 {
 }
-//*
+
 osgi::core::BackTrace::BackTrace(size_t framesNumber)
   : d(new BackTracePrivate)
 {

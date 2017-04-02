@@ -47,9 +47,9 @@ list(APPEND CMAKE_MODULE_PATH
     "${CMAKE_SOURCE_DIR}/src/main/config/config"
     "${CMAKE_SOURCE_DIR}/src/test/config/modules"
 )
+include(aol)
 include(qt)
 include(PreventInSourceBuilds)
-include(aol)
 include(CMakeSettings)
 # include(PrintVariables)
 include(DefinePlatformSpecfic)
@@ -119,11 +119,11 @@ endif()
 
 set(QRCS ${CMAKE_CURRENT_LIST_DIR}/src/main/resources/Qtrcs/resources.qrc 
 )
-
+link_directories(${TARGET_BUILD_DIRECTORY}/lib)
 add_subdirectory(external)
 include(FindGoogleMock)
-message (STATUS "${GOOGLEMOCK_INCLUDE_DIR}")
-# add_subdirectory(osgi)
 
-# add_subdirectory(src/main/cpp)
-#add_subdirectory(src/test/cpp)
+add_subdirectory(osgi)
+
+add_subdirectory(src/main/cpp)
+add_subdirectory(src/test/cpp)

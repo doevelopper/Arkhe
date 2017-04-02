@@ -2,9 +2,9 @@
 #include <arkhe/osgi/core/ScopedCurrentDir.hpp>
 
 template<typename BaseClassType>
-bool osgi::FactoryPluginItem<BaseClassType>::load()
+bool osgi::core::FactoryPluginItem<BaseClassType>::load()
 {
-    osgi::ScopedCurrentDir scopedCurrentDir(QFileInfo(this->path()).path());
+    osgi::core::ScopedCurrentDir scopedCurrentDir(QFileInfo(this->path()).path());
     this->Loader.setFileName(this->path());
     bool loaded = this->Loader.load();
     if (!loaded)
@@ -16,13 +16,13 @@ bool osgi::FactoryPluginItem<BaseClassType>::load()
 }
 
 template<typename BaseClassType>
-QString osgi::FactoryPluginItem<BaseClassType>::loadErrorString()const
+QString osgi::core::FactoryPluginItem<BaseClassType>::loadErrorString()const
 {
     return this->Loader.errorString();
 }
 
 template<typename BaseClassType>
-BaseClassType* osgi::FactoryPluginItem<BaseClassType>::instanciator()
+BaseClassType* osgi::core::FactoryPluginItem<BaseClassType>::instanciator()
 {
   //qDebug() << "PluginItem::instantiate - name:" << this->path();
     QObject * object = this->Loader.instance();

@@ -1,28 +1,35 @@
 #include <arkhe/osgi/core/AbstractFactory.hpp>
 
 template<typename BaseClassType>
-osgi::AbstractFactory<BaseClassType>::AbstractFactory()
+osgi::core::AbstractFactory<BaseClassType>::AbstractFactory()
 {
   this->Verbose = false;
   this->SharedRegisteredItemMap = QSharedPointer<HashType>(new HashType);
 }
 
 template<typename BaseClassType>
-osgi::AbstractFactory<BaseClassType>::~AbstractFactory()
+osgi::core::AbstractFactory<BaseClassType>::~AbstractFactory()
 {
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactory<BaseClassType>::printAdditionalInfo()
+void osgi::core::AbstractFactory<BaseClassType>::printAdditionalInfo()
 {
   qDebug() << "ctkAbstractFactory<BaseClassType> (" << this << ")";
   // TODO
 }
 
 template<typename BaseClassType>
-BaseClassType* osgi::AbstractFactory<BaseClassType>::instantiate(const QString& itemKey)
+QString osgi::core::AbstractFactory<BaseClassType>::path(const QString& itemKey)
 {
-  AbstractFactoryItem<BaseClassType>* _item = this->item(itemKey);
+	Q_UNUSED(itemKey);
+	return QString();
+}
+		
+template<typename BaseClassType>
+BaseClassType* osgi::core::AbstractFactory<BaseClassType>::instantiate(const QString& itemKey)
+{
+  osgi::core::AbstractFactoryItem<BaseClassType>* _item = this->item(itemKey);
   BaseClassType* instance = 0;
   bool wasInstantiated = false;
   if (_item)
@@ -58,7 +65,7 @@ BaseClassType* osgi::AbstractFactory<BaseClassType>::instantiate(const QString& 
 
 
 template<typename BaseClassType>
-osgi::AbstractFactoryItem<BaseClassType> * osgi::AbstractFactory<BaseClassType>::item(const QString& itemKey)const
+osgi::core::AbstractFactoryItem<BaseClassType> * osgi::core::AbstractFactory<BaseClassType>::item(const QString& itemKey)const
 {
     ConstIterator iter = this->RegisteredItemMap.find(itemKey);
     if ( iter == this->RegisteredItemMap.constEnd())
@@ -70,7 +77,7 @@ osgi::AbstractFactoryItem<BaseClassType> * osgi::AbstractFactory<BaseClassType>:
 }
 
 template<typename BaseClassType>
-osgi::AbstractFactoryItem<BaseClassType> * osgi::AbstractFactory<BaseClassType>::sharedItem(const QString& itemKey)const
+osgi::core::AbstractFactoryItem<BaseClassType> * osgi::core::AbstractFactory<BaseClassType>::sharedItem(const QString& itemKey)const
 {
     if(this->SharedRegisteredItemMap.isNull())
     {
@@ -88,14 +95,14 @@ osgi::AbstractFactoryItem<BaseClassType> * osgi::AbstractFactory<BaseClassType>:
 }
 
 template<typename BaseClassType>
-BaseClassType* osgi::AbstractFactory<BaseClassType>::instance(const QString& itemKey)
+BaseClassType* osgi::core::AbstractFactory<BaseClassType>::instance(const QString& itemKey)
 {
-    osgi::AbstractFactoryItem<BaseClassType>* factoryItem = this->item(itemKey);
+    osgi::core::AbstractFactoryItem<BaseClassType>* factoryItem = this->item(itemKey);
     return (factoryItem ? factoryItem->instance() : 0);
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactory<BaseClassType>::uninstantiate(const QString& itemKey)
+void osgi::core::AbstractFactory<BaseClassType>::uninstantiate(const QString& itemKey)
 {
     AbstractFactoryItem<BaseClassType> * _item = this->item(itemKey);
     if (!_item)
@@ -106,32 +113,32 @@ void osgi::AbstractFactory<BaseClassType>::uninstantiate(const QString& itemKey)
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactory<BaseClassType>::setVerbose(bool value)
+void osgi::core::AbstractFactory<BaseClassType>::setVerbose(bool value)
 {
     this->Verbose = value;
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFactory<BaseClassType>::verbose()const
+bool osgi::core::AbstractFactory<BaseClassType>::verbose()const
 {
     return this->Verbose;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactory<BaseClassType>::setSharedItems(const QSharedPointer<HashType>& items)
+void osgi::core::AbstractFactory<BaseClassType>::setSharedItems(const QSharedPointer<HashType>& items)
 {
     this->SharedRegisteredItemMap = items;
 }
 
 template<typename BaseClassType>
-QSharedPointer<typename osgi::AbstractFactory<BaseClassType>::HashType>
-osgi::AbstractFactory<BaseClassType>::sharedItems()
+QSharedPointer<typename osgi::core::AbstractFactory<BaseClassType>::HashType>
+osgi::core::AbstractFactory<BaseClassType>::sharedItems()
 {
   return this->SharedRegisteredItemMap;
 }
 
 template<typename BaseClassType>
-QStringList osgi::AbstractFactory<BaseClassType>::itemKeys() const
+QStringList osgi::core::AbstractFactory<BaseClassType>::itemKeys() const
 {
   // Since by construction, we checked if a name was already in the QHash,
   // there is no need to call 'uniqueKeys'
@@ -139,7 +146,7 @@ QStringList osgi::AbstractFactory<BaseClassType>::itemKeys() const
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactory<BaseClassType>::displayStatusMessage(
+void osgi::core::AbstractFactory<BaseClassType>::displayStatusMessage(
     const QtMsgType& type, const QString& description, const QString& status, bool display)
 {
     QString msg = QString("%1 [%2]").arg(description + " ", -70, QChar('.')).arg(status);
@@ -164,8 +171,8 @@ void osgi::AbstractFactory<BaseClassType>::displayStatusMessage(
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFactory<BaseClassType>::registerItem(const QString& key,
-  const QSharedPointer<osgi::AbstractFactoryItem<BaseClassType> > & _item)
+bool osgi::core::AbstractFactory<BaseClassType>::registerItem(const QString& key,
+  const QSharedPointer<osgi::core::AbstractFactoryItem<BaseClassType> > & _item)
 {
   // Sanity checks
     if (!_item)

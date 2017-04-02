@@ -3,12 +3,12 @@
 #include <QDebug>
 #include <arkhe/osgi/core/Exception.hpp>
 
-osgi::Exception::TraceManipulator::TraceManipulator(const Exception* e)
+osgi::core::Exception::TraceManipulator::TraceManipulator(const Exception* e)
   : Exc(e)
 {
 }
 
-QDebug osgi::Exception::TraceManipulator::print(QDebug dbg) const
+QDebug osgi::core::Exception::TraceManipulator::print(QDebug dbg) const
 {
     if (Exc)
     {
@@ -17,19 +17,19 @@ QDebug osgi::Exception::TraceManipulator::print(QDebug dbg) const
     return (dbg.maybeSpace());
 }
 
-osgi::Exception::Exception(const QString& msg)
+osgi::core::Exception::Exception(const QString& msg)
   : Msg(msg)
   , NestedException(0)
 {
 }
 
-osgi::Exception::Exception(const QString& msg, const Exception& cause)
+osgi::core::Exception::Exception(const QString& msg, const Exception& cause)
   : Msg(msg)
   , NestedException(cause.clone())
 {
 }
 
-osgi::Exception::Exception(const osgi::Exception& exc)
+osgi::core::Exception::Exception(const osgi::core::Exception& exc)
   : std::exception(exc)
   , BackTrace(exc)
   , Msg(exc.Msg)
@@ -37,12 +37,12 @@ osgi::Exception::Exception(const osgi::Exception& exc)
     NestedException = exc.NestedException ? exc.NestedException->clone() : 0;
 }
 
-osgi::Exception::~Exception() throw()
+osgi::core::Exception::~Exception() throw()
 {
   delete NestedException;
 }
 
-osgi::Exception& osgi::Exception::operator=(const osgi::Exception& exc)
+osgi::core::Exception& osgi::core::Exception::operator=(const osgi::core::Exception& exc)
 {
     if (&exc != this)
     {
@@ -54,28 +54,28 @@ osgi::Exception& osgi::Exception::operator=(const osgi::Exception& exc)
 }
 
 
-const osgi::Exception* osgi::Exception::cause() const throw()
+const osgi::core::Exception* osgi::core::Exception::cause() const throw()
 {
   return NestedException;
 }
 
-void osgi::Exception::setCause(const osgi::Exception& cause)
+void osgi::core::Exception::setCause(const osgi::core::Exception& cause)
 {
     delete NestedException;
     NestedException = cause.clone();
 }
 
-const char *osgi::Exception::name() const throw()
+const char *osgi::core::Exception::name() const throw()
 {
-  return "osgi::Exception";
+  return "osgi::core::Exception";
 }
 
-const char* osgi::Exception::className() const throw()
+const char* osgi::core::Exception::className() const throw()
 {
     return typeid(*this).name();
 }
 
-const char* osgi::Exception::what() const throw()
+const char* osgi::core::Exception::what() const throw()
 {
     if (WhatMsg.empty())
     {
@@ -89,29 +89,29 @@ const char* osgi::Exception::what() const throw()
   return WhatMsg.c_str();
 }
 
-QString osgi::Exception::message() const throw()
+QString osgi::core::Exception::message() const throw()
 {
     return Msg;
 }
 
-osgi::Exception::TraceManipulator osgi::Exception::printStackTrace() const
+osgi::core::Exception::TraceManipulator osgi::core::Exception::printStackTrace() const
 {
   return TraceManipulator(this);
 }
 
-osgi::Exception* osgi::Exception::clone() const
+osgi::core::Exception* osgi::core::Exception::clone() const
 {
-  return (new osgi::Exception(*this));
+  return (new osgi::core::Exception(*this));
 }
 
-void osgi::Exception::rethrow() const
+void osgi::core::Exception::rethrow() const
 {
   throw *this;
 }
 
-QDebug osgi::Exception::printStackTrace(QDebug dbg) const
+QDebug osgi::core::Exception::printStackTrace(QDebug dbg) const
 {
-    QSet<const osgi::Exception*> dejaVu;
+    QSet<const osgi::core::Exception*> dejaVu;
     dejaVu.insert(this);
 
   // Print our stack trace
@@ -131,10 +131,10 @@ QDebug osgi::Exception::printStackTrace(QDebug dbg) const
 }
 
 
-void osgi::Exception::printEnclosedStackTrace(QDebug dbg, const QList<QString>& enclosingTrace,
+void osgi::core::Exception::printEnclosedStackTrace(QDebug dbg, const QList<QString>& enclosingTrace,
                                                 const QString& caption,
                                                 const QString& prefix,
-                                                QSet<const osgi::Exception*>& dejaVu)
+                                                QSet<const osgi::core::Exception*>& dejaVu)
 {
     if (dejaVu.contains(this))
     {
@@ -176,13 +176,13 @@ void osgi::Exception::printEnclosedStackTrace(QDebug dbg, const QList<QString>& 
 }
 
 
-QDebug operator<<(QDebug dbg, const osgi::Exception& exc)
+QDebug operator<<(QDebug dbg, const osgi::core::Exception& exc)
 {
     dbg << exc.what();
     return dbg.maybeSpace();
 }
 
-QDebug operator<<(QDebug dbg, const osgi::Exception::TraceManipulator& trace)
+QDebug operator<<(QDebug dbg, const osgi::core::Exception::TraceManipulator& trace)
 {
     return trace.print(dbg);
 }

@@ -1,11 +1,9 @@
-#ifndef ARKHE_OSGI_CORE_ABSTRACTFACTORY_HPP
-#define ARKHE_OSGI_CORE_ABSTRACTFACTORY_HPP
+#ifndef ARKHE_OSGI_CORE_BACKTRACETEST_HPP
+#define ARKHE_OSGI_CORE_BACKTRACETEST_HPP
 
-#include <gtest/gtest.h>
-#include <QScopedPointer>
-#include <QString>
-
+#include <arkhe/osgi/core/BackTrace.hpp>
 #include <arkhe/osgi/osgi.hpp>
+#include <gtest/gtest.h>
 
 namespace osgi
 {
@@ -30,11 +28,12 @@ namespace osgi
 
 			protected:
 
-
-			private :
 				BackTrace * objectToTest;
 
+			private :
+
 			};
+		}
 	}
 }
 #endif

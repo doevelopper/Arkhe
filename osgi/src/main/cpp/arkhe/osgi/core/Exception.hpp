@@ -64,126 +64,129 @@ DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, IllegalStateException, RuntimeException)
  */
 namespace osgi
 {
-	class ARKHE_CORE_EXPORT Exception : public std::exception , public osgi::core::BackTrace
+	namespace core 
 	{
-	public:
-        class TraceManipulator
-        {
-        public:
-          
-              TraceManipulator(const Exception* e);
-              QDebug print(QDebug dbg) const;
-          
-        private:
-          
-              const Exception* Exc;
-        };
-        explicit Exception(const QString& msg);
-        virtual ~Exception() throw();
-        /**
-         * @brief Create a new ctkException containing another exception as the cause.
-         * @param msg The exception message.
-         * @param cause The nested exception causing this exception.
-         */
-        Exception(const QString& msg, const Exception& cause);
-      
-        /**
-         * @brief Copy constructor.
-         * @param o The exception to copy.
-         */
-        Exception(const Exception& o);
-        /**
-         * @brief Assignment operator.
-         * @param o The exception to assign to this exception.
-         * @return
-         */
-        Exception& operator=(const Exception& o);
-      
-        /**
-         * @brief Gets the nested exception which caused this exception.
-         * @return The nested exception, or <code>NULL</code> if there is none.
-         */
-        const Exception* cause() const throw();
-      
-        /**
-         * @brief Sets the cause for this exception.
-         * @param cause The exception causing this exception.
-         */
-        void setCause(const Exception& cause);
-      
-        /**
-         * @brief Returns the name for this exception.
-         * @return The exception name.
-         */
-        virtual const char* name() const throw();
-      
-        /**
-         * @brief Returns the class name for this exception.
-         * @return The exception class name.
-         */
-        virtual const char* className() const throw();
-      
-        /**
-         * @brief Returns a static string describing this exception.
-         * @return The exception description.
-         */
-        virtual const char* what() const throw();
-      
-        /**
-         * @brief Returns the detail message string of this exception.
-         * @return The detail exception message.
-         */
-        QString message() const throw();
-      
-        /**
-         * @brief Returns an object suitable for printing this executable
-         * and its backtrace via qDebug().
-         *
-         * Example usage:
-         * \code
-         * ctkException exc("My error");
-         * qDebug() << exc.printStackTrace();
-         * \endcode
-         *
-         * @return A helper object for streaming to qDebug().
-         */
-        TraceManipulator printStackTrace() const;
-      
-        /**
-         * @brief Creates a copy of this exception. Use rethrow() to throw the
-         * copy again.
-         * @return A copy of this exception.
-         */
-        virtual Exception* clone() const;
-      
-        /**
-         * @brief (Re)Throws this exception.
-         */
-        virtual void rethrow() const;
-	protected:
-        friend class TraceManipulator;
+		class ARKHE_CORE_EXPORT Exception : public std::exception , public osgi::core::BackTrace
+		{
+		public:
+			class TraceManipulator
+			{
+			public:
+			  
+				  TraceManipulator(const Exception* e);
+				  QDebug print(QDebug dbg) const;
+			  
+			private:
+			  
+				  const Exception* Exc;
+			};
+			explicit Exception(const QString& msg);
+			virtual ~Exception() throw();
+			/**
+			 * @brief Create a new ctkException containing another exception as the cause.
+			 * @param msg The exception message.
+			 * @param cause The nested exception causing this exception.
+			 */
+			Exception(const QString& msg, const Exception& cause);
+		  
+			/**
+			 * @brief Copy constructor.
+			 * @param o The exception to copy.
+			 */
+			Exception(const Exception& o);
+			/**
+			 * @brief Assignment operator.
+			 * @param o The exception to assign to this exception.
+			 * @return
+			 */
+			Exception& operator=(const Exception& o);
+		  
+			/**
+			 * @brief Gets the nested exception which caused this exception.
+			 * @return The nested exception, or <code>NULL</code> if there is none.
+			 */
+			const Exception* cause() const throw();
+		  
+			/**
+			 * @brief Sets the cause for this exception.
+			 * @param cause The exception causing this exception.
+			 */
+			void setCause(const Exception& cause);
+		  
+			/**
+			 * @brief Returns the name for this exception.
+			 * @return The exception name.
+			 */
+			virtual const char* name() const throw();
+		  
+			/**
+			 * @brief Returns the class name for this exception.
+			 * @return The exception class name.
+			 */
+			virtual const char* className() const throw();
+		  
+			/**
+			 * @brief Returns a static string describing this exception.
+			 * @return The exception description.
+			 */
+			virtual const char* what() const throw();
+		  
+			/**
+			 * @brief Returns the detail message string of this exception.
+			 * @return The detail exception message.
+			 */
+			QString message() const throw();
+		  
+			/**
+			 * @brief Returns an object suitable for printing this executable
+			 * and its backtrace via qDebug().
+			 *
+			 * Example usage:
+			 * \code
+			 * ctkException exc("My error");
+			 * qDebug() << exc.printStackTrace();
+			 * \endcode
+			 *
+			 * @return A helper object for streaming to qDebug().
+			 */
+			TraceManipulator printStackTrace() const;
+		  
+			/**
+			 * @brief Creates a copy of this exception. Use rethrow() to throw the
+			 * copy again.
+			 * @return A copy of this exception.
+			 */
+			virtual Exception* clone() const;
+		  
+			/**
+			 * @brief (Re)Throws this exception.
+			 */
+			virtual void rethrow() const;
+		protected:
+			friend class TraceManipulator;
 
-        /**
-         * @brief Print the stack trace of this exception using the given QDebug object.
-         * @param dbg
-         * @return
-         */
-        virtual QDebug printStackTrace(QDebug dbg) const;
-	private:
+			/**
+			 * @brief Print the stack trace of this exception using the given QDebug object.
+			 * @param dbg
+			 * @return
+			 */
+			virtual QDebug printStackTrace(QDebug dbg) const;
+		private:
 
-        //Exception(const Exception &);  /// Not implemented
-        //void operator=(const Exception&); /// Not implemented
-        
-        QString Msg;
-        mutable std::string WhatMsg;
-        Exception* NestedException;
+			//Exception(const Exception &);  /// Not implemented
+			//void operator=(const Exception&); /// Not implemented
+			
+			QString Msg;
+			mutable std::string WhatMsg;
+			Exception* NestedException;
 
-        void printEnclosedStackTrace(QDebug dbg, const QList<QString>& enclosingTrace,
-                               const QString& caption, const QString& prefix,
-                               QSet<const Exception*>& dejaVu);
-	};
+			void printEnclosedStackTrace(QDebug dbg, const QList<QString>& enclosingTrace,
+								   const QString& caption, const QString& prefix,
+								   QSet<const Exception*>& dejaVu);
+		};
 
-    ARKHE_CORE_EXPORT QDebug operator<<(QDebug dbg, const Exception& exc);
-    ARKHE_CORE_EXPORT QDebug operator<<(QDebug dbg, const Exception::TraceManipulator& trace);
+		ARKHE_CORE_EXPORT QDebug operator<<(QDebug dbg, const Exception& exc);
+		ARKHE_CORE_EXPORT QDebug operator<<(QDebug dbg, const Exception::TraceManipulator& trace);
+	}
 }
 #endif

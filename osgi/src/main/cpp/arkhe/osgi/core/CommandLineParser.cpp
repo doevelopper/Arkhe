@@ -8,7 +8,7 @@
 #include <QSettings>
 #include <QPointer>
 
-osgi::CommandLineParserArgumentDescription::CommandLineParserArgumentDescription(const QString& longArg,
+osgi::core::CommandLineParserArgumentDescription::CommandLineParserArgumentDescription(const QString& longArg,
                                              const QString& longArgPrefix,
                                             const QString& shortArg,
                                             const QString& shortArgPrefix,
@@ -74,12 +74,12 @@ osgi::CommandLineParserArgumentDescription::CommandLineParserArgumentDescription
 }
 
 
-osgi::CommandLineParserArgumentDescription::~CommandLineParserArgumentDescription()
+osgi::core::CommandLineParserArgumentDescription::~CommandLineParserArgumentDescription()
 {
             
 }
 
-bool osgi::CommandLineParserArgumentDescription::addParameter(const QString& value)
+bool osgi::core::CommandLineParserArgumentDescription::addParameter(const QString& value)
 {
     if (!RegularExpression.isEmpty())
     {
@@ -136,7 +136,7 @@ bool osgi::CommandLineParserArgumentDescription::addParameter(const QString& val
   return (true);
 }
 
-QString osgi::CommandLineParserArgumentDescription::helpText(int fieldWidth
+QString osgi::core::CommandLineParserArgumentDescription::helpText(int fieldWidth
                                                              , const char charPad
                                                              , const QString& settingsValue)
 {
@@ -186,8 +186,8 @@ QString osgi::CommandLineParserArgumentDescription::helpText(int fieldWidth
     return (text);
 }
 
-osgi::CommandLineParserArgumentDescription*
-  osgi::CommandLineParser::Internal::argumentDescription(const QString& argument)
+osgi::core::CommandLineParserArgumentDescription*
+  osgi::core::CommandLineParser::Internal::argumentDescription(const QString& argument)
 {
     QString unprefixedArg = argument;
     if (!LongPrefix.isEmpty() && argument.startsWith(LongPrefix))
@@ -219,24 +219,24 @@ osgi::CommandLineParserArgumentDescription*
     return (0);
 }
 
-osgi::CommandLineParser::CommandLineParser(QObject* newParent)
+osgi::core::CommandLineParser::CommandLineParser(QObject* newParent)
 : Superclass(newParent)
 {
     this->m_internal = new Internal(0);
 }
 
-osgi::CommandLineParser::CommandLineParser(QSettings* settings, QObject* newParent)
+osgi::core::CommandLineParser::CommandLineParser(QSettings* settings, QObject* newParent)
 :  Superclass(newParent)
 {
     this->m_internal = new Internal(settings);
 }
 
-osgi::CommandLineParser::~CommandLineParser()
+osgi::core::CommandLineParser::~CommandLineParser()
 {
   delete this->m_internal;
 }
 
-QHash<QString, QVariant> osgi::CommandLineParser::parseArguments(const QStringList& arguments, bool* ok)
+QHash<QString, QVariant> osgi::core::CommandLineParser::parseArguments(const QStringList& arguments, bool* ok)
 {
 
     this->m_internal->UnparsedArguments.clear();
@@ -558,7 +558,7 @@ QHash<QString, QVariant> osgi::CommandLineParser::parseArguments(const QStringLi
 }
 
 // -------------------------------------------------------------------------
-QHash<QString, QVariant> osgi::CommandLineParser::parseArguments(int argc, char** argv, bool* ok)
+QHash<QString, QVariant> osgi::core::CommandLineParser::parseArguments(int argc, char** argv, bool* ok)
 {
   QStringList arguments;
 
@@ -571,17 +571,17 @@ QHash<QString, QVariant> osgi::CommandLineParser::parseArguments(int argc, char*
     return this->parseArguments(arguments, ok);
 }
 
-QString osgi::CommandLineParser::errorString() const
+QString osgi::core::CommandLineParser::errorString() const
 {
     return this->m_internal->ErrorString;
 }
 
-const QStringList& osgi::CommandLineParser::unparsedArguments() const
+const QStringList& osgi::core::CommandLineParser::unparsedArguments() const
 {
     return (this->m_internal->UnparsedArguments);
 }
 
-void osgi::CommandLineParser::addArgument(const QString& longarg, const QString& shortarg,
+void osgi::core::CommandLineParser::addArgument(const QString& longarg, const QString& shortarg,
                                        QVariant::Type type, const QString& argHelp,
                                        const QVariant& defaultValue, bool ignoreRest,
                                        bool deprecated)
@@ -644,14 +644,14 @@ void osgi::CommandLineParser::addArgument(const QString& longarg, const QString&
     this->m_internal->GroupToArgumentDescriptionListMap[this->m_internal->CurrentGroup] << argDesc;
 }
 
-void osgi::CommandLineParser::addDeprecatedArgument(
+void osgi::core::CommandLineParser::addDeprecatedArgument(
     const QString& longarg, const QString& shortarg, const QString& argHelp)
 {
   addArgument(longarg, shortarg, QVariant::StringList, argHelp, QVariant(), false, true);
 }
 
 
-bool osgi::CommandLineParser::setExactMatchRegularExpression(
+bool osgi::core::CommandLineParser::setExactMatchRegularExpression(
     const QString& argument,
     const QString& expression,
     const QString& exactMatchFailedMessage)
@@ -672,39 +672,39 @@ bool osgi::CommandLineParser::setExactMatchRegularExpression(
     return (true);
 }
 
-int osgi::CommandLineParser::fieldWidth() const
+int osgi::core::CommandLineParser::fieldWidth() const
 {
     return (this->m_internal->FieldWidth);
 }
 
-void osgi::CommandLineParser::beginGroup(const QString& description)
+void osgi::core::CommandLineParser::beginGroup(const QString& description)
 {
     this->m_internal->CurrentGroup = description;
 }
 
-void osgi::CommandLineParser::endGroup()
+void osgi::core::CommandLineParser::endGroup()
 {
     this->m_internal->CurrentGroup.clear();
 }
 
-void osgi::CommandLineParser::enableSettings(const QString& disableLongArg, const QString& disableShortArg)
+void osgi::core::CommandLineParser::enableSettings(const QString& disableLongArg, const QString& disableShortArg)
 {
   this->m_internal->UseQSettings = true;
   this->m_internal->DisableQSettingsLongArg = disableLongArg;
   this->m_internal->DisableQSettingsShortArg = disableShortArg;
 }
 
-void osgi::CommandLineParser::mergeSettings(bool merge)
+void osgi::core::CommandLineParser::mergeSettings(bool merge)
 {
     this->m_internal->MergeSettings = merge;
 }
 
-bool osgi::CommandLineParser::settingsEnabled() const
+bool osgi::core::CommandLineParser::settingsEnabled() const
 {
     return (this->m_internal->UseQSettings);
 }
 
-QString osgi::CommandLineParser::helpText(const char charPad) const
+QString osgi::core::CommandLineParser::helpText(const char charPad) const
 {
     QString text;
     QTextStream stream(&text);
@@ -761,23 +761,23 @@ QString osgi::CommandLineParser::helpText(const char charPad) const
     return (text);
 }
 
-bool osgi::CommandLineParser::argumentAdded(const QString& argument) const
+bool osgi::core::CommandLineParser::argumentAdded(const QString& argument) const
 {
   return (this->m_internal->ArgNameToArgumentDescriptionMap.contains(argument));
 }
 
-bool osgi::CommandLineParser::argumentParsed(const QString& argument) const
+bool osgi::core::CommandLineParser::argumentParsed(const QString& argument) const
 {
     return (this->m_internal->ProcessedArguments.contains(argument));
 }
 
-void osgi::CommandLineParser::setArgumentPrefix(const QString& longPrefix, const QString& shortPrefix)
+void osgi::core::CommandLineParser::setArgumentPrefix(const QString& longPrefix, const QString& shortPrefix)
 {
     this->m_internal->LongPrefix = longPrefix;
     this->m_internal->ShortPrefix = shortPrefix;
 }
 
-void osgi::CommandLineParser::setStrictModeEnabled(bool strictMode)
+void osgi::core::CommandLineParser::setStrictModeEnabled(bool strictMode)
 {
     this->m_internal->StrictMode = strictMode;
 }

@@ -13,26 +13,28 @@
  */
 namespace osgi
 {
-    template<typename BaseClassType>
-    class AbstractFactoryItem;
-
-	template<typename BaseClassType>
-	class AbstractFileBasedFactory : public AbstractFactory<BaseClassType>
+	namespace core
 	{
-	public:
-        virtual bool isValidFile(const QFileInfo& file)const;
-        QString itemKey(const QFileInfo& file)const;
-        QString registerFileItem(const QFileInfo& file);
-        virtual QString pathway(const QString& key);
-	protected:
-	  
-	private:
-        void registerAllFileItems(const QStringList& directories);
-        bool registerFileItem(const QString& key, const QFileInfo& file);
-        virtual AbstractFactoryItem<BaseClassType>* createFactoryFileBasedItem();
-        virtual void initItem(AbstractFactoryItem<BaseClassType>* item);
-        virtual QString fileNameToKey(const QString& path)const;
-	};
-		
+		template<typename BaseClassType>
+		class AbstractFactoryItem;
+
+		template<typename BaseClassType>
+		class AbstractFileBasedFactory : public AbstractFactory<BaseClassType>
+		{
+		public:
+			virtual bool isValidFile(const QFileInfo& file)const;
+			QString itemKey(const QFileInfo& file)const;
+			QString registerFileItem(const QFileInfo& file);
+			virtual QString pathway(const QString& key);
+		protected:
+		  
+		private:
+			void registerAllFileItems(const QStringList& directories);
+			bool registerFileItem(const QString& key, const QFileInfo& file);
+			virtual AbstractFactoryItem<BaseClassType>* createFactoryFileBasedItem();
+			virtual void initItem(AbstractFactoryItem<BaseClassType>* item);
+			virtual QString fileNameToKey(const QString& path)const;
+		};
+	}
 }
 #endif

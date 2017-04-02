@@ -13,22 +13,23 @@
  */
 namespace osgi
 {
-
-	template<typename BaseClassType>
-	class AbstractObjectFactory : public AbstractFactory<BaseClassType>
+	namespace core 
 	{
-	public:
-        explicit AbstractObjectFactory();
-        virtual ~AbstractObjectFactory();
-        
-        template<typename ClassType>
-        bool registerObject(const QString& key);
-	protected:
+		template<typename BaseClassType>
+		class AbstractObjectFactory : public AbstractFactory<BaseClassType>
+		{
+		public:
+			explicit AbstractObjectFactory();
+			virtual ~AbstractObjectFactory();
+			
+			template<typename ClassType>
+			bool registerObject(const QString& key);
+		protected:
 
-	private:
-        AbstractObjectFactory(const AbstractObjectFactory &);  /// Not implemented
-        void operator=(const AbstractObjectFactory&); /// Not implemented
-	};
-		
+		private:
+			AbstractObjectFactory(const AbstractObjectFactory &);  /// Not implemented
+			void operator=(const AbstractObjectFactory&); /// Not implemented
+		};
+	}
 }
 #endif

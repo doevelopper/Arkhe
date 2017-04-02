@@ -13,20 +13,21 @@
  */
 namespace osgi
 {
-
-	template<typename BaseClassType, typename ClassType>
-	class FactoryObjectItem : public AbstractFactoryItem<BaseClassType>
+	namespace core 
 	{
-	public:
-        FactoryObjectItem();
-        virtual ~FactoryObjectItem();
-        virtual bool load();
-	protected:
-        typedef BaseClassType *(*InstantiateObjectFunc)();
-        virtual BaseClassType* instanciator();
-	private:
-        InstantiateObjectFunc instantiateObjectFunc;
-	};
-		
+		template<typename BaseClassType, typename ClassType>
+		class FactoryObjectItem : public AbstractFactoryItem<BaseClassType>
+		{
+		public:
+			FactoryObjectItem();
+			virtual ~FactoryObjectItem();
+			virtual bool load();
+		protected:
+			typedef BaseClassType *(*InstantiateObjectFunc)();
+			virtual BaseClassType* instanciator();
+		private:
+			InstantiateObjectFunc instantiateObjectFunc;
+		};
+	}
 }
 #endif

@@ -27,7 +27,8 @@ namespace osgi
 				StoppingWorkflow,
 				TransitionToPreviousStartingStepAfterSuccessfulGoToFinishStep
 			};
-
+			WorkflowInterstepTransition();
+			virtual ~WorkflowInterstepTransition();
 			WorkflowInterstepTransition(InterstepTransitionType newTransitionType);
 			WorkflowInterstepTransition(InterstepTransitionType newTransitionType, const QString& newId);
 

@@ -12,22 +12,23 @@
  */
 namespace osgi
 {
-
-	template<typename BaseClassType>
-	class AbstractPluginFactory : public AbstractFileBasedFactory<BaseClassType>
+	namespace core 
 	{
-	public:
-        AbstractPluginFactory();
-        virtual ~AbstractPluginFactory();
+		template<typename BaseClassType>
+		class AbstractPluginFactory : public AbstractFileBasedFactory<BaseClassType>
+		{
+		public:
+			AbstractPluginFactory();
+			virtual ~AbstractPluginFactory();
 
-	protected:
+		protected:
 
-        virtual bool isValidFile(const QFileInfo& file)const;
-        virtual AbstractFactoryItem<BaseClassType>* createFactoryFileBasedItem();
+			virtual bool isValidFile(const QFileInfo& file)const;
+			virtual AbstractFactoryItem<BaseClassType>* createFactoryFileBasedItem();
 
-	private:
+		private:
 
-  	};
-		
+		};
+	}
 }
 #endif

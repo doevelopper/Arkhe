@@ -19,7 +19,10 @@
  */
 namespace osgi
 {
-            class BinaryFileDescriptorPrivate
+	namespace core
+	{
+		
+		class BinaryFileDescriptorPrivate
         {
         public:
 
@@ -36,28 +39,28 @@ namespace osgi
         };
 
 
-	class ARKHE_CORE_EXPORT BinaryFileDescriptor
-	{
-	public:
-        BinaryFileDescriptor();
-        virtual ~BinaryFileDescriptor();
-        BinaryFileDescriptor(const QString& _fileName);
+		class ARKHE_CORE_EXPORT BinaryFileDescriptor
+		{
+		public:
+			BinaryFileDescriptor();
+			virtual ~BinaryFileDescriptor();
+			BinaryFileDescriptor(const QString& _fileName);
 
-        QString fileName()const;
-        void setFileName(const QString& _fileName);
-        bool load();
-        bool unload();
-        bool isLoaded() const;
-        void* resolve(const char * symbol);
-	protected:
+			QString fileName()const;
+			void setFileName(const QString& _fileName);
+			bool load();
+			bool unload();
+			bool isLoaded() const;
+			void* resolve(const char * symbol);
+		protected:
 
-        QScopedPointer<BinaryFileDescriptorPrivate> d_ptr;
+			QScopedPointer<BinaryFileDescriptorPrivate> d_ptr;
 
-	private:
+		private:
 
-        Q_DECLARE_PRIVATE(BinaryFileDescriptor)
-        Q_DISABLE_COPY(BinaryFileDescriptor)
-	};
-		
+			Q_DECLARE_PRIVATE(BinaryFileDescriptor)
+			Q_DISABLE_COPY(BinaryFileDescriptor)
+		};
+	}
 }
 #endif

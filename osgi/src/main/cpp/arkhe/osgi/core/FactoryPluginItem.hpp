@@ -12,26 +12,27 @@
  */
 namespace osgi
 {
-
-	template<typename BaseClassType>
-	class FactoryPluginItem : public AbstractFactoryFileBasedItem<BaseClassType>
+	namespace core 
 	{
-	public:
-        FactoryPluginItem();
-        virtual ~FactoryPluginItem();
-        
-        virtual bool load();
-        virtual QString loadErrorString()const;
+		template<typename BaseClassType>
+		class FactoryPluginItem : public AbstractFactoryFileBasedItem<BaseClassType>
+		{
+		public:
+			FactoryPluginItem();
+			virtual ~FactoryPluginItem();
+			
+			virtual bool load();
+			virtual QString loadErrorString()const;
 
-	protected:
+		protected:
 
-        virtual BaseClassType* instanciator();
+			virtual BaseClassType* instanciator();
 
-	private:
+		private:
 
-        QPluginLoader    Loader;
+			QPluginLoader    Loader;
 
-	};
-		
+		};
+	}
 }
 #endif

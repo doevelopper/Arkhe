@@ -11,7 +11,7 @@
 
 #define ARKHE_CORE_EXPORT
 #define ARKHE_CORE_PLUGIN_FW_EXPORT
-
+#define ARKHE_CORE_CLI_MODULECORE_EXPORT
 
 #define CONSTRUCTOR_NO_ARG_CPP(PUB)      \
     PUB::PUB(): d_ptr(new PUB##Private)    \

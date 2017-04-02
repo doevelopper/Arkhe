@@ -1,5 +1,14 @@
 #include <arkhe/osgi/core/workflow/WorkflowInterstepTransition.hpp>
 
+osgi::core::WorkflowInterstepTransition::WorkflowInterstepTransition()
+{
+	
+}
+
+osgi::core::WorkflowInterstepTransition::~WorkflowInterstepTransition()
+{
+	
+}
 
 osgi::core::WorkflowInterstepTransition::WorkflowInterstepTransition(InterstepTransitionType newTransitionType)
 : TransitionType(newTransitionType)

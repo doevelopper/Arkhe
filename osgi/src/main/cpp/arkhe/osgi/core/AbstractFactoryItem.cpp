@@ -1,85 +1,85 @@
 #include <arkhe/osgi/core/AbstractFactoryItem.hpp>
 
 template<typename BaseClassType>
-osgi::AbstractFactoryItem<BaseClassType>::AbstractFactoryItem()
+osgi::core::AbstractFactoryItem<BaseClassType>::AbstractFactoryItem()
   :Instance()
 {
     this->Verbose = false;
 }
 
 template<typename BaseClassType>
-osgi::AbstractFactoryItem<BaseClassType>::~AbstractFactoryItem()
+osgi::core::AbstractFactoryItem<BaseClassType>::~AbstractFactoryItem()
 {
 }
 
 template<typename BaseClassType>
-QStringList osgi::AbstractFactoryItem<BaseClassType>::instantiateErrorStrings()const
+QStringList osgi::core::AbstractFactoryItem<BaseClassType>::instantiateErrorStrings()const
 {
     return this->InstantiateErrorStrings;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::appendInstantiateErrorString(const QString& errorString)
+void osgi::core::AbstractFactoryItem<BaseClassType>::appendInstantiateErrorString(const QString& errorString)
 {
     this->InstantiateErrorStrings << errorString;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::clearInstantiateErrorStrings()
+void osgi::core::AbstractFactoryItem<BaseClassType>::clearInstantiateErrorStrings()
 {
     this->InstantiateErrorStrings.clear();
 }
 
 template<typename BaseClassType>
-QStringList osgi::AbstractFactoryItem<BaseClassType>::instantiateWarningStrings()const
+QStringList osgi::core::AbstractFactoryItem<BaseClassType>::instantiateWarningStrings()const
 {
     return this->InstantiateWarningStrings;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::appendInstantiateWarningString(const QString& msg)
+void osgi::core::AbstractFactoryItem<BaseClassType>::appendInstantiateWarningString(const QString& msg)
 {
   this->InstantiateWarningStrings << msg;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::clearInstantiateWarningStrings()
+void osgi::core::AbstractFactoryItem<BaseClassType>::clearInstantiateWarningStrings()
 {
   this->InstantiateWarningStrings.clear();
 }
 
 template<typename BaseClassType>
-QStringList osgi::AbstractFactoryItem<BaseClassType>::loadErrorStrings()const
+QStringList osgi::core::AbstractFactoryItem<BaseClassType>::loadErrorStrings()const
 {
   return this->LoadErrorStrings;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::appendLoadErrorString(const QString& errorString)
+void osgi::core::AbstractFactoryItem<BaseClassType>::appendLoadErrorString(const QString& errorString)
 {
   this->LoadErrorStrings << errorString;
 }
 
 template<typename BaseClassType>
-QStringList osgi::AbstractFactoryItem<BaseClassType>::loadWarningStrings()const
+QStringList osgi::core::AbstractFactoryItem<BaseClassType>::loadWarningStrings()const
 {
   return this->LoadWarningStrings;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::appendLoadWarningString(const QString& msg)
+void osgi::core::AbstractFactoryItem<BaseClassType>::appendLoadWarningString(const QString& msg)
 {
   this->LoadWarningStrings << msg;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::clearLoadWarningStrings()
+void osgi::core::AbstractFactoryItem<BaseClassType>::clearLoadWarningStrings()
 {
     this->LoadWarningStrings.clear();
 }
 
 template<typename BaseClassType>  
-BaseClassType* osgi::AbstractFactoryItem<BaseClassType>::instantiate()
+BaseClassType* osgi::core::AbstractFactoryItem<BaseClassType>::instantiate()
 {
     this->clearInstantiateErrorStrings();
     this->clearInstantiateWarningStrings();
@@ -88,19 +88,19 @@ BaseClassType* osgi::AbstractFactoryItem<BaseClassType>::instantiate()
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFactoryItem<BaseClassType>::isInstantiated()const
+bool osgi::core::AbstractFactoryItem<BaseClassType>::isInstantiated()const
 {
   return (this->Instance != 0);
 }
 
 template<typename BaseClassType>
-BaseClassType* osgi::AbstractFactoryItem<BaseClassType>::instance()const
+BaseClassType* osgi::core::AbstractFactoryItem<BaseClassType>::instance()const
 {
   return this->Instance;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::uninstantiate()
+void osgi::core::AbstractFactoryItem<BaseClassType>::uninstantiate()
 {
   if (!this->Instance)
     {
@@ -113,13 +113,13 @@ void osgi::AbstractFactoryItem<BaseClassType>::uninstantiate()
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFactoryItem<BaseClassType>::setVerbose(bool value)
+void osgi::core::AbstractFactoryItem<BaseClassType>::setVerbose(bool value)
 {
   this->Verbose = value;
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFactoryItem<BaseClassType>::verbose()const
+bool osgi::core::AbstractFactoryItem<BaseClassType>::verbose()const
 {
   return this->Verbose;
 }

@@ -10,31 +10,32 @@
  */
 namespace osgi
 {
-
-	class ScopedCurrentDir
+	namespace core 
 	{
-	public:
-        class ARKHE_CORE_EXPORT ScopedCurrentDirPrivate
-        {
-        public:
-            ScopedCurrentDirPrivate()
-            {
-            }
-            QString SavedCurrentPath;
-        };
+		class ScopedCurrentDir
+		{
+		public:
+			class ARKHE_CORE_EXPORT ScopedCurrentDirPrivate
+			{
+			public:
+				ScopedCurrentDirPrivate()
+				{
+				}
+				QString SavedCurrentPath;
+			};
 
-        explicit ScopedCurrentDir(const QString& path);
-        virtual ~ScopedCurrentDir();
+			explicit ScopedCurrentDir(const QString& path);
+			virtual ~ScopedCurrentDir();
 
-        QString currentPath()const;
-        QString savedCurrentPath()const;
+			QString currentPath()const;
+			QString savedCurrentPath()const;
 
-	protected:
-        QScopedPointer<ScopedCurrentDirPrivate> d_ptr;
-	private:
-        Q_DECLARE_PRIVATE(ScopedCurrentDir)
-        Q_DISABLE_COPY(ScopedCurrentDir)
-	};
-		
+		protected:
+			QScopedPointer<ScopedCurrentDirPrivate> d_ptr;
+		private:
+			Q_DECLARE_PRIVATE(ScopedCurrentDir)
+			Q_DISABLE_COPY(ScopedCurrentDir)
+		};
+	}
 }
 #endif

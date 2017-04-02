@@ -111,6 +111,57 @@ add_library(${PROJECT_NAME}-osgi
 	arkhe/osgi/Services/log/LogService.cpp
 	arkhe/osgi/Services/log/LogEntry.cpp
 	arkhe/osgi/Services/log/LogReaderService.cpp
+	
+	
+	arkhe/osgi/cli/CmdLineModuleBackend.cpp
+	arkhe/osgi/cli/CmdLineModuleCache.cpp
+	arkhe/osgi/cli/CmdLineModuleCachePrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleConcurrentRegister.cpp
+	arkhe/osgi/cli/CmdLineModuleConcurrentUnRegister.cpp
+	arkhe/osgi/cli/CmdLineModuleDefaultPathBuilder.cpp
+	arkhe/osgi/cli/CmdLineModuleDefaultPathBuilderPrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleDescription.cpp
+	arkhe/osgi/cli/CmdLineModuleDescriptionPrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleDirectoryWatcher.cpp
+	arkhe/osgi/cli/CmdLineModuleDirectoryWatcherPrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleEnumerationParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleFileParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleFrontend.cpp
+	arkhe/osgi/cli/CmdLineModuleFrontendFactory.cpp
+	arkhe/osgi/cli/CmdLineModuleFuture.cpp
+	arkhe/osgi/cli/CmdLineModuleFutureCallOutEvent.cpp
+	arkhe/osgi/cli/CmdLineModuleFutureCallOutInterface.cpp
+	arkhe/osgi/cli/CmdLineModuleFutureInterface.cpp
+	arkhe/osgi/cli/CmdLineModuleFutureInterfacePrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleFutureWatcher.cpp
+	arkhe/osgi/cli/CmdLineModuleGeometryParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleImageParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleManager.cpp
+	arkhe/osgi/cli/CmdLineModuleMultipleParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleParameter.cpp
+	arkhe/osgi/cli/CmdLineModuleParameterGroup.cpp
+	arkhe/osgi/cli/CmdLineModuleParameterGroupPrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleParameterPrivate.cpp
+	arkhe/osgi/cli/CmdLineModulePathBuilder.cpp
+	arkhe/osgi/cli/CmdLineModulePointParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleReference.cpp
+	arkhe/osgi/cli/CmdLineModuleReferencePrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleReferenceResult.cpp
+	arkhe/osgi/cli/CmdLineModuleResult.cpp
+	arkhe/osgi/cli/CmdLineModuleRunException.cpp
+	arkhe/osgi/cli/CmdLineModuleScalarParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleScalarVectorParameterParser.cpp
+	arkhe/osgi/cli/CmdLineModuleTimeoutException.cpp
+	arkhe/osgi/cli/CmdLineModuleUtils.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlException.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlMsgHandler.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlParser.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlValidator.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlValidatorPrivate.cpp
+	arkhe/osgi/cli/CmdLineModuleXslTransform.cpp
+	arkhe/osgi/cli/CmdLineModuleXmlProgressWatcherPrivate.cpp
+
 )
 
 target_link_libraries( ${PROJECT_NAME}-osgi Qt5::Core )

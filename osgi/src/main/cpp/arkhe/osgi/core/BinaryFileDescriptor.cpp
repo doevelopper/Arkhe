@@ -2,12 +2,12 @@
 
 
 
-osgi::BinaryFileDescriptorPrivate::BinaryFileDescriptorPrivate()
+osgi::core::BinaryFileDescriptorPrivate::BinaryFileDescriptorPrivate()
 {
   this->BFD = 0;
 }
 
-void* osgi::BinaryFileDescriptorPrivate::resolve(const char * symbol)
+void* osgi::core::BinaryFileDescriptorPrivate::resolve(const char * symbol)
 {
     if (!this->BFD)
     {
@@ -77,33 +77,33 @@ void* osgi::BinaryFileDescriptorPrivate::resolve(const char * symbol)
 }
 
 
-osgi::BinaryFileDescriptor::BinaryFileDescriptor()
+osgi::core::BinaryFileDescriptor::BinaryFileDescriptor()
 : d_ptr(new BinaryFileDescriptorPrivate)
 {
 }
 
-osgi::BinaryFileDescriptor::BinaryFileDescriptor(const QString& _fileName): 
+osgi::core::BinaryFileDescriptor::BinaryFileDescriptor(const QString& _fileName): 
   d_ptr(new BinaryFileDescriptorPrivate)
 {
     Q_D(BinaryFileDescriptor);
     d->FileName = _fileName;
 }
 
-osgi::BinaryFileDescriptor::~BinaryFileDescriptor()
+osgi::core::BinaryFileDescriptor::~BinaryFileDescriptor()
 {
 }
 
 
-GET_CPP(osgi::BinaryFileDescriptor, QString, fileName, FileName)
-SET_CPP(osgi::BinaryFileDescriptor, const QString&, setFileName, FileName)
+GET_CPP(osgi::core::BinaryFileDescriptor, QString, fileName, FileName)
+SET_CPP(osgi::core::BinaryFileDescriptor, const QString&, setFileName, FileName)
 
-bool osgi::BinaryFileDescriptor::isLoaded() const
+bool osgi::core::BinaryFileDescriptor::isLoaded() const
 {
   Q_D(const BinaryFileDescriptor);
   return (d->BFD != 0);
 }
 
-bool osgi::BinaryFileDescriptor::load()
+bool osgi::core::BinaryFileDescriptor::load()
 {
     Q_D(BinaryFileDescriptor);
  /* 
@@ -128,7 +128,7 @@ bool osgi::BinaryFileDescriptor::load()
 }
 
 
-bool osgi::BinaryFileDescriptor::unload()
+bool osgi::core::BinaryFileDescriptor::unload()
 {
     Q_D(BinaryFileDescriptor);
 
@@ -141,7 +141,7 @@ bool osgi::BinaryFileDescriptor::unload()
     return (true);
 }
 
-void* osgi::BinaryFileDescriptor::resolve(const char * symbol)
+void* osgi::core::BinaryFileDescriptor::resolve(const char * symbol)
 {
     Q_D(BinaryFileDescriptor);
     return (d->resolve(symbol));

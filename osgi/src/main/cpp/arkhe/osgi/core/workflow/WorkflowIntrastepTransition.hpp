@@ -25,9 +25,9 @@ namespace osgi
 				ValidationTransition = 0,
 				ValidationFailedTransition
 			};
-			// WorkflowIntrastepTransition();
-			virtual ~WorkflowIntrastepTransition();
+			WorkflowIntrastepTransition();
 			WorkflowIntrastepTransition(IntrastepTransitionType newTransitionType);
+			virtual ~WorkflowIntrastepTransition();
 
 			IntrastepTransitionType transitionType();
 		protected:

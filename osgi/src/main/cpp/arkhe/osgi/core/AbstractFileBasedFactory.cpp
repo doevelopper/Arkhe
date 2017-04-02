@@ -3,7 +3,7 @@
 #include <arkhe/osgi/core/AbstractFactoryFileBasedItem.hpp>
 
 template<typename BaseClassType>
-QString osgi::AbstractFileBasedFactory<BaseClassType>::pathway(const QString& key)
+QString osgi::core::AbstractFileBasedFactory<BaseClassType>::pathway(const QString& key)
 {
     AbstractFactoryFileBasedItem<BaseClassType>* _item =
         dynamic_cast<AbstractFactoryFileBasedItem<BaseClassType>*>(this->item(key));
@@ -14,7 +14,7 @@ QString osgi::AbstractFileBasedFactory<BaseClassType>::pathway(const QString& ke
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFileBasedFactory<BaseClassType>::registerAllFileItems(const QStringList& directories)
+void osgi::core::AbstractFileBasedFactory<BaseClassType>::registerAllFileItems(const QStringList& directories)
 {
 
     foreach (QString path, directories) //! Process one path at a time
@@ -42,13 +42,13 @@ void osgi::AbstractFileBasedFactory<BaseClassType>::registerAllFileItems(const Q
 }
 
 template<typename BaseClassType>
-QString osgi::AbstractFileBasedFactory<BaseClassType>::itemKey(const QFileInfo& fileInfo)const
+QString osgi::core::AbstractFileBasedFactory<BaseClassType>::itemKey(const QFileInfo& fileInfo)const
 {
   return this->fileNameToKey(fileInfo.filePath());
 }
 
 template<typename BaseClassType>
-QString osgi::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QFileInfo& fileInfo)
+QString osgi::core::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QFileInfo& fileInfo)
 {
     QString key = this->itemKey(fileInfo);
     bool registered = this->registerFileItem(key, fileInfo);
@@ -56,7 +56,7 @@ QString osgi::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QF
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QString& key, const QFileInfo& fileInfo)
+bool osgi::core::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QString& key, const QFileInfo& fileInfo)
 {
     QString description = QString("Attempt to register \"%1\"").arg(key);
 
@@ -72,7 +72,7 @@ bool osgi::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QStri
         return (false);
     }
 
-    QSharedPointer<osgi::AbstractFactoryItem<BaseClassType> > itemToRegister(this->createFactoryFileBasedItem());
+    QSharedPointer<osgi::core::AbstractFactoryItem<BaseClassType> > itemToRegister(this->createFactoryFileBasedItem());
     
     if (itemToRegister.isNull())
     {
@@ -80,31 +80,31 @@ bool osgi::AbstractFileBasedFactory<BaseClassType>::registerFileItem(const QStri
         return (false);
     }
     
-    dynamic_cast<osgi::AbstractFactoryFileBasedItem<BaseClassType>*>(itemToRegister.data())->setPath(fileInfo.filePath());
+    dynamic_cast<osgi::core::AbstractFactoryFileBasedItem<BaseClassType>*>(itemToRegister.data())->setPath(fileInfo.filePath());
     this->initItem(itemToRegister.data());
     return (this->registerItem(key, itemToRegister));
 }
 
 template<typename BaseClassType>
-bool osgi::AbstractFileBasedFactory<BaseClassType>::isValidFile(const QFileInfo& file)const
+bool osgi::core::AbstractFileBasedFactory<BaseClassType>::isValidFile(const QFileInfo& file)const
 {
     return file.isFile();
 }
 
 template<typename BaseClassType>
-osgi::AbstractFactoryItem<BaseClassType>* osgi::AbstractFileBasedFactory<BaseClassType>::createFactoryFileBasedItem()
+osgi::core::AbstractFactoryItem<BaseClassType>* osgi::core::AbstractFileBasedFactory<BaseClassType>::createFactoryFileBasedItem()
 {
     return 0;
 }
 
 template<typename BaseClassType>
-void osgi::AbstractFileBasedFactory<BaseClassType>::initItem(osgi::AbstractFactoryItem<BaseClassType>* item)
+void osgi::core::AbstractFileBasedFactory<BaseClassType>::initItem(osgi::core::AbstractFactoryItem<BaseClassType>* item)
 {
     item->setVerbose(this->verbose());
 }
 
 template<typename BaseClassType>
-QString osgi::AbstractFileBasedFactory<BaseClassType>::fileNameToKey(const QString& fileName)const
+QString osgi::core::AbstractFileBasedFactory<BaseClassType>::fileNameToKey(const QString& fileName)const
 {
     return QFileInfo(fileName).baseName();
 }

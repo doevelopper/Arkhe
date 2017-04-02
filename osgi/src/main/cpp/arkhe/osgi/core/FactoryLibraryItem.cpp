@@ -1,19 +1,19 @@
 #include <arkhe/osgi/core/FactoryLibraryItem.hpp>
 
 template<typename BaseClassType>
-osgi::FactoryLibraryItem<BaseClassType>::FactoryLibraryItem()
+osgi::core::FactoryLibraryItem<BaseClassType>::FactoryLibraryItem()
 {
     
 }
 
 template<typename BaseClassType>
-osgi::FactoryLibraryItem<BaseClassType>::~FactoryLibraryItem()
+osgi::core::FactoryLibraryItem<BaseClassType>::~FactoryLibraryItem()
 {
     
 }
 
 template<typename BaseClassType>
-bool osgi::FactoryLibraryItem<BaseClassType>::load()
+bool osgi::core::FactoryLibraryItem<BaseClassType>::load()
 {
     this->Library.setFileName(this->path());
     bool loaded = this->Library.load();
@@ -36,19 +36,19 @@ bool osgi::FactoryLibraryItem<BaseClassType>::load()
 }
 
 template<typename BaseClassType>
-void osgi::FactoryLibraryItem<BaseClassType>::setSymbols(const QStringList& symbols)
+void osgi::core::FactoryLibraryItem<BaseClassType>::setSymbols(const QStringList& symbols)
 { 
     this->Symbols = symbols; 
 }
 
 template<typename BaseClassType>
-void osgi::FactoryLibraryItem<BaseClassType>::setLoadHints(QLibrary::LoadHints hints)
+void osgi::core::FactoryLibraryItem<BaseClassType>::setLoadHints(QLibrary::LoadHints hints)
 {
     this->Library.setLoadHints(hints);
 }
 
 template<typename BaseClassType>
-bool osgi::FactoryLibraryItem<BaseClassType>::resolve()
+bool osgi::core::FactoryLibraryItem<BaseClassType>::resolve()
 {
     foreach(const QString& symbol, this->Symbols)
     {
@@ -81,8 +81,8 @@ bool osgi::FactoryLibraryItem<BaseClassType>::resolve()
 
 
 template<typename BaseClassType>
-typename osgi::FactoryLibraryItem<BaseClassType>::SymbolAddressType
-osgi::FactoryLibraryItem<BaseClassType>::symbolAddress(const QString& symbol)const
+typename osgi::core::FactoryLibraryItem<BaseClassType>::SymbolAddressType
+osgi::core::FactoryLibraryItem<BaseClassType>::symbolAddress(const QString& symbol)const
 {
     ConstIterator iter = this->ResolvedSymbols.find(symbol);
     if ( iter == this->ResolvedSymbols.constEnd())

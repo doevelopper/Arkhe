@@ -12,84 +12,86 @@
  */
 namespace osgi
 {
-    class BooleanMapperPrivate
-    {
-    public:
-        BooleanMapperPrivate();
-        QByteArray PropertyName;
-        QVariant TrueValue;
-        QVariant FalseValue;
-    };
-
-	class ARKHE_CORE_EXPORT BooleanMapper : public QObject
+	namespace core 
 	{
-        Q_OBJECT
+		class BooleanMapperPrivate
+		{
+		public:
+			BooleanMapperPrivate();
+			QByteArray PropertyName;
+			QVariant TrueValue;
+			QVariant FalseValue;
+		};
 
-        Q_PROPERTY(QByteArray propertyName READ propertyName)
+		class ARKHE_CORE_EXPORT BooleanMapper : public QObject
+		{
+			Q_OBJECT
 
-        Q_PROPERTY(bool value READ value WRITE setValue NOTIFY complementChanged STORED false);
+			Q_PROPERTY(QByteArray propertyName READ propertyName)
 
-        Q_PROPERTY(bool complement READ complement WRITE setComplement NOTIFY complementChanged STORED false)
+			Q_PROPERTY(bool value READ value WRITE setValue NOTIFY complementChanged STORED false);
 
-        Q_PROPERTY(int valueAsInt READ valueAsInt WRITE setValueAsInt NOTIFY valueAsIntChanged STORED false )
+			Q_PROPERTY(bool complement READ complement WRITE setComplement NOTIFY complementChanged STORED false)
 
-        Q_PROPERTY(QString valueAsString READ valueAsString WRITE setValueAsString NOTIFY valueAsStringChanged STORED false )
+			Q_PROPERTY(int valueAsInt READ valueAsInt WRITE setValueAsInt NOTIFY valueAsIntChanged STORED false )
 
-        Q_PROPERTY(QVariant trueValue READ trueValue WRITE setTrueValue )
+			Q_PROPERTY(QString valueAsString READ valueAsString WRITE setValueAsString NOTIFY valueAsStringChanged STORED false )
 
-        Q_PROPERTY(QVariant falseValue READ falseValue WRITE setFalseValue )
+			Q_PROPERTY(QVariant trueValue READ trueValue WRITE setTrueValue )
 
-	public:
-        BooleanMapper(QObject* targetObject, const QByteArray& propertyName, const char* signal);
-        virtual ~BooleanMapper();
+			Q_PROPERTY(QVariant falseValue READ falseValue WRITE setFalseValue )
 
-        QByteArray propertyName()const;
-        QObject* targetObject()const;
+		public:
+			BooleanMapper(QObject* targetObject, const QByteArray& propertyName, const char* signal);
+			virtual ~BooleanMapper();
 
-        bool value()const;
-        bool complement()const;
-        int valueAsInt()const;
-        QString valueAsString()const;
-        QVariant trueValue()const;
-        QVariant falseValue()const;
-      
-        void setTrueValue(const QVariant& value);
-        void setFalseValue(const QVariant& value);
-        
-        public Q_SLOTS:
+			QByteArray propertyName()const;
+			QObject* targetObject()const;
 
-          void setValue(bool value);
-          void setComplement(bool complement);
-          void setValueAsInt(int value);
-          void setValueAsString(const QString& value);
+			bool value()const;
+			bool complement()const;
+			int valueAsInt()const;
+			QString valueAsString()const;
+			QVariant trueValue()const;
+			QVariant falseValue()const;
+		  
+			void setTrueValue(const QVariant& value);
+			void setFalseValue(const QVariant& value);
+			
+			public Q_SLOTS:
 
-          void toggle();
+			  void setValue(bool value);
+			  void setComplement(bool complement);
+			  void setValueAsInt(int value);
+			  void setValueAsString(const QString& value);
 
-        Q_SIGNALS:
+			  void toggle();
 
-          void valueChanged(bool value);
-          void complementChanged(bool complement);
-          void valueAsIntChanged(int value);
-          void valueAsStringChanged(const QString& value);
+			Q_SIGNALS:
 
-        protected Q_SLOTS:
+			  void valueChanged(bool value);
+			  void complementChanged(bool complement);
+			  void valueAsIntChanged(int value);
+			  void valueAsStringChanged(const QString& value);
 
-          void emitValueChanged();
-          void emitValueAsChanged();
-        
-        protected:
-          QScopedPointer<BooleanMapperPrivate> d_ptr;
-        
-        private:
-          Q_DECLARE_PRIVATE(BooleanMapper);
-          Q_DISABLE_COPY(BooleanMapper);        
-	protected:
+			protected Q_SLOTS:
 
-	private:
-       // BooleanMapper(const BooleanMapper &);  /// Not implemented
-      //  void operator=(const BooleanMapper&); /// Not implemented
+			  void emitValueChanged();
+			  void emitValueAsChanged();
+			
+			protected:
+			  QScopedPointer<BooleanMapperPrivate> d_ptr;
+			
+			private:
+			  Q_DECLARE_PRIVATE(BooleanMapper);
+			  Q_DISABLE_COPY(BooleanMapper);        
+		protected:
 
-	};
-		
+		private:
+		   // BooleanMapper(const BooleanMapper &);  /// Not implemented
+		  //  void operator=(const BooleanMapper&); /// Not implemented
+
+		};
+	}
 }
 #endif

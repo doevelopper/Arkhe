@@ -3,19 +3,19 @@
 #include <arkhe/osgi/core/FactoryObjectItem.hpp>
         
 template<typename BaseClassType>
-osgi::AbstractObjectFactory<BaseClassType>::AbstractObjectFactory()
-    :osgi::AbstractFactory<BaseClassType>()
+osgi::core::AbstractObjectFactory<BaseClassType>::AbstractObjectFactory()
+    :osgi::core::AbstractFactory<BaseClassType>()
 {
 }
 
 template<typename BaseClassType>
-osgi::AbstractObjectFactory<BaseClassType>::~AbstractObjectFactory()
+osgi::core::AbstractObjectFactory<BaseClassType>::~AbstractObjectFactory()
 {
 }
 
 template<typename BaseClassType>
 template<typename ClassType>
-bool osgi::AbstractObjectFactory<BaseClassType>::registerObject(const QString& key)
+bool osgi::core::AbstractObjectFactory<BaseClassType>::registerObject(const QString& key)
 {
 
     QString description = QString("Attempt to register \"%1\"").arg(key);

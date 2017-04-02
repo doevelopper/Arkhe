@@ -16,59 +16,58 @@
  */
 namespace osgi
 {
-	//class AbstractFactoryItem;
-
-	template<typename BaseClassType>
-	class AbstractFactory
+	namespace core 
 	{
-	public:
-		using HashType = QHash<QString, QSharedPointer<AbstractFactoryItem<BaseClassType> > >;
 		
-		AbstractFactory();
-		virtual ~AbstractFactory();
-		virtual void printAdditionalInfo();
+		//class AbstractFactoryItem;
 
-		virtual BaseClassType * instantiate(const QString& itemKey);
-		virtual BaseClassType * instance(const QString& itemKey);
-		void uninstantiate(const QString& itemKey);
-		virtual QString path(const QString& itemKey)
+		template<typename BaseClassType>
+		class AbstractFactory
 		{
-			Q_UNUSED(itemKey);
-			return QString();
-		}
+		public:
+			using HashType = QHash<QString, QSharedPointer<AbstractFactoryItem<BaseClassType> > >;
+			
+			AbstractFactory();
+			virtual ~AbstractFactory();
+			virtual void printAdditionalInfo();
 
-		void setSharedItems(const QSharedPointer<HashType>& items);
-		QSharedPointer<HashType> sharedItems();
+			virtual BaseClassType * instantiate(const QString& itemKey);
+			virtual BaseClassType * instance(const QString& itemKey);
+			void uninstantiate(const QString& itemKey);
+			virtual QString path(const QString& itemKey);
+			void setSharedItems(const QSharedPointer<HashType>& items);
+			QSharedPointer<HashType> sharedItems();
 
-		QStringList itemKeys() const;
+			QStringList itemKeys() const;
 
-		virtual void registerItems()
-		{
-		}
+			virtual void registerItems()
+			{
+			}
 
-		void setVerbose(bool value);
-		bool verbose()const;
+			void setVerbose(bool value);
+			bool verbose()const;
 
-	protected:
-	
-		void displayStatusMessage(const QtMsgType& type, const QString& description, const QString& status, bool display);
-		bool registerItem(const QString& key, const QSharedPointer<AbstractFactoryItem<BaseClassType> > & item);
-		AbstractFactoryItem<BaseClassType> * item(const QString& itemKey)const;
-		AbstractFactoryItem<BaseClassType> * sharedItem(const QString& itemKey)const;
-	  
-		typedef typename HashType::const_iterator ConstIterator;
-		typedef typename HashType::iterator       Iterator;
-	  
-	private:
-		//!TODO  To implement
-		//! @{
-		AbstractFactory(const AbstractFactory &); 
-		void operator=(const AbstractFactory&); 
-	    //! @}
-		HashType RegisteredItemMap;
-		QSharedPointer<HashType> SharedRegisteredItemMap;
-		bool Verbose;
-	};
+		protected:
 		
+			void displayStatusMessage(const QtMsgType& type, const QString& description, const QString& status, bool display);
+			bool registerItem(const QString& key, const QSharedPointer<AbstractFactoryItem<BaseClassType> > & item);
+			AbstractFactoryItem<BaseClassType> * item(const QString& itemKey)const;
+			AbstractFactoryItem<BaseClassType> * sharedItem(const QString& itemKey)const;
+		  
+			typedef typename HashType::const_iterator ConstIterator;
+			typedef typename HashType::iterator       Iterator;
+		  
+		private:
+			//!TODO  To implement
+			//! @{
+			AbstractFactory(const AbstractFactory &); 
+			void operator=(const AbstractFactory&); 
+			//! @}
+			HashType RegisteredItemMap;
+			QSharedPointer<HashType> SharedRegisteredItemMap;
+			bool Verbose;
+		};
+		
+	}
 }
 #endif
