@@ -12,9 +12,10 @@
 	<artifactId>levitics.arkhe</artifactId>
 	<version>1.0-SNAPSHOOT</version>
 	<packaging>pom</packaging>
-	<description>
-     UAV Mission planning and operations.
-	</description>
+
+	<name>Levitics Arkhe</name>
+
+	<description> UAV Mission planning and operations.	</description>
 	<url>http://www.levitics.com/arkhe</url>
 	<inceptionYear>2017</inceptionYear>
 	<organization>
@@ -100,6 +101,11 @@
 	<!--                                PROPERTIES                               -->
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 	<properties>
+
+		<main.basedir>${project.basedir}</main.basedir>
+		<install.basedir>${project.build.directory}</install.basedir>
+		<rootDir>${session.executionRootDirectory}</rootDir>
+
 		<global.encoding>UTF-8</global.encoding>
 		<project.build.sourceEncoding>${global.encoding}</project.build.sourceEncoding>
 		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
@@ -117,8 +123,7 @@
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <puppycrawl.tools.version>5.4</puppycrawl.tools.version>
-        <cmake.command>cmake</cmake.command>
-        <make.command>make</make.command>
+
         <sonar.language>c++</sonar.language>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.cxx.cppcheck.reportPath>.sonar/reports-cppcheck/cppcheck-result-*.xml</sonar.cxx.cppcheck.reportPath>		
@@ -129,17 +134,21 @@
 		<sonar.cxx.bulleyescoverage.reportPath>.sonar/reports-bullseye/bullseyecoverage-result-*.xml</sonar.cxx.bulleyescoverage.reportPath>
 		<sonar.cxx.bulleyescoverage.itReportPath>.sonar/reports-it-bullseye/bullseyecoverage-result-*.xml</sonar.cxx.bulleyescoverage.itReportPath> 
 		<sonar.cxx.bulleyescoverage.calcomplexity>true</sonar.cxx.bulleyescoverage.calcomplexity>			
-		<sonar.host.url>http://latest-fiasco:9000</sonar.host.url>                
+		<sonar.host.url>http://latest-fiasco:9000</sonar.host.url>
+
+        <cmake.command>cmake</cmake.command>
+        <make.command>make</make.command>
         <cmake.generator.win32>Visual Studio 14 2015</cmake.generator.win32>
         <cmake.generator.win64>Visual Studio 14 2015 Win64</cmake.generator.win64>
         <cmake.generator.mingw>MinGW Makefiles</cmake.generator.mingw>
         <cmake.generator.unix>Unix Makefiles</cmake.generator.unix>  
 		<cmake.build.type>Debug</cmake.build.type>
+
 		<cmake.generator/>
 		<hostname/>
         <aol/>
 		<cpp.compiler.version/>
-		<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
+		<nproc/>
 		<os>${env.OS}</os>
         <computer>${env.COMPUTERNAME}</computer>
         <arch>${env.PROCESSOR_ARCHITECTURE}</arch>
@@ -152,7 +161,13 @@
         <sys.user.timezone>${user.timezone}</sys.user.timezone>
 	</properties>
 
+	<modules>
+		<module>external</module>
+		<module>osgi</module>
+	</modules>
+  
 	<build>
+
 		<extensions>
 			<extension>
 				<groupId>kr.motd.maven</groupId>
@@ -362,6 +377,7 @@
                 <cmake.command>cmake.exe</cmake.command>
                 <make.command>mingw32-make</make.command>
                 <hostname>${env.COMPUTERNAME}</hostname>
+				<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
 				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
 				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
 				<!-- <aol>${os.detected.classifier}-${cmake.build.type}</aol> -->
@@ -407,12 +423,20 @@
                                     <!-- <workingDirectory>${project.build.directory}/${aol}</workingDirectory> -->
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <arguments>
+										<!-- <argument>-DPROJECT_CMAKE_MODULE_ROOT_PATH=${project.basedir}</argument> -->
+										<argument>-DPROJECT_CMAKE_MODULE_ROOT_PATH=${main.basedir}</argument>
                                         <argument>-DPROJECT_NAME=${project.artifactId}</argument>
+                                        <argument>-Wno-dev</argument>
                                         <argument>-G</argument>
                                         <argument>${cmake.generator}</argument>
                                         <argument>-DCMAKE_BUILD_TYPE=${cmake.build.type}</argument>
                                         <argument>-DCMAKE_EXPORT_COMPILE_COMMANDS=ON</argument>
                                         <argument>${project.basedir}</argument>
+                                        <argument>-DCMAKE_INSTALL_PREFIX=${install.basedir}</argument>
+                                        <argument>-DTARGET_BUILD_DIRECTORY=${install.basedir}</argument>
+                                        <argument>-DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${install.basedir}/lib</argument>
+                                        <argument>-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${install.basedir}/lib</argument>
+                                        <argument>-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${install.basedir}/bin</argument>
                                     </arguments>
                                 </configuration>
                             </execution>

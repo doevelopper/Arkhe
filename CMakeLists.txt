@@ -1,9 +1,20 @@
 cmake_minimum_required( VERSION 3.7 FATAL_ERROR)
+
 project (${PROJECT_NAME})
+
+message(STATUS "PROJECT_CMAKE_MODULE_ROOT_PATH ${PROJECT_CMAKE_MODULE_ROOT_PATH}")
 
 if((NOT PROJECT_NAME))
     message(FATAL_ERROR "Project name must be specified!")
 endif ((NOT PROJECT_NAME))
+
+
+if((NOT PROJECT_CMAKE_MODULE_ROOT_PATH))
+    message(FATAL_ERROR "User module path should be given. It is shared accros module!")
+endif ((NOT PROJECT_CMAKE_MODULE_ROOT_PATH))
+
+
+string(REPLACE "\\" "/" PROJECT_CMAKE_MODULE_ROOT_PATH "${PROJECT_CMAKE_MODULE_ROOT_PATH}" ) 
 
 if(${PROJECT_NAME} MATCHES " ")
     message(FATAL_ERROR "Project name cannot contain spaces!")
@@ -40,12 +51,19 @@ set(${PROJECT_NAME}_SO_VERSION
 )
 
 
+# list(APPEND CMAKE_MODULE_PATH
+    # "${CMAKE_SOURCE_DIR}/src/main/config/modules"
+    # "${CMAKE_SOURCE_DIR}/src/main/config/toolChains"
+    # "${CMAKE_SOURCE_DIR}/src/main/config/macros"
+    # "${CMAKE_SOURCE_DIR}/src/main/config/config"
+    # "${CMAKE_SOURCE_DIR}/src/test/config/modules"
+# )
 list(APPEND CMAKE_MODULE_PATH
-    "${CMAKE_SOURCE_DIR}/src/main/config/modules"
-    "${CMAKE_SOURCE_DIR}/src/main/config/toolChains"
-    "${CMAKE_SOURCE_DIR}/src/main/config/macros"
-    "${CMAKE_SOURCE_DIR}/src/main/config/config"
-    "${CMAKE_SOURCE_DIR}/src/test/config/modules"
+    "${PROJECT_CMAKE_MODULE_ROOT_PATH}/src/main/config/modules"
+    "${PROJECT_CMAKE_MODULE_ROOT_PATH}/src/main/config/macros"
+    # "${PROJECT_CMAKE_MODULE_ROOT_PATH}/src/main/config/macros"
+    # "${PROJECT_CMAKE_MODULE_ROOT_PATH}/src/main/config/config"
+    # "${PROJECT_CMAKE_MODULE_ROOT_PATH}/src/test/config/modules"
 )
 include(aol)
 include(qt)
@@ -119,11 +137,11 @@ endif()
 
 set(QRCS ${CMAKE_CURRENT_LIST_DIR}/src/main/resources/Qtrcs/resources.qrc 
 )
-link_directories(${TARGET_BUILD_DIRECTORY}/lib)
-add_subdirectory(external)
-include(FindGoogleMock)
+# link_directories(${TARGET_BUILD_DIRECTORY}/lib)
+# add_subdirectory(external)
+# include(FindGoogleMock)
 
-add_subdirectory(osgi)
+# add_subdirectory(osgi)
 
 add_subdirectory(src/main/cpp)
 add_subdirectory(src/test/cpp)
