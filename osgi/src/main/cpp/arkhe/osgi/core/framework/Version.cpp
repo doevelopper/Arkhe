@@ -1,5 +1,6 @@
 #include <QStringListIterator>
 #include <QDebug>
+#include <arkhe/osgi/core/Exception.hpp>
 #include <arkhe/osgi/core/framework/Version.hpp>
 
 const QString osgi::core::Version::SEPARATOR = ".";
@@ -17,6 +18,16 @@ osgi::core::Version::Version(bool undefined)
   , undefined(undefined)
 {
 
+}
+
+osgi::core::Version::Version(unsigned int majorVersion, unsigned int minorVersion, unsigned int microVersion, const QString& qualifier)
+   : majorVersion(majorVersion)
+   , minorVersion(minorVersion)
+   , microVersion(microVersion)
+   , qualifier(qualifier)
+   , undefined(true)
+{
+	this->validate();	
 }
 
 osgi::core::Version::Version(unsigned int majorVersion, unsigned int minorVersion, unsigned int microVersion)

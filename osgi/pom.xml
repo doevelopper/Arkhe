@@ -26,7 +26,7 @@
 	<groupId>io.github.levitics</groupId>  
 	<artifactId>levitics.arkhe.osgi</artifactId>
 	<version>1.0-SNAPSHOOT</version>
-	
+
 	<name>Complete and dynamic component model</name>
 	<description>Modular system and a service platform.</description>
 
@@ -36,4 +36,55 @@
 		<install.basedir>${project.parent.build.directory}</install.basedir>
 	</properties>
 
+	<build>
+		<directory>${aol}</directory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<configuration>
+							<target>
+								<echoproperties />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${exec-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>applying-code-formater</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<phase>process-sources</phase>
+						<configuration>
+							<executable>uncrustify</executable>
+							<workingDirectory>${project.basedir}</workingDirectory>
+							<arguments>
+								<argument>--no-backup</argument>
+								<argument>-l</argument>
+								<argument>CPP</argument>
+								<argument>-c</argument>
+								<argument>${project.parent.basedir}/src/main/config/uncrustify.cfg</argument>
+								<!-- <argument>${project.build.sourceDirectory}</argument> -->
+								<argument>${project.basedir}\src\main\cpp\arkhe\osgi\osgi.cpp</argument>
+								<argument>${project.basedir}\src\main\cpp\arkhe\osgi\osgi.hpp</argument>
+								<argument>${project.basedir}\src\main\cpp\arkhe\osgi\services\Event.hpp</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

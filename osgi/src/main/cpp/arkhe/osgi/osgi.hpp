@@ -1,3 +1,4 @@
+
 #ifndef ARKHE_OSGI_HPP
 #define ARKHE_OSGI_HPP
 
@@ -14,14 +15,15 @@
 #define ARKHE_CORE_CLI_MODULECORE_EXPORT
 
 #define CONSTRUCTOR_NO_ARG_CPP(PUB)      \
-    PUB::PUB(): d_ptr(new PUB##Private)    \
+    PUB::PUB() \
+        : d_ptr(new PUB ## Private)    \
     {                                    \
     }
 
 #define CONSTRUCTOR_1_ARG_CPP(PUB, _ARG1)   \
     PUB::PUB(_ARG1 _parent)                       \
         : Superclass( _parent )                     \
-        , d_ptr(new PUB##Private)                   \
+            , d_ptr(new PUB ## Private)                   \
     {                                           \
     }
 
@@ -29,7 +31,7 @@
     void PUB::_NAME(_TYPE var)                        \
     {                                                 \
         Q_D(PUB);                                       \
-        d->_VARNAME =  var;                             \
+        d->_VARNAME = var;                             \
     }
 
 #define GET_CPP(PUB, _TYPE, _NAME, _VARNAME)   \
@@ -39,95 +41,106 @@
         return d->_VARNAME;                            \
     }
 
-namespace osgi 
+namespace osgi
 {
-    void ARKHE_CORE_EXPORT qListToSTLVector(const QStringList& list, std::vector<char*>& vector);
-    void ARKHE_CORE_EXPORT qListToSTLVector(const QStringList& list, std::vector<std::string>& vector);
-    void ARKHE_CORE_EXPORT stlVectorToQList(const std::vector<std::string>& vector, QStringList& list);
-    QStringList ARKHE_CORE_EXPORT nameFilterToExtensions(const QString& nameFilter);
-    QStringList ARKHE_CORE_EXPORT nameFiltersToExtensions(const QStringList& nameFilters);
-    QString ARKHE_CORE_EXPORT extensionToRegExp(const QString& extension);
-    QRegExp ARKHE_CORE_EXPORT nameFiltersToRegExp(const QStringList& nameFilters);
-    int ARKHE_CORE_EXPORT significantDecimals(double value, int defaultDecimals = -1);
-    int ARKHE_CORE_EXPORT orderOfMagnitude(double value);
-    double ARKHE_CORE_EXPORT closestPowerOfTen(double value);
-    bool ARKHE_CORE_EXPORT removeDirRecursively(const QString & dirName);
-    bool ARKHE_CORE_EXPORT copyDirRecursively(const QString &srcPath, const QString &dstPath);
-    QString ARKHE_CORE_EXPORT qtHandleToString(Qt::HANDLE handle);
-    qint64 ARKHE_CORE_EXPORT msecsTo(const QDateTime& t1, const QDateTime& t2);
-    
+    void ARKHE_CORE_EXPORT qListToSTLVector (const QStringList & list, std::vector<char *> & vector);
+    void ARKHE_CORE_EXPORT qListToSTLVector (const QStringList & list,  std::vector<std::string> & vector);
+    void ARKHE_CORE_EXPORT stlVectorToQList (const std::vector<std::string> & vector,  QStringList & list);
+    QStringList ARKHE_CORE_EXPORT nameFilterToExtensions (const QString & nameFilter);
+    QStringList ARKHE_CORE_EXPORT nameFiltersToExtensions (const QStringList & nameFilters);
+    QString ARKHE_CORE_EXPORT extensionToRegExp (const QString & extension);
+    QRegExp ARKHE_CORE_EXPORT nameFiltersToRegExp (const QStringList & nameFilters);
+    int ARKHE_CORE_EXPORT significantDecimals (double value, int defaultDecimals = -1);
+    int ARKHE_CORE_EXPORT orderOfMagnitude (double value);
+    double ARKHE_CORE_EXPORT closestPowerOfTen (double value);
+    bool ARKHE_CORE_EXPORT removeDirRecursively (const QString & dirName);
+    bool ARKHE_CORE_EXPORT copyDirRecursively (const QString & srcPath,  const QString & dstPath);
+    QString ARKHE_CORE_EXPORT qtHandleToString (Qt::HANDLE handle);
+    qint64 ARKHE_CORE_EXPORT msecsTo (const QDateTime & t1, const QDateTime & t2);
+
     namespace
     {
-		struct ARKHE_CORE_EXPORT SetName
-		{	
-			SetName(const QString& Name);
-			const QString Name;
-		};
-		/// Sets a Qt object's name  ie menu->addAction("Open") << ctkSetName("FileOpenMenu");
-		template<typename T>
-		T* operator<<(T* LHS, const SetName& RHS)
-		{
-		  LHS->setObjectName(RHS.Name);
-		  return LHS;
-		}
+        struct ARKHE_CORE_EXPORT SetName
+        {
+            SetName(const QString & Name);
+            const QString Name;
+        };
+
+/// Sets a Qt object's name  ie menu->addAction("Open") << ctkSetName("FileOpenMenu");
+        template<typename T>
+        T *
+        operator<< (T *             LHS,
+                    const SetName & RHS)
+        {
+            LHS->setObjectName(RHS.Name);
+
+            return LHS;
+        }
+
         template<typename BaseClassType, typename ClassType>
-        BaseClassType *instantiateObject()
+        BaseClassType * instantiateObject ()
         {
             return new ClassType;
         }
     }
-	
-	namespace
-	{
-		using Properties = QHash<QString, QVariant> ;
-		using Dictionary = QHash<QString, QVariant> ;
 
-		#if QT_VERSION < 0x040700
-			#include <QSharedPointer>
-			template<class T>
-			inline uint qHash(const QSharedPointer<T>& ptr)
-			{
-				return qHash<T>(ptr.data());
-			}
-		#endif
-		
-		template<class A>
-		QStringList getIIDs()
-		{
-			  return QStringList(qobject_interface_iid<A*>());
-		}
-		
-		template<class A, class B>
-		QStringList getIIDs()
-		{
-			QStringList ids;
-			ids << qobject_interface_iid<A*>();
-			ids << qobject_interface_iid<B*>();
-			return ids;
-		}
+    namespace
+    {
+        using Properties = QHash<QString, QVariant>;
+        using Dictionary = QHash<QString, QVariant>;
 
+   #if QT_VERSION < 0x040700
+        # include <QSharedPointer>
+            template<class T>
+            inline uint
+            qHash (const QSharedPointer<T> & ptr)
+            {
+                return qHash<T>(ptr.data());
+            }
 
-		template<class A, class B, class C>
-		QStringList getIIDs()
-		{
-			QStringList ids;
-			ids << qobject_interface_iid<A*>();
-			ids << qobject_interface_iid<B*>();
-			ids << qobject_interface_iid<C*>();
-			return ids;
-		}
+   #endif
 
-		template<class A, class B, class C, class D>
-		QStringList getIIDs()
-		{
-			QStringList ids;
-			ids << qobject_interface_iid<A*>();
-			ids << qobject_interface_iid<B*>();
-			ids << qobject_interface_iid<C*>();
-			ids << qobject_interface_iid<D*>();
-			return ids;
-		}
-	}
+        template<class A>
+        QStringList getIIDs ()
+        {
+            return QStringList(qobject_interface_iid<A *>());
+        }
+
+        template<class A, class B>
+        QStringList getIIDs ()
+        {
+            QStringList ids;
+
+            ids << qobject_interface_iid<A *>();
+            ids << qobject_interface_iid<B *>();
+
+            return ids;
+        }
+
+        template<class A, class B, class C>
+        QStringList getIIDs ()
+        {
+            QStringList ids;
+
+            ids << qobject_interface_iid<A *>();
+            ids << qobject_interface_iid<B *>();
+            ids << qobject_interface_iid<C *>();
+
+            return ids;
+        }
+
+        template<class A, class B, class C, class D>
+        QStringList getIIDs ()
+        {
+            QStringList ids;
+
+            ids << qobject_interface_iid<A *>();
+            ids << qobject_interface_iid<B *>();
+            ids << qobject_interface_iid<C *>();
+            ids << qobject_interface_iid<D *>();
+
+            return ids;
+        }
+    }
 }
 #endif
-

@@ -34,7 +34,6 @@ else()
     message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 or later support. Please use a different C++ compiler.")
 endif()
 
-
 # find a way to use "add_compile_options()"
 
 # set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -stdlib=libstdc++") ;# Fails on Windows

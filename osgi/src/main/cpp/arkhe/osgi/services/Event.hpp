@@ -1,26 +1,28 @@
+
 #ifndef ARKHE_OSGI_SERVICES_Event_HPP
 #define ARKHE_OSGI_SERVICES_Event_HPP
 
 #include <arkhe/osgi/osgi.hpp>
 
 /*!
- * @brief 
- * 
+ * @brief
+ *
  */
 namespace osgi
 {
-	namespace svc
-	{
-		class ARKHE_CORE_PLUGIN_FW_EXPORT Event
-		{
+    namespace svc
+    {
+        class ARKHE_CORE_PLUGIN_FW_EXPORT Event
+        {
+            public:
 
-		public:
-			Event();
-			virtual ~Event();
-		protected:
+                Event();
+                virtual ~Event();
 
-		private:
-		};		
-	}
+            protected:
+
+            private:
+        };
+    }
 }
 #endif

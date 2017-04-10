@@ -1,9 +1,11 @@
 #include <arkhe/osgi/core/framework/PluginTrackerCustomizer.hpp>
 
-osgi::core::PluginTrackerCustomizer::PluginTrackerCustomizer()
+template<class T>
+osgi::core::PluginTrackerCustomizer<T>::PluginTrackerCustomizer()
 {
 }
 
-osgi::core::PluginTrackerCustomizer::~PluginTrackerCustomizer()
+template<class T>
+osgi::core::PluginTrackerCustomizer<T>::~PluginTrackerCustomizer()
 {
 }

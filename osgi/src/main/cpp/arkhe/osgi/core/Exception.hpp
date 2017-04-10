@@ -26,7 +26,7 @@
     void rethrow() const ;                            \
   };
 
-#define CTK_IMPLEMENT_EXCEPTION(CLS, BASE, NAME)                         \
+#define IMPLEMENT_EXCEPTION(CLS, BASE, NAME)                         \
   CLS::CLS(const QString& msg) : BASE(msg)                               \
   { }                                                                    \
   CLS::CLS(const QString& msg, const ctkException& exc) : BASE(msg, exc) \
@@ -52,12 +52,16 @@
   {                                                                      \
     throw *this;                                                         \
   }
-/*
-DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, UnsupportedOperationException, Exception)
-DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, RuntimeException, Exception)
-DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, InvalidArgumentException, RuntimeException)
-DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, IllegalStateException, RuntimeException)
-*/
+
+DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, osgi::core::UnsupportedOperationException, osgi::core::Exception)
+DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, osgi::core::RuntimeException, osgi::core::Exception)
+DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, osgi::core::InvalidArgumentException, osgi::core::RuntimeException)
+DECLARE_EXCEPTION(ARKHE_CORE_EXPORT, osgi::core::IllegalStateException, osgi::core::RuntimeException)
+
+IMPLEMENT_EXCEPTION(osgi::core::UnsupportedOperationException, osgi::core::Exception, "UnsupportedOperationException")
+IMPLEMENT_EXCEPTION(osgi::core::RuntimeException, osgi::core::Exception, "RuntimeException")
+IMPLEMENT_EXCEPTION(osgi::core::InvalidArgumentException, osgi::core::RuntimeException, "InvalidArgumentException")
+IMPLEMENT_EXCEPTION(osgi::core::IllegalStateException, osgi::core::RuntimeException, "IllegalStateException")
 
 /*!
  * @brief .

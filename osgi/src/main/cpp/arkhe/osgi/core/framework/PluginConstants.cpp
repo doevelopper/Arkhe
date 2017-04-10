@@ -34,10 +34,10 @@ const QString osgi::core::PluginConstants::RESOLUTION_OPTIONAL = "optional";
 
 const QString osgi::core::PluginConstants::OBJECTCLASS = "objectclass";
 
-// ATTENTION!!! If the value is changed, change also ctkEventConstants::SERVICE_ID
+// ATTENTION!!! If the value is changed, change also EventConstants::SERVICE_ID
 const QString osgi::core::PluginConstants::SERVICE_ID = "service.id";
 
-// ATTENTION!!! If the value is changed, change also ctkEventConstants::SERVICE_PID
+// ATTENTION!!! If the value is changed, change also EventConstants::SERVICE_PID
 const QString osgi::core::PluginConstants::SERVICE_PID = "service.pid";
 
 const QString osgi::core::PluginConstants::SERVICE_RANKING = "service.ranking";

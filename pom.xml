@@ -111,6 +111,7 @@
 		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
 		<project.reporting.outputEncoding>${global.encoding}</project.reporting.outputEncoding> 
         <sourceReleaseAssemblyDescriptor>source-release</sourceReleaseAssemblyDescriptor>
+
         <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
 		<maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
 		<maven-site-plugin.version>3.6</maven-site-plugin.version>
@@ -163,7 +164,8 @@
 
 	<modules>
 		<module>external</module>
-		<module>osgi</module>
+		<module>ctk</module>
+		<!-- <module>osgi</module> -->
 	</modules>
   
 	<build>
@@ -420,10 +422,8 @@
                                 <phase>generate-sources</phase>
                                 <configuration>
                                     <executable>${cmake.command}</executable>
-                                    <!-- <workingDirectory>${project.build.directory}/${aol}</workingDirectory> -->
                                     <workingDirectory>${project.build.directory}</workingDirectory>
                                     <arguments>
-										<!-- <argument>-DPROJECT_CMAKE_MODULE_ROOT_PATH=${project.basedir}</argument> -->
 										<argument>-DPROJECT_CMAKE_MODULE_ROOT_PATH=${main.basedir}</argument>
                                         <argument>-DPROJECT_NAME=${project.artifactId}</argument>
                                         <argument>-Wno-dev</argument>
