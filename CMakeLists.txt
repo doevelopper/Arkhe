@@ -15,6 +15,7 @@ endif ((NOT PROJECT_CMAKE_MODULE_ROOT_PATH))
 
 
 string(REPLACE "\\" "/" PROJECT_CMAKE_MODULE_ROOT_PATH "${PROJECT_CMAKE_MODULE_ROOT_PATH}" ) 
+string(REPLACE "\\" "/" TARGET_BUILD_DIRECTORY "${TARGET_BUILD_DIRECTORY}" ) 
 
 if(${PROJECT_NAME} MATCHES " ")
     message(FATAL_ERROR "Project name cannot contain spaces!")
@@ -31,12 +32,12 @@ set(PROJECT_VERSION_MINOR ${${PROJECT_NAME}_MINOR_VERSION})
 set(PROJECT_VERSION_MICRO ${${PROJECT_NAME}_MICRO_VERSION})
 set(PROJECT_VERSION_PATCH ${${PROJECT_NAME}_PATCH_VERSION})
 
-set(${PROJECT_NAME}_VERSION 
-    "${${PROJECT_NAME}_MAJOR_VERSION}.
-    ${${PROJECT_NAME}_MINOR_VERSION}.
-    ${${PROJECT_NAME}_MICRO_VERSION}.
-    ${${PROJECT_NAME}_PATCH_VERSION}"
+
+set(${PROJECT_NAME}_VERSION "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_MICRO_VERSION}.${${PROJECT_NAME}_PATCH_VERSION}.${PROJECT_NAME}_REVISION_VERSION"
 )
+
+message (STATUS "${PROJECT_NAME}_INFO ${MAJOR}.${MINOR}.${MICRO}.${PATCH}.${REV}")
+
 set(${PROJECT_NAME}_VERSION_REV 
     "${${PROJECT_NAME}_VERSION_MAJOR}.
     ${${PROJECT_NAME}_VERSION_MINOR}.
@@ -73,6 +74,21 @@ include(CMakeSettings)
 include(DefinePlatformSpecfic)
 include(SuperPedanticWarnings)
 
+configure_file("${PROJECT_SOURCE_DIR}/src/main/config/Api.hpp.in"
+                   "${TARGET_BUILD_DIRECTORY}/include/Api.hpp" 
+                    @ONLY
+)
+
+configure_file( "${CMAKE_SOURCE_DIR}/src/main/config/Version.hpp.in"
+                   "${TARGET_BUILD_DIRECTORY}/include/Version.hpp" 
+				   @ONLY
+)
+
+configure_file( "${CMAKE_SOURCE_DIR}/src/main/config/Version.cpp.in"
+                "${TARGET_BUILD_DIRECTORY}/include/Version.cpp" 
+				   @ONLY
+)
+				   
 option(ENABLE_QA_CHECK              "Software quality. Conformance to one or more standards"    OFF)
 option(ENABLE_COVERAGE              "Build the project with coverage support"                   OFF)
 option(ENABLE_CPPLINT               "Ensure that code conforms to Google's coding style guides" OFF)

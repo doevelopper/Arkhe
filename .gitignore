@@ -27,3 +27,4 @@
 *.out
 *.app
 amd64*/
+target*/

@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/fonts" >
+        <file>digitalreadout.ttf</file>
+        <file>myblueroom.ttf</file>
+    </qresource>
+    <qresource prefix="/skins" >
+        <file>buttons.svg</file>
+        <file>defaultskin.svg</file>
+        <file>defaultskin.xml</file>
+        <file>field.svg</file>
+        <file>gauge.svg</file>
+        <file>icons.svg</file>
+        <file>label.svg</file>
+        <file>lcd.svg</file>
+        <file>led.svg</file>
+        <file>levelindicator.svg</file>
+        <file>logo.svg</file>
+        <file>panel.svg</file>
+        <file>slider.svg</file>
+    </qresource>
+</RCC>

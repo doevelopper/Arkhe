@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<skin id="default">
+
+    <instrument class="Panel">
+        <property name="background.file">:/skins/panel.svg</property>
+        <property name="background.id">panel1</property>
+    </instrument>
+
+    <instrument class="Panel" subclass="simple">
+        <property name="background.file">:/skins/panel.svg</property>
+        <property name="background.id">panel4</property>
+    </instrument>
+
+    <instrument class="Panel" subclass="noframe">
+        <property name="background.file">:/skins/panel.svg</property>
+        <property name="background.id">panel_noframe</property>
+    </instrument>
+
+    <instrument class="TextLabel">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/label.svg</property>
+        <state name="enabled">
+            <property name="background.id">label_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">label_disabled</property>
+        </state>
+    </instrument>
+
+    <instrument class="TextLabel" subclass="levelIndicator">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+    </instrument>
+
+    <instrument class="TextLabel" subclass="slider">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+    </instrument>
+
+    <instrument class="NumericLabel">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/label.svg</property>
+        <state name="enabled">
+            <property name="background.id">label_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">label_disabled</property>
+        </state>
+    </instrument>
+
+    <instrument class="NumericLabel" subclass="levelIndicator">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+    </instrument>
+
+    <instrument class="TextField">
+        <property name="color.red">0</property>
+        <property name="color.green">0</property>
+        <property name="color.blue">0</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/field.svg</property>
+        <state name="enabled">
+            <property name="background.id">field_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">field_disabled</property>
+        </state>
+        <state name="hovered">
+            <property name="background.id">field_enabled</property>
+        </state>
+        <state name="editing">
+            <property name="background.id">field_hovered</property>
+        </state>
+    </instrument>
+
+    <instrument class="NumericField">
+        <property name="color.red">0</property>
+        <property name="color.green">0</property>
+        <property name="color.blue">0</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/field.svg</property>
+        <state name="enabled">
+            <property name="background.id">field_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">field_disabled</property>
+        </state>
+        <state name="hovered">
+            <property name="background.id">field_enabled</property>
+        </state>
+        <state name="editing">
+            <property name="background.id">field_hovered</property>
+        </state>
+    </instrument>
+
+    <instrument class="NumericField" subclass="slider">
+        <property name="color.red">255</property>
+        <property name="color.green">255</property>
+        <property name="color.blue">255</property>
+        <property name="validateOnFocusOut">0</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/slider.svg</property>
+        <state name="enabled">
+            <property name="background.id">slider_field_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">slider_field_disabled</property>
+        </state>
+        <state name="hovered">
+            <property name="background.id">slider_field_hovered</property>
+        </state>
+        <state name="editing">
+            <property name="background.id">slider_field_editing</property>
+        </state>
+    </instrument>
+
+    <instrument class="LevelIndicator">
+        <property name="scale.baseLineColor.red">255</property>
+        <property name="scale.baseLineColor.green">255</property>
+        <property name="scale.baseLineColor.blue">255</property>
+        <property name="scale.graduations0.labelsColor.red">255</property>
+        <property name="scale.graduations0.labelsColor.green">255</property>
+        <property name="scale.graduations0.labelsColor.blue">255</property>
+        <property name="scale.graduations0.ticksColor.red">255</property>
+        <property name="scale.graduations0.ticksColor.green">255</property>
+        <property name="scale.graduations0.ticksColor.blue">255</property>
+        <property name="scale.graduations1.labelsColor.red">255</property>
+        <property name="scale.graduations1.labelsColor.green">255</property>
+        <property name="scale.graduations1.labelsColor.blue">255</property>
+        <property name="scale.graduations1.ticksColor.red">255</property>
+        <property name="scale.graduations1.ticksColor.green">255</property>
+        <property name="scale.graduations1.ticksColor.blue">255</property>
+        <property name="scale.graduations2.labelsColor.red">255</property>
+        <property name="scale.graduations2.labelsColor.green">255</property>
+        <property name="scale.graduations2.labelsColor.blue">255</property>
+        <property name="scale.graduations2.ticksColor.red">255</property>
+        <property name="scale.graduations2.ticksColor.green">255</property>
+        <property name="scale.graduations2.ticksColor.blue">255</property>
+        <property name="additionalScale.baseLineColor.red">255</property>
+        <property name="additionalScale.baseLineColor.green">255</property>
+        <property name="additionalScale.baseLineColor.blue">255</property>
+        <property name="additionalScale.graduations0.labelsColor.red">255</property>
+        <property name="additionalScale.graduations0.labelsColor.green">255</property>
+        <property name="additionalScale.graduations0.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations0.ticksColor.red">255</property>
+        <property name="additionalScale.graduations0.ticksColor.green">255</property>
+        <property name="additionalScale.graduations0.ticksColor.blue">255</property>
+        <property name="additionalScale.graduations1.labelsColor.red">255</property>
+        <property name="additionalScale.graduations1.labelsColor.green">255</property>
+        <property name="additionalScale.graduations1.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations1.ticksColor.red">255</property>
+        <property name="additionalScale.graduations1.ticksColor.green">255</property>
+        <property name="additionalScale.graduations1.ticksColor.blue">255</property>
+        <property name="additionalScale.graduations2.labelsColor.red">255</property>
+        <property name="additionalScale.graduations2.labelsColor.green">255</property>
+        <property name="additionalScale.graduations2.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations2.ticksColor.red">255</property>
+        <property name="additionalScale.graduations2.ticksColor.green">255</property>
+        <property name="additionalScale.graduations2.ticksColor.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/levelIndicator.svg</property>
+        <property name="tank.background.file">:/skins/levelIndicator.svg</property>
+        <property name="tank.foreground.file">:/skins/levelIndicator.svg</property>
+        <state name="enabled">
+            <property name="background.id">levelIndicator_background_enabled</property>
+            <property name="tank.background.id">levelIndicator_tank_background_enabled</property>
+            <property name="tank.foreground.id">levelIndicator_tank_foreground_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">levelIndicator_background_disabled</property>
+            <property name="tank.background.id">levelIndicator_tank_background_disabled</property>
+            <property name="tank.foreground.id">levelIndicator_tank_foreground_disabled</property>
+        </state>
+    </instrument>
+
+    <instrument class="Slider">
+        <property name="scale.baseLineColor.red">255</property>
+        <property name="scale.baseLineColor.green">255</property>
+        <property name="scale.baseLineColor.blue">255</property>
+        <property name="scale.graduations0.labelsColor.red">255</property>
+        <property name="scale.graduations0.labelsColor.green">255</property>
+        <property name="scale.graduations0.labelsColor.blue">255</property>
+        <property name="scale.graduations0.ticksColor.red">255</property>
+        <property name="scale.graduations0.ticksColor.green">255</property>
+        <property name="scale.graduations0.ticksColor.blue">255</property>
+        <property name="scale.graduations1.labelsColor.red">255</property>
+        <property name="scale.graduations1.labelsColor.green">255</property>
+        <property name="scale.graduations1.labelsColor.blue">255</property>
+        <property name="scale.graduations1.ticksColor.red">255</property>
+        <property name="scale.graduations1.ticksColor.green">255</property>
+        <property name="scale.graduations1.ticksColor.blue">255</property>
+        <property name="scale.graduations2.labelsColor.red">255</property>
+        <property name="scale.graduations2.labelsColor.green">255</property>
+        <property name="scale.graduations2.labelsColor.blue">255</property>
+        <property name="scale.graduations2.ticksColor.red">255</property>
+        <property name="scale.graduations2.ticksColor.green">255</property>
+        <property name="scale.graduations2.ticksColor.blue">255</property>
+        <property name="additionalScale.baseLineColor.red">255</property>
+        <property name="additionalScale.baseLineColor.green">255</property>
+        <property name="additionalScale.baseLineColor.blue">255</property>
+        <property name="additionalScale.graduations0.labelsColor.red">255</property>
+        <property name="additionalScale.graduations0.labelsColor.green">255</property>
+        <property name="additionalScale.graduations0.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations0.ticksColor.red">255</property>
+        <property name="additionalScale.graduations0.ticksColor.green">255</property>
+        <property name="additionalScale.graduations0.ticksColor.blue">255</property>
+        <property name="additionalScale.graduations1.labelsColor.red">255</property>
+        <property name="additionalScale.graduations1.labelsColor.green">255</property>
+        <property name="additionalScale.graduations1.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations1.ticksColor.red">255</property>
+        <property name="additionalScale.graduations1.ticksColor.green">255</property>
+        <property name="additionalScale.graduations1.ticksColor.blue">255</property>
+        <property name="additionalScale.graduations2.labelsColor.red">255</property>
+        <property name="additionalScale.graduations2.labelsColor.green">255</property>
+        <property name="additionalScale.graduations2.labelsColor.blue">255</property>
+        <property name="additionalScale.graduations2.ticksColor.red">255</property>
+        <property name="additionalScale.graduations2.ticksColor.green">255</property>
+        <property name="additionalScale.graduations2.ticksColor.blue">255</property>
+        <property name="background.borderMode">fixed</property>
+        <property name="background.file">:/skins/slider.svg</property>
+        <property name="cursor.cursor.file">:/skins/slider.svg</property>
+        <property name="cursor.railBackground.file">:/skins/slider.svg</property>
+        <property name="cursor.railForeground.file">:/skins/slider.svg</property>
+        <state name="enabled">
+            <property name="background.id">slider_background_enabled</property>
+            <property name="cursor.cursor.id">slider_cursor_enabled</property>
+            <property name="cursor.railBackground.id">slider_rail_background_enabled</property>
+            <property name="cursor.railForeground.id">slider_rail_foreground_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">slider_background_disabled</property>
+            <property name="cursor.cursor.id">slider_cursor_disabled</property>
+            <property name="cursor.railBackground.id">slider_rail_background_disabled</property>
+            <property name="cursor.railForeground.id">slider_rail_foreground_disabled</property>
+        </state>
+        <state name="cursorHovered">
+            <property name="background.id">slider_background_enabled</property>
+            <property name="cursor.cursor.id">slider_cursor_hovered</property>
+            <property name="cursor.railBackground.id">slider_rail_background_enabled</property>
+            <property name="cursor.railForeground.id">slider_rail_foreground_enabled</property>
+        </state>
+        <state name="valueFieldHovered">
+            <property name="background.id">slider_background_enabled</property>
+            <property name="cursor.cursor.id">slider_cursor_enabled</property>
+            <property name="cursor.railBackground.id">slider_rail_background_enabled</property>
+            <property name="cursor.railForeground.id">slider_rail_foreground_enabled</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_green</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led" subclass="green">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_green</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led" subclass="red">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_red</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led" subclass="orange">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_orange</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led" subclass="yellow">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_yellow</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Led" subclass="blue">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/led.svg</property>
+        <state name="enabledOn">
+            <property name="background.id">led_background_enabled_on_blue</property>
+        </state>
+        <state name="enabledOff">
+            <property name="background.id">led_background_enabled_off</property>
+        </state>
+        <state name="disabledOn">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+        <state name="disabledOff">
+            <property name="background.id">led_background_disabled_off</property>
+        </state>
+    </instrument>
+
+    <instrument class="Lcd">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/lcd.svg</property>
+        <!--<property name="foreground.file">:/skins/defaultskin.svg</property>
+        <property name="foreground.id">lcd_foreground</property>-->
+        <state name="enabled">
+            <property name="background.id">lcd_background_enabled</property>
+            <property name="activeColor.red">171</property>
+            <property name="activeColor.green">208</property>
+            <property name="activeColor.blue">55</property>
+            <property name="inactiveColor.red">93</property>
+            <property name="inactiveColor.green">96</property>
+            <property name="inactiveColor.blue">82</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">lcd_background_disabled</property>
+            <property name="activeColor.red">72</property>
+            <property name="activeColor.green">72</property>
+            <property name="activeColor.blue">74</property>
+            <property name="inactiveColor.red">188</property>
+            <property name="inactiveColor.green">190</property>
+            <property name="inactiveColor.blue">192</property>
+        </state>
+    </instrument>
+
+    <instrument class="Button">
+        <property name="textColor.red">255</property>
+        <property name="textColor.green">255</property>
+        <property name="textColor.blue">255</property>
+        <property name="textColor.alpha">255</property>
+        <property name="background.file">:/skins/buttons.svg</property>
+        <state name="enabledUp">
+            <property name="background.id">sEnabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="hoveredUp">
+            <property name="background.id">sHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="disabledUp">
+            <property name="background.id">sDisabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="enabledDown">
+            <property name="background.id">sEnabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="hoveredDown">
+            <property name="background.id">sHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="disabledDown">
+            <property name="background.id">sDisabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="pressedUpDown">
+            <property name="background.id">sHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="pressedDownUp">
+            <property name="background.id">sHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+    </instrument>
+
+    <instrument class="Button" subclass="square">
+        <property name="textColor.red">255</property>
+        <property name="textColor.green">255</property>
+        <property name="textColor.blue">255</property>
+        <property name="textColor.alpha">255</property>
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/buttons.svg</property>
+        <state name="enabledUp">
+            <property name="background.id">sEnabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="hoveredUp">
+            <property name="background.id">sHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="disabledUp">
+            <property name="background.id">sDisabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="enabledDown">
+            <property name="background.id">sEnabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="hoveredDown">
+            <property name="background.id">sHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="disabledDown">
+            <property name="background.id">sDisabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="pressedUpDown">
+            <property name="background.id">sHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.96</property>
+        </state>
+        <state name="pressedDownUp">
+            <property name="background.id">sHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+    </instrument>
+
+    <instrument class="Button" subclass="circular">
+        <property name="keepAspectRatio">1</property>
+        <property name="background.file">:/skins/buttons.svg</property>
+        <state name="enabledUp">
+            <property name="background.id">cEnabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="hoveredUp">
+            <property name="background.id">cHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="disabledUp">
+            <property name="background.id">cDisabledUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+        <state name="enabledDown">
+            <property name="background.id">cEnabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.95</property>
+        </state>
+        <state name="hoveredDown">
+            <property name="background.id">cHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.95</property>
+        </state>
+        <state name="disabledDown">
+            <property name="background.id">cDisabledDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.95</property>
+        </state>
+        <state name="pressedUpDown">
+            <property name="background.id">cHoveredDown</property>
+            <property name="contentTransform.hScale">0.95</property>
+            <property name="contentTransform.vScale">0.95</property>
+        </state>
+        <state name="pressedDownUp">
+            <property name="background.id">cHoveredUp</property>
+            <property name="contentTransform.hScale">1.0</property>
+            <property name="contentTransform.vScale">1.0</property>
+        </state>
+    </instrument>
+
+
+    <instrument class="Gauge">
+        <property name="scaleBaseLinePosition">0.93</property>
+        <property name="valueLabelPosition">-0.55</property>
+        <property name="titleLabelPosition">0.30</property>
+        <property name="scale.flipGraduations">1</property>
+        <property name="scale.baseLineColor.red">255</property>
+        <property name="scale.baseLineColor.green">255</property>
+        <property name="scale.baseLineColor.blue">255</property>
+        <property name="scale.baseLineWidth">2</property>
+        <property name="scale.startAngle">135</property>
+        <property name="scale.angleCourse">270</property>
+        <property name="scale.graduations0.labelsFont.size">16</property>
+        <property name="scale.graduations0.labelsPrecision">0</property>
+        <property name="scale.graduations0.labelsColor.red">255</property>
+        <property name="scale.graduations0.labelsColor.green">255</property>
+        <property name="scale.graduations0.labelsColor.blue">255</property>
+        <property name="scale.graduations0.ticksColor.red">255</property>
+        <property name="scale.graduations0.ticksColor.green">255</property>
+        <property name="scale.graduations0.ticksColor.blue">255</property>
+        <property name="scale.graduations1.labelsColor.red">255</property>
+        <property name="scale.graduations1.labelsColor.green">255</property>
+        <property name="scale.graduations1.labelsColor.blue">255</property>
+        <property name="scale.graduations1.ticksColor.red">255</property>
+        <property name="scale.graduations1.ticksColor.green">255</property>
+        <property name="scale.graduations1.ticksColor.blue">255</property>
+        <property name="scale.graduations2.labelsColor.red">255</property>
+        <property name="scale.graduations2.labelsColor.green">255</property>
+        <property name="scale.graduations2.labelsColor.blue">255</property>
+        <property name="scale.graduations2.ticksColor.red">255</property>
+        <property name="scale.graduations2.ticksColor.green">255</property>
+        <property name="scale.graduations2.ticksColor.blue">255</property>
+        <property name="titleLabel.font.size">12</property>
+        <property name="titleLabel.color.red">255</property>
+        <property name="titleLabel.color.green">255</property>
+        <property name="titleLabel.color.blue">255</property>
+        <property name="valueLabel.background.file">:/skins/gauge.svg</property>
+        <property name="valueLabel.background.borderMode">fixed</property>
+        <property name="background.file">:/skins/gauge.svg</property>
+        <property name="foreground.file">:/skins/gauge.svg</property>
+        <property name="needle.file">:/skins/gauge.svg</property>
+        <property name="hat.file">:/skins/gauge.svg</property>
+        <property name="hat.id">gauge_hat_enabled</property>
+        <state name="enabled">
+            <property name="background.id">gauge_background_enabled</property>
+            <property name="foreground.id">gauge_foreground_enabled</property>
+            <property name="valueLabel.background.id">valueLabel_background_enabled</property>
+            <property name="needle.id">gauge_needle_enabled</property>
+        </state>
+        <state name="disabled">
+            <property name="background.id">gauge_background_disabled</property>
+            <property name="foreground.id">gauge_foreground_disabled</property>
+            <property name="valueLabel.background.id">valueLabel_background_disabled</property>
+            <property name="needle.id">gauge_needle_disabled</property>
+        </state>
+    </instrument>
+</skin>

@@ -101,11 +101,14 @@
 	<!--                                PROPERTIES                               -->
 	<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 	<properties>
-
-		<main.basedir>${project.basedir}</main.basedir>
+		<namespace>ARKHE</namespace>
+		<styleFolderSrc>${project.build.sourceDirectory}</styleFolderSrc>
+		<styleFolderTest>${project.build.testSourceDirectory}</styleFolderTest>
+		<main.basedir>${project.basedir}</main.basedir>  <!-- ovverriden in sub module -->
+		<activeBaseDir>${session.executionRootDirectory}</activeBaseDir> <!-- always points to the ... directory ... from which the maven command was executed.-->
+		<roodDir>${project.basedir}</roodDir>
 		<install.basedir>${project.build.directory}</install.basedir>
-		<rootDir>${session.executionRootDirectory}</rootDir>
-
+		<uncrustifyCFG/>
 		<global.encoding>UTF-8</global.encoding>
 		<project.build.sourceEncoding>${global.encoding}</project.build.sourceEncoding>
 		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
@@ -124,6 +127,8 @@
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <puppycrawl.tools.version>5.4</puppycrawl.tools.version>
+        <groovy-maven-plugin.version>2.0</groovy-maven-plugin.version>
+        <groovy-al.version>2.4.8</groovy-al.version>
 
         <sonar.language>c++</sonar.language>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -163,13 +168,15 @@
 	</properties>
 
 	<modules>
-		<module>external</module>
+		<!-- <module>external</module> -->
 		<module>ctk</module>
+		<!-- <module>utils</module> -->
 		<!-- <module>osgi</module> -->
 	</modules>
   
 	<build>
-
+        <sourceDirectory>${project.basedir}/src/main/cpp</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/cpp</testSourceDirectory>
 		<extensions>
 			<extension>
 				<groupId>kr.motd.maven</groupId>
@@ -195,6 +202,247 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <version>${groovy-maven-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>${groovy-al.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+						<id>uncrustifying-files</id>
+                        <phase>validate</phase>
+                        <!-- <phase>generate-resources</phase> -->
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+								<![CDATA[ 
+									import groovy.util.logging.Slf4j
+									class Connector {
+										private String mainSrcDir
+										private String mainTestDir
+										private String roodDir 		
+										private String activeBaseDir
+										private String styleCFG
+										
+
+										Connector(properties) {
+											mainSrcDir = properties['styleFolderSrc']
+											mainTestDir = properties['styleFolderTest']
+											activeBaseDir = properties['activeBaseDir']
+											roodDir = properties['roodDir']
+											styleCFG = properties['uncrustifyCFG']
+										}
+									}
+									
+									def connector = new Connector(project.properties)
+									def styleExe = connector.styleCFG
+									println "Styling ${connector.styleCFG}";
+									try {
+										new File(connector.mainSrcDir).eachDirRecurse() { dir ->
+
+												dir.eachFileMatch(~/.*.cpp/) { file -> 
+
+													def sources = file.getPath()
+													//println "Styling $sources";
+											
+													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+													//println "Styling ${process.text}";
+													
+												}
+
+												dir.eachFileMatch(~/.*.hpp/) { file -> 
+													def headers = file.getPath()
+													//println "Styling $headers";
+													
+													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+											}
+										}
+										new File(connector.mainTestDir).eachDirRecurse() { dir ->
+												dir.eachFileMatch(~/.*.cpp/) { file -> 
+													//println file.getPath() 
+													def sourcesTest = file.getPath()
+													//println "Styling Test $sourcesTest";
+													
+													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+											}
+												dir.eachFileMatch(~/.*.hpp/) { file -> 
+													//println file.getPath() 
+													def headersTest = file.getPath()
+													//println "Styling Test $headersTest";
+													
+													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+											}
+										}
+									}catch(Exception ex) {
+									
+										log.error 'Exception Caught' + ex.getMessage()
+									}
+                                 ]]>
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<!--plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>lint-with-cpplint</id>
+						<configuration>
+							<executable>python</executable>
+							<workingDirectory>src/main/upgrade/</workingDirectory>
+							<arguments>
+								<argument>cpplint.py</argument>
+							</arguments>    
+
+						</configuration>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin-->
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-antrun-plugin</artifactId> -->
+			<!-- <version>1.8</version> -->
+			<!-- <executions> -->
+			  <!-- <execution> -->
+				<!-- <id>show-uncrustify-files</id> -->
+				<!-- <phase>validate</phase> -->
+				<!-- <goals> -->
+				  <!-- <goal>run</goal> -->
+				<!-- </goals> -->
+				<!-- <configuration> -->
+							<!-- <tasks> -->
+								<!-- <echo>uncrustify.files: ${uncrustify.files}</echo> -->
+							<!-- </tasks> -->
+				<!-- </configuration> -->
+			  <!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+		<!--plugin>
+			<artifactId>maven-antrun-plugin</artifactId>
+			<version>1.8</version>
+			<executions>
+				<execution>
+					<phase>generate-sources</phase>
+					<configuration>
+						<target>
+							<fileset id="my-fileset" dir="src/main/cpp" />
+							<pathconvert targetos="unix" pathsep=","
+								property="my-file-list" refid="my-fileset">
+								<map from="${basedir}\src\main\cpp\" to="" />
+							</pathconvert>
+							<echo file="${basedir}\target\file-list.txt">${my-file-list}</echo>
+						</target>
+					</configuration>
+					<goals>
+						<goal>run</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin-->
+				<!-- <plugin> -->
+					<!-- <groupId>org.codehaus.mojo</groupId> -->
+					<!-- <artifactId>buildnumber-maven-plugin</artifactId> -->
+					<!-- <version>1.4</version> -->
+					<!-- <inherited>false</inherited> -->
+					<!-- <configuration> -->
+					  <!-- <format>{0,number}.{1,number}.{2,number}</format> -->
+					  <!-- <shortRevisionLength>8</shortRevisionLength> -->
+					  <!-- <items> -->
+						<!-- <item>buildNumber0</item> -->
+						<!-- <item>buildNumber1</item> -->
+						<!-- <item>buildNumber2</item> -->
+					  <!-- </items> -->
+					<!-- </configuration> -->
+					<!-- <executions> -->
+					  <!-- <execution> -->
+						<!-- <phase>validate</phase> -->
+						<!-- <goals> -->
+						  <!-- <goal>create</goal> -->
+						<!-- </goals> -->
+					  <!-- </execution> -->
+					<!-- </executions> -->
+				<!-- </plugin> -->
+				<plugin>
+					<groupId>pl.project13.maven</groupId>
+					<artifactId>git-commit-id-plugin</artifactId>
+					<version>2.2.1</version>
+					<inherited>false</inherited>
+					<executions>
+						<execution>
+							<id>get-the-git-infos</id>
+							<phase>none</phase>
+							<goals>
+								<goal>revision</goal>
+							</goals>
+						</execution>
+						<!-- <execution> -->
+							<!-- <id>validate-the-git-infos</id> -->
+							<!-- <goals> -->
+								<!-- <goal>validateRevision</goal> -->
+							<!-- </goals> -->
+							<!-- <phase>package</phase> -->
+							<!-- <phase>validate</phase> -->
+						<!-- </execution> -->
+					</executions>
+					<configuration>
+						<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+						<prefix>git</prefix>
+						<dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
+						<dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
+						<verbose>true</verbose>
+						<generateGitPropertiesFile>true</generateGitPropertiesFile>
+						<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+						<!-- <format>json</format> -->
+						<format>properties</format>
+						<skipPoms>false</skipPoms>
+						<injectAllReactorProjects>false</injectAllReactorProjects>
+						<failOnNoGitDirectory>true</failOnNoGitDirectory>
+						<failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>
+						<skip>false</skip>
+						<runOnlyOnce>false</runOnlyOnce>
+						<excludeProperties>
+							<excludeProperty>git.user.*</excludeProperty>
+						</excludeProperties>
+						<includeOnlyProperties>
+							<!-- <includeOnlyProperty>^git.commit.id.full$</includeOnlyProperty> -->
+						</includeOnlyProperties>
+						<useNativeGit>false</useNativeGit>
+						<abbrevLength>7</abbrevLength>
+						 <!-- <commitIdGenerationMode>flat</commitIdGenerationMode> -->
+						 <commitIdGenerationMode>full</commitIdGenerationMode>
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>false</always>
+                        <abbrev>7</abbrev>
+                        <dirty>-dirty</dirty>
+                        <match>*</match>
+                        <tags>false</tags>
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                    <validationProperties>
+                        <validationProperty>
+                            <name>validating project version</name>
+                            <value>${project.version}</value>
+                            <shouldMatchTo><![CDATA[^.*(?<!-SNAPSHOT)$]]></shouldMatchTo>
+                        </validationProperty>
+                    </validationProperties>
+                    <validationShouldFailIfNoMatch>true</validationShouldFailIfNoMatch>
+					</configuration>
+				</plugin>
 			<!--plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -376,6 +624,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
+				<uncrustifyCFG>${roodDir}\src\main\config\uncrustify.cfg</uncrustifyCFG>
                 <cmake.command>cmake.exe</cmake.command>
                 <make.command>mingw32-make</make.command>
                 <hostname>${env.COMPUTERNAME}</hostname>
@@ -414,6 +663,27 @@
                         <artifactId>exec-maven-plugin</artifactId>
 						<version>${exec-maven-plugin.version}</version>
                         <executions>
+							<execution>
+							  <id>default-style</id>
+							  <!-- <phase>initialize</phase> -->
+							  <phase>none</phase>
+							  <goals>
+								<goal>exec</goal>
+							  </goals>
+							  <configuration>
+								<executable>cmd.exe</executable>
+								<arguments>
+								  <argument>/C</argument>
+								  <argument>uncrustify.exe</argument>
+								  <argument>--no-backup</argument>
+								  <argument>-l</argument>
+								  <argument>CPP</argument>
+								  <argument>-c</argument>
+								  <argument>${main.basedir}/src/main/config/uncrustify.cfg</argument>
+								  <argument>${src}/*.?pp</argument>
+								</arguments>
+							  </configuration>
+							</execution>
                             <execution>
                                 <id>cmake-generate-and-configure</id>
                                 <goals>
@@ -431,12 +701,18 @@
                                         <argument>${cmake.generator}</argument>
                                         <argument>-DCMAKE_BUILD_TYPE=${cmake.build.type}</argument>
                                         <argument>-DCMAKE_EXPORT_COMPILE_COMMANDS=ON</argument>
+                                        <argument>-DNAMESPACE=${namespace}</argument>
                                         <argument>${project.basedir}</argument>
                                         <argument>-DCMAKE_INSTALL_PREFIX=${install.basedir}</argument>
                                         <argument>-DTARGET_BUILD_DIRECTORY=${install.basedir}</argument>
                                         <argument>-DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=${install.basedir}/lib</argument>
                                         <argument>-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=${install.basedir}/lib</argument>
                                         <argument>-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=${install.basedir}/bin</argument>
+										<argument>-DMAJOR=1</argument>
+										<argument>-DMINOR=0</argument>
+										<argument>-DMICRO=0</argument>
+										<argument>-DPATCH=${git.commit.id.abbrev}</argument>
+										<argument>-DREV="SNAPSHOOT"</argument>
                                     </arguments>
                                 </configuration>
                             </execution>

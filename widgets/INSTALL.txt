@@ -1,0 +1,63 @@
+
+Building GICS
+-------------
+
+The build system used for GICS is CMake (http://cmake.org/).
+
+Moreover, the GICS library depends on Qt4 (http://www.qtsoftware.com/downloads/),
+Boost (http://www.boost.org/) and the Tegesoft's CAMP library (http://www.tegesoft.com/).
+
+CMake will find Qt4 automatically if it is properly installed. However, if you have more than one
+installations of Qt, you can specify the right one by filling the QT_QMAKE_EXECUTABLE CMake variable with the
+path of the corresponding qmake executable.
+
+CMake will also find Boost if it is properly installed. If not, the BOOST_ROOT CMake variable can
+be defined to locate it.
+
+For CMake to be able to locate the CAMP library, it will need the FindCAMP.cmake file provided with
+the CAMP package. If this file is not found automatically by CMake (i.e. the file is not in a
+standard CMake directory), the CMAKE_MODULE_PATH variable can be set to different paths to locate
+it.
+
+If CAMP is not installed in a standard directory, the CAMP_DIR environment variable can be set to
+the path to the CAMP header files and the path to the CAMP library (example: CAMP_DIR="/home/dev/camp/include;/home/dev/camp/lib").
+
+Once you have generated the project files / makefiles for your favorite compiler (please refer to http://cmake.org/
+if you do not know how to do it), you can use them to compile the GICS binaries.
+ 
+The following targets are defined:
+ 
+(empty)
+    builds everything
+
+gics
+    builds the GICS library
+
+simpledemo
+    builds the GICS simple demo
+
+apidoc
+    generates the API documentation in HTML format; on Windows, if the HTML Help Workshop program
+    is available, the CHM documentation is generated as well
+         
+apidoc_forced
+    regenerates the API documentation
+
+install
+    installs all the generated components to the standard path, in a Tegesoft/CAMP subdirectory
+
+
+Installing GICS
+---------------
+
+There are three ways to install GICS:
+- Running the installer (on Windows and Mac OS X) and following the instructions
+- Uncompressing the binary archive to a standard path (C:\Program Files, /usr/local/, ...)
+- Using CMake and calling the "install" target (see above)
+
+This will create the following directories:
+- <INSTALL_PATH>/bin contains the GICS binary files
+- <INSTALL_PATH>/doc contains the API documentation
+- <INSTALL_PATH>/include contains the GICS header files
+- <INSTALL_PATH>/lib contains the GICS library files
+- <INSTALL_PATH>/utils contains various utilities related to GICS

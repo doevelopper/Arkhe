@@ -24,7 +24,7 @@
 //----------------------------------------------------------------------------
 QString ctkCmdLineModuleBackendFunctionPointer::DescriptionPrivate::xmlDescription() const
 {
-  QString xml;
+QString xml;
   QTextStream str(&xml);
   str << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
   str << "<executable>\n";
