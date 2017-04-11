@@ -108,7 +108,9 @@
 		<activeBaseDir>${session.executionRootDirectory}</activeBaseDir> <!-- always points to the ... directory ... from which the maven command was executed.-->
 		<roodDir>${project.basedir}</roodDir>
 		<install.basedir>${project.build.directory}</install.basedir>
-		<uncrustifyCFG/>
+		<!-- <uncrustifyCFG>${project.basedir}\src\main\config\uncrustify.cfg</uncrustifyCFG> -->
+		<uncrustifyCFG> H:\levitics\Arkhe\ctk\src\main\config\uncrustify.cfg</uncrustifyCFG>
+
 		<global.encoding>UTF-8</global.encoding>
 		<project.build.sourceEncoding>${global.encoding}</project.build.sourceEncoding>
 		<project.build.outputEncoding>${global.encoding}</project.build.outputEncoding>
@@ -245,13 +247,14 @@
 									def connector = new Connector(project.properties)
 									def styleExe = connector.styleCFG
 									println "Styling ${connector.styleCFG}";
+
 									try {
 										new File(connector.mainSrcDir).eachDirRecurse() { dir ->
 
 												dir.eachFileMatch(~/.*.cpp/) { file -> 
 
 													def sources = file.getPath()
-													//println "Styling $sources";
+													println "CPP: $sources";
 											
 													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
 													//println "Styling ${process.text}";
@@ -260,11 +263,14 @@
 
 												dir.eachFileMatch(~/.*.hpp/) { file -> 
 													def headers = file.getPath()
-													//println "Styling $headers";
+													println "HPP: $headers";
 													
-													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();//.exitValue();
+													//if(!process)
+													//	log.warn 'filed to style' + file.getPath()
 											}
 										}
+
 										new File(connector.mainTestDir).eachDirRecurse() { dir ->
 												dir.eachFileMatch(~/.*.cpp/) { file -> 
 													//println file.getPath() 
@@ -281,6 +287,7 @@
 													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
 											}
 										}
+
 									}catch(Exception ex) {
 									
 										log.error 'Exception Caught' + ex.getMessage()
@@ -624,7 +631,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-				<uncrustifyCFG>${roodDir}\src\main\config\uncrustify.cfg</uncrustifyCFG>
+				<!-- <uncrustifyCFG>${main.basedir}\src\main\config\uncrustify.cfg</uncrustifyCFG> -->
                 <cmake.command>cmake.exe</cmake.command>
                 <make.command>mingw32-make</make.command>
                 <hostname>${env.COMPUTERNAME}</hostname>
@@ -680,7 +687,7 @@
 								  <argument>CPP</argument>
 								  <argument>-c</argument>
 								  <argument>${main.basedir}/src/main/config/uncrustify.cfg</argument>
-								  <argument>${src}/*.?pp</argument>
+								  <argument>${main.basedir}/src/main/cpp/*.?pp</argument>
 								</arguments>
 							  </configuration>
 							</execution>
