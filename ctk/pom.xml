@@ -31,12 +31,12 @@
 	<name>CTK Complete and dynamic component model (CDCM)</name>
 	<description>Modular system and a service platform.</description>
 
-	<modules>
-		<module>cli</module>
-		<module>core</module>
-		<module>pluginFramework</module>
-		<module>plugins</module>
-	</modules>
+	<!-- <modules> -->
+		<!-- <module>cli</module> -->
+		<!-- <module>core</module> -->
+		<!-- <module>pluginFramework</module> -->
+		<!-- <module>plugins</module> -->
+	<!-- </modules> -->
 
 	<properties>
 		<checkstyle.violation.ignore>RedundantThrows,NewlineAtEndOfFile,ParameterNumber,MethodLength,FileLength,JavadocType,MethodName,MagicNumber,ConstantName,VisibilityModifier,InnerAssignment</checkstyle.violation.ignore>

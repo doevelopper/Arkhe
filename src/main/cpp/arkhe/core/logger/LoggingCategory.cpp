@@ -1,8 +1,9 @@
+
 #include <QSettings>
 #include <arkhe/core/logger/LoggingCategory.hpp>
 
 
-/*! 
+/*!
  * @brief Add Global logging categories (not class specific) here using QGC_LOGGING_CATEGORY
  */
 
@@ -14,32 +15,33 @@ LOGGING_CATEGORY(ParameterManagerLog,       "ParameterManagerLog")
 LOGGING_CATEGORY(GeotaggingLog,             "GeotaggingLog")
 
 
-LoggingCategoryRegister* LoggingCategoryRegister::_instance = nullptr;
-const char* LoggingCategoryRegister::_filterRulesSettingsGroup = "LoggingFilters";
+LoggingCategoryRegister * LoggingCategoryRegister::_instance = nullptr;
+const char * LoggingCategoryRegister::_filterRulesSettingsGroup = "LoggingFilters";
 
-LoggingCategoryRegister* LoggingCategoryRegister::instance(void)
+LoggingCategoryRegister * LoggingCategoryRegister::instance (void)
 {
-    if (!_instance) 
+    if( !_instance )
     {
         _instance = new LoggingCategoryRegister();
         Q_CHECK_PTR(_instance);
     }
-    
+
     return _instance;
 }
 
-QStringList LoggingCategoryRegister::registeredCategories(void)
+QStringList LoggingCategoryRegister::registeredCategories (void)
 {
     _registeredCategories.sort();
+
     return _registeredCategories;
 }
 
-void LoggingCategoryRegister::registerCategory(const char* category)
+void LoggingCategoryRegister::registerCategory (const char * category)
 {
-     _registeredCategories << category; 
+    _registeredCategories << category;
 }
 
-void LoggingCategoryRegister::setCategoryLoggingOn(const QString& category, bool enable)
+void LoggingCategoryRegister::setCategoryLoggingOn (const QString & category, bool enable)
 {
     QSettings settings;
 
@@ -47,20 +49,22 @@ void LoggingCategoryRegister::setCategoryLoggingOn(const QString& category, bool
     settings.setValue(category, enable);
 }
 
-bool LoggingCategoryRegister::categoryLoggingOn(const QString& category)
+bool LoggingCategoryRegister::categoryLoggingOn (const QString & category)
 {
     QSettings settings;
 
     settings.beginGroup(_filterRulesSettingsGroup);
+
     return settings.value(category, false).toBool();
 }
 
-void LoggingCategoryRegister::setFilterRulesFromSettings(const QString& commandLineLoggingOptions)
+void LoggingCategoryRegister::setFilterRulesFromSettings (const QString & commandLineLoggingOptions)
 {
-    if (!commandLineLoggingOptions.isEmpty()) 
+    if( !commandLineLoggingOptions.isEmpty())
     {
         _commandLineLoggingOptions = commandLineLoggingOptions;
     }
+
     QString filterRules;
 
     // Turn off bogus ssl warning
@@ -68,9 +72,9 @@ void LoggingCategoryRegister::setFilterRulesFromSettings(const QString& commandL
     filterRules += "*Log.debug=false\n";
 
     // Set up filters defined in settings
-    foreach (QString category, _registeredCategories) 
+    foreach (QString category, _registeredCategories)
     {
-        if (categoryLoggingOn(category)) 
+        if( categoryLoggingOn(category))
         {
             filterRules += category;
             filterRules += ".debug=true\n";
@@ -78,22 +82,23 @@ void LoggingCategoryRegister::setFilterRulesFromSettings(const QString& commandL
     }
 
     // Command line rules take precedence, so they go last in the list
-    if (!_commandLineLoggingOptions.isEmpty()) 
+    if( !_commandLineLoggingOptions.isEmpty())
     {
         QStringList logList = _commandLineLoggingOptions.split(",");
 
-        if (logList[0] == "full") 
+        if( logList [0] == "full" )
         {
             filterRules += "*Log.debug=true\n";
-            for(int i=1; i<logList.count(); i++) 
+
+            for( int i = 1 ; i<logList.count() ; i++ )
             {
-                filterRules += logList[i];
+                filterRules += logList [i];
                 filterRules += ".debug=false\n";
             }
-        } 
-        else 
+        }
+        else
         {
-            foreach(const QString &rule, logList) 
+            foreach(const QString &rule, logList)
             {
                 filterRules += rule;
                 filterRules += ".debug=true\n";

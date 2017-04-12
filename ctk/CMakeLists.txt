@@ -1,5 +1,15 @@
 cmake_minimum_required(VERSION 3.8)
 
+# add_definitions(-DMY_EXPORT_HEADER_PREFIX="\\"ARKHE_CTK\\"")
+# add_definitions(-DMY_LIBNAME="\\"ARKHE_CTK\\")
+# add_definitions(-DMY_LIBRARY_EXPORT_DIRECTIVE="\\"ARKHE_CTK_EXPORT\\")
+
+configure_file(
+    ${CMAKE_SOURCE_DIR}/src/main/resources/ctkExport.h.in
+    ${CMAKE_SOURCE_DIR}/src/main/cpp/arkhe/ctk/ctkExport.hpp 
+    @ONLY
+)
+
 if((NOT PROJECT_CMAKE_MODULE_ROOT_PATH))
     message(FATAL_ERROR "User module path should be given. It is shared accros module!")
 endif ((NOT PROJECT_CMAKE_MODULE_ROOT_PATH))
@@ -24,6 +34,7 @@ include(CMakeSettings)
 # include(PrintVariables)
 include(DefinePlatformSpecfic)
 include(SuperPedanticWarnings)
+
 
 
 # set(CORE_MODULE_ROOT_CMAKE_CURRENT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})

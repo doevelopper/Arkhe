@@ -1,16 +1,18 @@
+
 #include <arkhe/core/json/JsonValue.hpp>
 
 Json::JsonValue::JsonValue(Type type)
     : ui(0)
-    , d(0)
-    , t(type)
+        , d(0)
+        , t(type)
 {
-    
 }
 
 Json::JsonValue::~JsonValue()
 {
-    if (t == String && stringData && !stringData->ref.deref())
+    if( t == String
+        && stringData
+        && !stringData->ref.deref())
     {
         // free(stringData);
     }
@@ -21,37 +23,37 @@ Json::JsonValue::~JsonValue()
     }
 }
 
-Json::JsonValue::JsonValue(Data *data, Base *base, const Value &v)
+Json::JsonValue::JsonValue(Data * data, Base * base, const Value & v)
     : d(0)
-    , t((Type)(uint32_t)v.type)
+        , t((Type)(uint32_t)v.type)
 {
-    switch (t)
+    switch( t )
     {
-        case Undefined:
-        case Null:
-            dbl = 0;
-            break;
-        case Bool:
-            b = v.toBoolean();
-            break;
-        case Double:
-            dbl = v.toDouble(base);
-            break;
-        case String:
-        {
-            stringData = new SharedString;
-            stringData->s = v.toString(base);
-            stringData->ref.ref();
-            break;
-        }
-        case Array:
-        case Object:
-            d = data;
-            this->base = v.base(base);
-            break;
+    case Undefined:
+    case Null:
+        dbl = 0;
+        break;
+    case Bool:
+        b = v.toBoolean();
+        break;
+    case Double:
+        dbl = v.toDouble(base);
+        break;
+    case String:
+    {
+        stringData = new SharedString;
+        stringData->s = v.toString(base);
+        stringData->ref.ref();
+        break;
     }
-    
-    if (d)
+    case Array:
+    case Object:
+        d = data;
+        this->base = v.base(base);
+        break;
+    }
+
+    if( d )
     {
         // d->ref.ref();
     }
@@ -59,44 +61,44 @@ Json::JsonValue::JsonValue(Data *data, Base *base, const Value &v)
 
 Json::JsonValue::JsonValue(bool b)
     : d(0)
-    , t(Bool)
+        , t(Bool)
 {
     this->b = b;
 }
 
 Json::JsonValue::JsonValue(double n)
     : d(0)
-    , t(Double)
+        , t(Double)
 {
     this->dbl = n;
 }
 
 Json::JsonValue::JsonValue(int n)
     : d(0)
-    , t(Double)
+        , t(Double)
 {
     this->dbl = n;
 }
 
 Json::JsonValue::JsonValue(int64_t n)
     : d(0)
-    , t(Double)
+        , t(Double)
 {
     this->dbl = double(n);
 }
 
-Json::JsonValue::JsonValue(const std::string &s)
+Json::JsonValue::JsonValue(const std::string & s)
     : d(0)
-    , t(String)
+        , t(String)
 {
     stringData = new SharedString;
     stringData->s = s;
     stringData->ref.ref();
 }
 
-Json::JsonValue::JsonValue(const char *s)
+Json::JsonValue::JsonValue(const char * s)
     : d(0)
-    , t(String)
+        , t(String)
 {
     stringData = new SharedString;
     stringData->s = s;
@@ -104,45 +106,45 @@ Json::JsonValue::JsonValue(const char *s)
 }
 
 // Json::JsonValue::JsonValue(const JsonArray &a)
-    // : d(a.d)
-    // , t(Array)
+// : d(a.d)
+// , t(Array)
 // {
-    // base = a.a;
-    // if (d)
-    // {
-        // d->ref.ref();
-    // }
+// base = a.a;
+// if (d)
+// {
+// d->ref.ref();
+// }
 // }
 
 // Json::JsonValue::JsonValue(const JsonObject &o)
-    // : d(o.d)
-    // , t(Object)
+// : d(o.d)
+// , t(Object)
 // {
-    // base = o.o;
-    // if (d)
-    // {
-        // d->ref.ref();
-    // }
+// base = o.o;
+// if (d)
+// {
+// d->ref.ref();
+// }
 // }
 
-Json::JsonValue::JsonValue(const void *) 
-: t(Null) 
+Json::JsonValue::JsonValue(const void *)
+    : t(Null)
 {
-    
 }
 
-
-Json::JsonValue::JsonValue(const JsonValue &other)
+Json::JsonValue::JsonValue(const JsonValue & other)
     : t(other.t)
 {
-    d = other.d;
+    d  = other.d;
     ui = other.ui;
-    if (d)
+
+    if( d )
     {
         // d->ref.ref();
     }
 
-    if (t == String && stringData)
+    if( t == String
+        && stringData )
     {
         // stringData->ref.ref();
     }
@@ -150,41 +152,41 @@ Json::JsonValue::JsonValue(const JsonValue &other)
 
 // Json::JsonValue &JsonValue::operator=(const JsonValue &other)
 // {
-    // if (t == String && stringData && !stringData->ref.deref())
-    // {
-        // free(stringData);
-    // }
-
-    // t = other.t;
-    // dbl = other.dbl;
-
-    // if (d != other.d)
-    // {
-        // if (d && !d->ref.deref())
-        // {
-            // delete d;
-        // }
-        
-        // d = other.d;
-        
-        // if (d)
-        // {
-            // d->ref.ref();
-        // }
-
-    // }
-
-    // if (t == String && stringData)
-    // {
-        // stringData->ref.ref();
-    // }
-
-    // return *this;
+// if (t == String && stringData && !stringData->ref.deref())
+// {
+// free(stringData);
 // }
 
-bool Json::JsonValue::toBool(bool defaultValue) const
+// t = other.t;
+// dbl = other.dbl;
+
+// if (d != other.d)
+// {
+// if (d && !d->ref.deref())
+// {
+// delete d;
+// }
+
+// d = other.d;
+
+// if (d)
+// {
+// d->ref.ref();
+// }
+
+// }
+
+// if (t == String && stringData)
+// {
+// stringData->ref.ref();
+// }
+
+// return *this;
+// }
+
+bool Json::JsonValue::toBool (bool defaultValue) const
 {
-    if (t != Bool)
+    if( t != Bool )
     {
         return defaultValue;
     }
@@ -192,9 +194,10 @@ bool Json::JsonValue::toBool(bool defaultValue) const
     return b;
 }
 
-int Json::JsonValue::toInt(int defaultValue) const
+int Json::JsonValue::toInt (int defaultValue) const
 {
-    if (t == Double && int(dbl) == dbl)
+    if( t == Double
+        && int(dbl) == dbl )
     {
         return int(dbl);
     }
@@ -202,9 +205,9 @@ int Json::JsonValue::toInt(int defaultValue) const
     return defaultValue;
 }
 
-double Json::JsonValue::toDouble(double defaultValue) const
+double Json::JsonValue::toDouble (double defaultValue) const
 {
-    if (t != Double)
+    if( t != Double )
     {
         return defaultValue;
     }
@@ -212,9 +215,9 @@ double Json::JsonValue::toDouble(double defaultValue) const
     return dbl;
 }
 
-std::string Json::JsonValue::toString(const std::string &defaultValue) const
+std::string Json::JsonValue::toString (const std::string & defaultValue) const
 {
-    if (t != String)
+    if( t != String )
     {
         return defaultValue;
     }
@@ -224,82 +227,97 @@ std::string Json::JsonValue::toString(const std::string &defaultValue) const
 
 // JsonArray Json::JsonValue::toArray(const JsonArray &defaultValue) const
 // {
-    // if (!d || t != Array)
-    // {
-        // return defaultValue;
-    // }
+// if (!d || t != Array)
+// {
+// return defaultValue;
+// }
 
-    // return JsonArray(d, static_cast<Internal::Array *>(base));
+// return JsonArray(d, static_cast<Internal::Array *>(base));
 // }
 
 // JsonArray Json::JsonValue::toArray() const
 // {
-    // return toArray(JsonArray());
+// return toArray(JsonArray());
 // }
 /*
-JsonObject Json::JsonValue::toObject(const JsonObject &defaultValue) const
-{
+   JsonObject Json::JsonValue::toObject(const JsonObject &defaultValue) const
+   {
     if (!d || t != Object)
     {
         return defaultValue;
     }
 
     return JsonObject(d, static_cast<Internal::Object *>(base));
-}
+   }
 
-JsonObject Json::JsonValue::toObject() const
-{
+   JsonObject Json::JsonValue::toObject() const
+   {
     return toObject(JsonObject());
-}
-*/
-bool Json::JsonValue::operator==(const JsonValue &other) const
+   }
+ */
+bool Json::JsonValue::operator== (const JsonValue & other) const
 {
-    if (t != other.t)
+    if( t != other.t )
     {
         return false;
     }
 
-    switch (t)
+    switch( t )
     {
-        case Undefined:
-        case Null:
-            break;
-        case Bool:
-            return b == other.b;
-        case Double:
-            return dbl == other.dbl;
-        case String:
-            return toString() == other.toString();
-        case Array:
-            if (base == other.base)
-                return true;
-            if (!base)
-                return !other.base->length;
-            if (!other.base)
-                return !base->length;
-            // return JsonArray(d, static_cast<Internal::Array *>(base))
-                    // == JsonArray(other.d, static_cast<Internal::Array *>(other.base));
-        case Object:
-            if (base == other.base)
-                return true;
-            if (!base)
-                return !other.base->length;
-            if (!other.base)
-                return !base->length;
-            // return JsonObject(d, static_cast<Internal::Object *>(base))
-                    // == JsonObject(other.d, static_cast<Internal::Object *>(other.base));
+    case Undefined:
+    case Null:
+        break;
+    case Bool:
+
+        return b == other.b;
+
+    case Double:
+
+        return dbl == other.dbl;
+
+    case String:
+
+        return toString() == other.toString();
+
+    case Array:
+
+        if( base == other.base )
+            return true;
+
+        if( !base )
+            return !other.base->length;
+
+        if( !other.base )
+            return !base->length;
+
+    // return JsonArray(d, static_cast<Internal::Array *>(base))
+    // == JsonArray(other.d, static_cast<Internal::Array *>(other.base));
+    case Object:
+
+        if( base == other.base )
+            return true;
+
+        if( !base )
+            return !other.base->length;
+
+        if( !other.base )
+            return !base->length;
+
+        // return JsonObject(d, static_cast<Internal::Object *>(base))
+        // == JsonObject(other.d, static_cast<Internal::Object *>(other.base));
     }
+
     return true;
 }
 
-bool Json::JsonValue::operator!=(const JsonValue &other) const
+bool Json::JsonValue::operator!= (const JsonValue & other) const
 {
     // return !(*this == other);
 }
 
-void Json::JsonValue::detach()
+void Json::JsonValue::detach ()
 {
-    if (!d)
+    if( !d )
     {
         return;
     }
@@ -316,44 +334,42 @@ void Json::JsonValue::detach()
     // base = static_cast<Internal::Object *>(d->header->root());
 }
 
-
-Json::JsonValue::Type Json::JsonValue::type() const 
-{ 
-    return t; 
+Json::JsonValue::Type Json::JsonValue::type () const
+{
+    return t;
 }
 
-bool Json::JsonValue::isNull() const 
-{ 
+bool Json::JsonValue::isNull () const
+{
     return t == Null;
 }
 
-bool Json::JsonValue::isBool() const 
-{ 
-    return t == Bool; 
+bool Json::JsonValue::isBool () const
+{
+    return t == Bool;
 }
 
-bool Json::JsonValue::isDouble() const 
-{ 
-    return t == Double; 
+bool Json::JsonValue::isDouble () const
+{
+    return t == Double;
 }
 
-bool Json::JsonValue::isString() const 
-{ 
-    return t == String; 
+bool Json::JsonValue::isString () const
+{
+    return t == String;
 }
 
-bool Json::JsonValue::isArray() const 
-{ 
-    return t == Array; 
+bool Json::JsonValue::isArray () const
+{
+    return t == Array;
 }
 
-bool Json::JsonValue::isObject() const 
-{ 
-    return t == Object; 
-
+bool Json::JsonValue::isObject () const
+{
+    return t == Object;
 }
 
-bool Json::JsonValue::isUndefined() const 
-{ 
-    return t == Undefined; 
+bool Json::JsonValue::isUndefined () const
+{
+    return t == Undefined;
 }
