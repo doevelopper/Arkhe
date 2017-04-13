@@ -172,7 +172,7 @@
 
 	<modules>
 		<!-- <module>external</module> -->
-		<!-- <module>ctk</module> -->
+		<module>ctk</module>
 		<!-- <module>utils</module> -->
 		<!-- <module>osgi</module> -->
 	</modules>
@@ -396,190 +396,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>windows-x64-code-beautifier</id>
-			<activation>
-				<os>
-					<family>Windows</family>
-					<!-- <arch>x64</arch> -->
-				</os>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<cmake.command>cmake.exe</cmake.command>
-				<cmake.build.type>Debug</cmake.build.type>
-				<make.command>mingw32-make</make.command>
-				<hostname>${env.COMPUTERNAME}</hostname>
-				<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
-				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
-				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
-				<!-- <aol>${os.detected.classifier}-${cmake.build.type}</aol> -->
-			</properties>
-			<build>
-				<directory>${aol}</directory>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>${exec-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>applying-code-beautifier</id>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-								<phase>initialize</phase>
-								<configuration>
-									<executable>${cmake.command}</executable>
-									<workingDirectory>${project.build.directory}</workingDirectory>
-									<arguments>
-										<!-- <argument>${project.artifactId}-style</argument> -->
-										<argument>-version</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>windows-x64-code-cpplint</id>
-			<activation>
-				<os>
-					<family>Windows</family>
-					<!-- <arch>x64</arch> -->
-				</os>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<cmake.command>cmake.exe</cmake.command>
-				<cmake.build.type>Debug</cmake.build.type>
-				<make.command>mingw32-make</make.command>
-				<hostname>${env.COMPUTERNAME}</hostname>
-				<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
-				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
-				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
-				<!-- <aol>${os.detected.classifier}-${cmake.build.type}</aol> -->
-			</properties>
-			<build>
-				<directory>${aol}</directory>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>${exec-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>cpplint-code</id>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-								<phase>generate-sources</phase>
-								<configuration>
-									<executable>${cmake.command}</executable>
-									<workingDirectory>${project.build.directory}</workingDirectory>
-									<arguments>
-										<argument>-version</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>windows-x64-code-cppcheck</id>
-			<activation>
-				<os>
-					<family>Windows</family>
-					<!-- <arch>x64</arch> -->
-				</os>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<cmake.command>cmake.exe</cmake.command>
-				<cmake.build.type>Debug</cmake.build.type>
-				<make.command>mingw32-make</make.command>
-				<hostname>${env.COMPUTERNAME}</hostname>
-				<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
-				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
-				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
-			</properties>
-			<build>
-				<directory>${aol}</directory>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>${exec-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>cppcheck-code</id>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-								<phase>process-sources</phase>
-								<configuration>
-									<executable>${cmake.command}</executable>
-									<workingDirectory>${project.build.directory}</workingDirectory>
-									<arguments>
-										<argument>-version</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>windows-x64-code-cyclomatic-complexity</id>
-			<activation>
-				<os>
-					<family>Windows</family>
-					<!-- <arch>x64</arch> -->
-				</os>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<cmake.command>cmake.exe</cmake.command>
-				<cmake.build.type>Debug</cmake.build.type>
-				<make.command>mingw32-make</make.command>
-				<hostname>${env.COMPUTERNAME}</hostname>
-				<nproc>${env.NUMBER_OF_PROCESSORS}</nproc>
-				<cmake.generator>${cmake.generator.mingw}</cmake.generator>
-				<aol>${sys.os.arch}-${os.detected.name}-${cmake.build.type}</aol>
-			</properties>
-			<build>
-				<directory>${aol}</directory>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>${exec-maven-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>cyclomatic-complexity-analyser</id>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-								<phase>process-sources</phase>
-								<configuration>
-									<executable>${cmake.command}</executable>
-									<workingDirectory>${project.build.directory}</workingDirectory>
-									<arguments>
-										<argument>-version</argument>
-									</arguments>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>windows-x64-build-groovy</id>
+			<id>windows-x64-build-groovy-style</id>
 			<activation>
 				<os>
 					<family>Windows</family>
@@ -606,8 +423,8 @@
 						<executions>
 							<execution>
 								<id>uncrustifying-files</id>
-								<!-- <phase>none</phase> -->
-								<phase>generate-resources</phase>
+								<phase>none</phase>
+								<!-- <phase>generate-resources</phase> -->
 								<goals>
 									<goal>execute</goal>
 								</goals>
@@ -633,59 +450,65 @@
 									println "mainSrcDir ${connector.mainSrcDir}";
 									println "mainTestDir ${connector.mainTestDir}";
 									println "rsrc_Folder ${connector.rsrc_Folder}";
+									
 									def uncrustifycfg;
+									def testcommand = "uncrustify --version"
+									
 									try {
 
 										new File(connector.rsrc_Folder).eachFileMatch(pattern) { file ->  
-											uncrustifycfg = file.getPath()
-											println uncrustifycfg
-											
+
+											//assert file.exists() : "Uncrustify config file not found"
+											//uncrustifycfg = file.getPath() ;//.replaceAll( "\\","/");                  ///Widows console hack
+											//println " Style config : $uncrustifycfg"
 										}
 										
 										new File(connector.mainSrcDir).eachDirRecurse() { dir ->
 
-												dir.eachFileMatch(~/.*.cpp/) { file -> 
+											dir.eachFileMatch(~/.*.cpp/) { file -> 
 
-													def sources = file.getPath()
-													//println "CPP: $sources";
+												def sources = file.getPath()
+												
+												["uncrustify", "--no-backup", "-l", "CPP", "-c","E:\\developppements\\Arkhe-develop-home\\src\\main\\config\\coding.style", sources ].execute().waitForProcessOutput(System.out, System.err);
+												
+												//println(["uncrustify", "--no-backup", "-l", "CPP", "-c","E:\\developppements\\Arkhe-develop-home\\src\\main\\config\\coding.style" , "E:\\developppements\\Arkhe-develop-home\\src\\main\\cpp\\arkhe\\core\\json\\Parser.cpp"].execute().text)
+												//uncrustify --no-backup -l CPP -c E:\developppements\Arkhe-develop-home\src\main\config\coding.style
+												//println(["uncrustify", "--no-backup", "-l", "CPP", "-c", uncrustifycfg, sources].execute().text)
+												//println "Beautifying " + 'uncrustify --no-backup -l CPP -c $uncrustifycfg $sources'.execute().text;
+												//println "Beautifying " + "$testcommand".execute().text + "$sources" ;
+												//println "uncrustify --no-backup -l CPP -c  $uncrustifycfg $sources".execute().text;
+												//println "cmd /c uncrustify --no-backup -l CPP -c  $uncrustifycfg $sources".execute(null, "${connector.mainSrcDir}").text;
+												//def process = "uncrustify --no-backup -l CPP -c  uncrustifycfg $sources".execute();
+												//println  process
+													
+											}
 											
-													println "uncrustify --no-backup -l CPP -c  $uncrustifycfg $sources".execute(null, "${connector.mainSrcDir}").text;
-													//def process = "uncrustify --no-backup -l CPP -c  uncrustifycfg $sources".execute();
-													//println  process
-													
-												}
-
-												dir.eachFileMatch(~/.*.hpp/) { file -> 
+											dir.eachFileMatch(~/.*.hpp/) { file -> 
 													def headers = file.getPath()
-													//println "HPP: $headers";
 													
-													def process = "uncrustify --no-backup -l CPP -c  uncrustifycfg $headers".execute();//.exitValue();
-													println "Styling ${process.text}";
+													["uncrustify", "--no-backup", "-l", "CPP", "-c","E:\\developppements\\Arkhe-develop-home\\src\\main\\config\\coding.style" , headers ].execute().waitForProcessOutput(System.out, System.err);
 													//if(!process)
 													//	log.warn 'filed to style' + file.getPath()
 											}
 										}
-
 										new File(connector.mainTestDir).eachDirRecurse() { dir ->
 												dir.eachFileMatch(~/.*.cpp/) { file -> 
 										
 													def sourcesTest = file.getPath()
-													//println "Styling Test $sourcesTest";
 													
-													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
-													println "Styling ${process.text}";
-											}
+													//def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
+													["uncrustify", "--no-backup", "-l", "CPP", "-c","E:\\developppements\\Arkhe-develop-home\\src\\main\\config\\coding.style" , sourcesTest ].execute().waitForProcessOutput(System.out, System.err);
+												}
+												
 												dir.eachFileMatch(~/.*.hpp/) { file -> 
 													def headersTest = file.getPath()
-													//println "Styling Test $headersTest";
-													def process = "uncrustify --no-backup -l CPP -c  connector.styleCFG file.getPath()".execute();
-													println "Styling ${process.text}";
-											}
+													["uncrustify", "--no-backup", "-l", "CPP", "-c","E:\\developppements\\Arkhe-develop-home\\src\\main\\config\\coding.style" , headersTest ].execute().waitForProcessOutput(System.out, System.err);
+												}
 										}
 
 									}catch(Exception ex) {
 									
-										log.error 'Project bld Exception Caught' + ex.getMessage()
+										log.error 'Project bld Exception Caught: ' + ex.getMessage()
 									}
                                  ]]>
 									</source>

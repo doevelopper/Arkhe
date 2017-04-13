@@ -31,15 +31,33 @@
 	<name>CTK Complete and dynamic component model (CDCM)</name>
 	<description>Modular system and a service platform.</description>
 
-	<!-- <modules> -->
+	<modules>
 		<!-- <module>cli</module> -->
-		<!-- <module>core</module> -->
+		<module>core</module>
 		<!-- <module>pluginFramework</module> -->
 		<!-- <module>plugins</module> -->
-	<!-- </modules> -->
+	</modules>
 
+	<!-- <dependencies> -->
+		<!-- <dependency> -->
+		<!-- <groupId>io.github.levitics</groupId>   -->
+		<!-- <artifactId>levitics.arkhe.ctk.core</artifactId> -->
+		<!-- <version>1.0-SNAPSHOOT</version> -->
+			<!-- <type/> -->
+			<!-- <classifier/> -->
+			<!-- <scope/> -->
+			<!-- <systemPath/> -->
+			<!-- <exclusions> -->
+				<!-- <exclusion> -->
+					<!-- <artifactId/> -->
+					<!-- <groupId/> -->
+					<!-- </exclusion> -->
+			<!-- </exclusions> -->
+			<!-- <optional/> -->
+		<!-- </dependency> -->
+	<!-- </dependencies> -->
+  
 	<properties>
-		<checkstyle.violation.ignore>RedundantThrows,NewlineAtEndOfFile,ParameterNumber,MethodLength,FileLength,JavadocType,MethodName,MagicNumber,ConstantName,VisibilityModifier,InnerAssignment</checkstyle.violation.ignore>
 		<main.basedir>${project.parent.basedir}</main.basedir>
 		<install.basedir>${project.parent.build.directory}</install.basedir>
 	</properties>

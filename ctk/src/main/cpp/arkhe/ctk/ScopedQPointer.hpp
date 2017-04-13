@@ -5,6 +5,8 @@
 #include <memory>
 #include <type_traits>
  
+#include<arkhe/ctk/ctkExport.hpp>
+ 
 template < class Object, class Deleter = std::default_delete<Object> > 
 class ScopedQPointer 
 {
@@ -17,14 +19,14 @@ public:
     using pointer         = object_type *;
     using const_pointer   = object_type const *;
  
-    explicit ScopedQPointer(Object * p = nullptr) : qptr{p} {}
+    explicit ScopedQPointer(Object * p = nullptr);// : qptr{p} {}
  
     ScopedQPointer(ScopedQPointer const &) = delete;
     ScopedQPointer & operator = (ScopedQPointer const &) = delete;
  
-    ScopedQPointer(ScopedQPointer && other) Q_DECL_NOEXCEPT
-      : qptr{ other.release() }
-    { }
+    ScopedQPointer(ScopedQPointer && other) Q_DECL_NOEXCEPT;
+      // : qptr{ other.release() }
+    // { }
  
     ScopedQPointer & operator = (ScopedQPointer && other) Q_DECL_NOEXCEPT 
 	{
